@@ -9,7 +9,7 @@ public class Exercicio2 {
         Scanner sc = new Scanner(System.in);
         limite = sc.nextInt();
         int soma = 0, i = 1;
-        while(soma < limite) {
+        while(soma <= limite) {
             soma += i;
             i++;
         }
