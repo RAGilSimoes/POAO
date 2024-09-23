@@ -2,7 +2,7 @@ package POAO.Ficha2;
 
 import java.util.Scanner;
 
-public class Exercicio4 {
+public class Exercicio4a {
     public static int ePrimo (int x) {
         int resultado = 0;
         int verdade = 0;
