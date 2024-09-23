@@ -10,11 +10,11 @@ public class Exercicio1 {
         }
 
         for(int i = 0; i < 10; i++){
-            System.out.printf("Número: " + tabela[i] + " Posição: %d ", i);
+            System.out.printf("Número: %d; Posição: %d ", tabela[i], i);
             System.out.println();
             soma += tabela[i];
         }
-        double media = (double)(soma / 10.0);
+        double media = (soma / 10.0);
 
         System.out.println("Soma: " + soma);
         System.out.printf("Média: %.1f", media);
