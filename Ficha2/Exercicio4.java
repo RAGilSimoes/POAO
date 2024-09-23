@@ -3,25 +3,48 @@ package POAO.Ficha2;
 import java.util.Scanner;
 
 public class Exercicio4 {
+    public static int ePrimo (int x) {
+        int resultado = 0;
+        int verdade = 0;
+        for(int i = 1; i <= x; i++) {
+            resultado = (x % i);
+            if(resultado == 0 && i == 1 || i == x) {
+                verdade = 1;
+            }else {
+                if(resultado == 0) {
+                    verdade = 0;
+                    break;
+                }
+            }
+        }
+        return verdade;
+    }
+
     public static int[] Eratosthenes(int n) {
-        char[] numeros = new char[n];
-        for(int i = 0; i < n; i++){
-            if(i % 2 != 0){
-                numeros[i] += 'a';
+        int[] numeros = new int[n];
+        for(int i = 2; i <= n; i++){
+            int verdade = ePrimo(i);
+            if(verdade == 1){
+                numeros[i-2] = i;
             }
         }
 
-        int quantidade = 0;
-        for(char c: numeros){
-            if(c == 'a'){
-                quantidade++;
+        int quantidadeZeros = 0;
+        for(int i = 0; i < (numeros.length - 1); i++){
+            if(numeros[i] == 0){
+                quantidadeZeros++;
             }
         }
 
-        int[] tabela = new int[quantidade];
+        int[] tabela = new int[n - quantidadeZeros - 1];
 
-        for(int i = 0; i < quantidade; i++) {
-            tabela[i] = (int) (Math.random() * 100);
+        int numeroZerosPassados = 0;
+        for(int i = 0; i < (numeros.length - 1); i++){
+            if(numeros[i] == 0){
+                numeroZerosPassados++;
+            } else{
+                tabela[i - numeroZerosPassados] = numeros[i];
+            }
         }
 
         return tabela;
