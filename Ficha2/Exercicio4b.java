@@ -33,7 +33,7 @@ public class Exercicio4b {
             if(numerosPrimos[i] == 0){
                 quantidadeZeros++;
             }
-        }
+        }   
 
         int[] tabela = new int[numerosPrimos.length - quantidadeZeros];
 
