@@ -1,4 +1,4 @@
-package POAO.Ficha3;
+package Ficha3;
 
 import java.io.DataInput;
 import java.util.Scanner;
