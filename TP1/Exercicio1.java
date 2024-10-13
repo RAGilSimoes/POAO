@@ -12,6 +12,8 @@ public class Exercicio1 {
 
         exibirSalariosMedicos(salariosMedicos);
 
+        System.out.println();
+        
         String[][] gastoEspecialidade = calcularGastosEspecialidades(informacoesEspecialidades, informacoesMedicos, salariosMedicos); //matriz com o custo de cada especialidade
 
         exibirGastoEspecialidade(gastoEspecialidade);
@@ -29,23 +31,22 @@ public class Exercicio1 {
 
     //---------------------------------------------------------------------------------
 
-    public static String[][] calcularSalariosMedicos(String[][] informacoesMedicos, String[][] informacoesespecialidadesInseridas){
+    public static String[][] calcularSalariosMedicos(String[][] informacoesMedicos, String[][] informacoesEspecialidades){
         String[][] destino = new String[informacoesMedicos.length][2]; //cria uma matriz com o nº de linhas equivalente à quantidade de índices do array passado como argumento
-        String nome;
-        String especialidade;
 
         for(int i = 0; i < informacoesMedicos.length; i++){
-            nome = informacoesMedicos[i][0]; //obtém o nome do médico
-            especialidade = informacoesMedicos[i][1]; //obtém a especialidade do médico
+            String nome = informacoesMedicos[i][0]; //obtém o nome do médico;
+            String especialidade = informacoesMedicos[i][1]; //obtém a especialidade do médico
             int anosServico = Integer.parseInt(informacoesMedicos[i][2]); //obtém os anos de serviço do médico
-            int anosServicoMultiplo5 = (anosServico / 5); //divide os anos de serviço por 5 para saber quantas vezes recebe os 4% do salário base
             int horasExtra = Integer.parseInt(informacoesMedicos[i][3]); //obtém a quantidade de horas extras efetuadas pelo médico
+            
+            int anosServicoMultiplo5 = (anosServico / 5); //divide os anos de serviço por 5 para saber quantas vezes recebe os 4% do salário base
             double salario = 0.0;
 
-            for(int l = 0; l < informacoesespecialidadesInseridas.length; l++){
-                if(especialidade.equalsIgnoreCase(informacoesespecialidadesInseridas[l][0])){ //compara a especialidade do médico com a especialidade do índice l para verificar se correspondem
-                    double salarioBase = Double.parseDouble(informacoesespecialidadesInseridas[l][1]); //obtém o salário base da especialidade
-                    double valorHoraExtra = Double.parseDouble(informacoesespecialidadesInseridas[l][2]); //obtém o custo de cada hora extra
+            for(int l = 0; l < informacoesEspecialidades.length; l++){
+                if(especialidade.equalsIgnoreCase(informacoesEspecialidades[l][0])){ //compara a especialidade do médico com a especialidade do índice l para verificar se correspondem
+                    double salarioBase = Double.parseDouble(informacoesEspecialidades[l][1]); //obtém o salário base da especialidade
+                    double valorHoraExtra = Double.parseDouble(informacoesEspecialidades[l][2]); //obtém o custo de cada hora extra
 
                     for(int m = 0; m < anosServicoMultiplo5; m++){
                         salarioBase += (salarioBase * 0.04); //multiplica o salário base por 4% do mesmo por cada conjunto de 5 anos de serviço do médico
@@ -66,19 +67,18 @@ public class Exercicio1 {
 
     public static String[][] calcularGastosEspecialidades(String[][] informacoesespecialidadesInseridas, String[][] informacoesMedicos, String[][] salariosMedicos){
         String[][] destino = new String[informacoesespecialidadesInseridas.length][2]; //cria uma matriz com o nº de linhas equivalente à quantidade de índices do array passado como argumento
-        String especialidades;
 
         for(int i = 0; i < informacoesespecialidadesInseridas.length; i++){
-            especialidades = informacoesespecialidadesInseridas[i][0]; //obtém a especialidade
+            String especialidade = informacoesespecialidadesInseridas[i][0]; //obtém a especialidade
             double valorGastoEspecialidade = 0.0;
 
             for(int l = 0; l < informacoesMedicos.length; l++){
-                if(especialidades.equalsIgnoreCase(informacoesMedicos[l][1])){ //compara a especialidade com a especialidade do do médico do índice l para ver se correspondem
+                if(especialidade.equalsIgnoreCase(informacoesMedicos[l][1])){ //compara a especialidade com a especialidade do do médico do índice l para ver se correspondem
                     valorGastoEspecialidade += Double.parseDouble(salariosMedicos[l][1]); //adiciona ao valor gasto na especialidade o salario do medico dessa especialidade
                     break;
                 }
             }
-            destino[i][0] = especialidades; //passa a especialidade para a primeira coluna da respetiva linha
+            destino[i][0] = especialidade; //passa a especialidade para a primeira coluna da respetiva linha
             destino[i][1] = String.valueOf(valorGastoEspecialidade); //passa o valor gasto da especialidade para a segunda coluna da respetiva linha
         }
         return destino;
@@ -91,7 +91,6 @@ public class Exercicio1 {
             System.out.printf("%s: %s€", salariosMedicos[i][0], salariosMedicos[i][1]); //percorre a matriz dos salários dos médicos e apresenta as informações
             System.out.println();
         }
-        System.out.println();
     }
 
     //---------------------------------------------------------------------------------
