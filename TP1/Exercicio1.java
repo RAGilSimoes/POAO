@@ -75,7 +75,6 @@ public class Exercicio1 {
             for(int l = 0; l < informacoesMedicos.length; l++){
                 if(especialidade.equalsIgnoreCase(informacoesMedicos[l][1])){ //compara a especialidade com a especialidade do do médico do índice l para ver se correspondem
                     valorGastoEspecialidade += Double.parseDouble(salariosMedicos[l][1]); //adiciona ao valor gasto na especialidade o salario do medico dessa especialidade
-                    break;
                 }
             }
             destino[i][0] = especialidade; //passa a especialidade para a primeira coluna da respetiva linha
