@@ -1,4 +1,4 @@
-package POAO.Ficha4.exercicio3;
+package Ficha4.exercicio3;
 
 import java.util.Scanner;
 
@@ -17,6 +17,8 @@ public class Exercicio3 {
 
         primeiraFracao.soma(segundaFracao);
         primeiraFracao.subtracao(segundaFracao);
+        primeiraFracao.multiplicacao(segundaFracao);
+        primeiraFracao.divisao(segundaFracao);
     }
 }
 
