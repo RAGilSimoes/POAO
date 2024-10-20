@@ -1,8 +1,10 @@
-package TP1;
+package POAO.TP1;
 
 public class Exercicio1 {
     public static void main(String[] args) {
-        String[] especialidadesInseridas = {"Radiologia/2030/50", "Oftalmologia/2500/70", "Pediatria/2700/75"};
+        String[] especialidadesInseridas = {"Radiologia/2030/50",
+                 "Oftalmologia/2500/70",
+                "Pediatria/2700/75"};
         String[] medicosInseridos = {"Vasco Santana/radiologia/15/10", "Laura Alves/oftalmologia/5/7", "António Silva/oftalmologia/12/5"};
 
         String[][] informacoesEspecialidades = tratarInformacoesRecebidas(especialidadesInseridas); //matriz com informacoes das especialidades

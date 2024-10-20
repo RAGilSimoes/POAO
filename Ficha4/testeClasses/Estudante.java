@@ -1,4 +1,4 @@
-package Ficha4.testeClasses;
+package POAO.Ficha4.testeClasses;
 
 import java.util.Scanner;
 
