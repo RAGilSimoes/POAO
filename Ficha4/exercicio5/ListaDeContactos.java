@@ -1,4 +1,4 @@
-package Ficha4.exercicio5;
+package POAO.Ficha4.exercicio5;
 
 import java.util.ArrayList;
 
@@ -55,5 +55,12 @@ public class ListaDeContactos{
 
     public Contacto obtemContacto(int indice) {
         return listaContactos.get(indice);
+    }
+
+    public void imprimeLista() {
+        for(Contacto contacto: listaContactos) {
+            System.out.printf("Contacto -> %s, %s, %s, %s ",contacto.getNome(), contacto.getEmail(), contacto.getMorada(), contacto.getTelefone());
+            System.out.println();
+        }
     }
 }
