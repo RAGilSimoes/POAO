@@ -1,0 +1,36 @@
+criar classe para problema                                                                    |
+criar classe ncslab de array de computadores que tenha 5 servidores, 5 laptops e 5 Raspberry  |
+criar classe para imprimir todos os computadores e informações                                |
+restringir a impressão para os computadores x64                                               |
+calcular consumo dependente do tipo de computador (ver tabela)                                |
+----------------------------------------------------------------------------------------------|
+
+polimorfismo onde????? (linha 16 a 29) -----------------------------------------------------------------------------|
+class computador -> nivel onde se encontra                                                                          |
+outras classes extend computador -> id, memoria ram, espaco disco, cpu, arquitetura, valores aleatórios(ver tabela) | ASSIM OU LINHA 16????
+--------------------------------------------------------------------------------------------------------------------|
+
+fazer o javadoc em condições (ver slides)
+
+----------------------------------------------------------|
+Níveis:                                                   |
+Servidores -> Cloud | laptops -> edge | raspberry -> iot  |
+                                                          |
+Arquitetura:                                              |
+x64 ou ARM                                                |
+----------------------------------------------------------|
+
+-------------------------------------------------- polimorfismo assim??????-|
+class computador {                                                          |
+    definir as variaveis: nivel, id, ram, disco, cpu, arquitetura           |
+    class servidor extends computador{                                      |
+        inicializa as tabelas com valores aleatórios consoante a tabela     |
+    }                                                                       |
+    class laptops extends computador{                                       |
+        inicializa as tabelas com valores aleatórios consoante a tabela     |
+    }                                                                       |
+    class raspberry extends computador{                                     |
+        inicializa as tabelas com valores aleatórios consoante a tabela     |
+    }                                                                       |
+}                                                                           |
+----------------------------------------------------------------------------|
