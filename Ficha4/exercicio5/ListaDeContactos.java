@@ -1,4 +1,4 @@
-package POAO.Ficha4.exercicio5;
+package Ficha4.exercicio5;
 
 import java.util.ArrayList;
 
