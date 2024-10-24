@@ -16,6 +16,6 @@ public class Docente extends Pessoa{
     }
 
     public String toString(){
-        return ("O Docente " + this.nome + " com o número mecanográfico " + this.numeroMecanografico + " tem uma missão de " + this.missao());
+        return ("O Docente " + this.nome + " com o número mecanográfico " + this.numeroMecanografico + " tem a missão de " + this.missao());
     }
 }

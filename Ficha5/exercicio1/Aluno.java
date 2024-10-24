@@ -20,6 +20,6 @@ public class Aluno extends Pessoa {
     }
 
     public String toString(){
-        return ("O Aluno " + this.nome + " com o número de aluno " + this.numeroAluno + " tem uma missão de " + this.missao());
+        return ("O Aluno " + this.nome + " com o número de aluno " + this.numeroAluno + " tem a missão de " + this.missao());
     }
 }
