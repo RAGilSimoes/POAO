@@ -8,7 +8,7 @@ public class Docente extends Pessoa{
     }
 
     public String comunica() { //substitui metodo comunica da classe Pai (pessoa)
-        return (this.nome + " a comunicar é um docente.");
+        return (this.getNome() + " a comunicar é um docente.");
     }
 
     public String missao(){
@@ -16,6 +16,6 @@ public class Docente extends Pessoa{
     }
 
     public String toString(){
-        return ("O Docente " + this.nome + " com o número mecanográfico " + this.numeroMecanografico + " tem a missão de " + this.missao());
+        return ("O Docente " + this.getNome() + " com o número mecanográfico " + this.numeroMecanografico + " tem a missão de " + this.missao());
     }
 }

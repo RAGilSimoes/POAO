@@ -1,21 +1,16 @@
 package Ficha5.exercicio7;
 
-public class Animal{
+abstract class Animal{
     protected String tipo;
     protected String especie;
-    public Animal(String tipo, String especie) {
-        this.tipo = tipo;
-        this.especie = especie;
-    }
 
-    public void desloca(){
-        System.out.println("Animal a deslocar-se");
-    }
+    abstract void desloca();
 }
 
 class Mamifero extends Animal{
     public Mamifero(String tipo, String especie) {
-        super(tipo, especie);
+        this.tipo = tipo;
+        this.especie = especie;
     }
 
     public void desloca(){
@@ -25,7 +20,8 @@ class Mamifero extends Animal{
 
 class Ave extends Animal{
     public Ave(String tipo, String especie) {
-        super(tipo, especie);
+        this.tipo = tipo;
+        this.especie = especie;
     }
 
     public void desloca(){
@@ -35,7 +31,8 @@ class Ave extends Animal{
 
 class Reptil extends Animal{
     public Reptil(String tipo, String especie) {
-        super(tipo, especie);
+        this.tipo = tipo;
+        this.especie = especie;
     }
 
     public void desloca(){
@@ -45,7 +42,8 @@ class Reptil extends Animal{
 
 class Peixe extends Animal{
     public Peixe(String tipo, String especie) {
-        super(tipo, especie);
+        this.tipo = tipo;
+        this.especie = especie;
     }
 
     public void desloca(){
