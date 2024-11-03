@@ -3,11 +3,12 @@ package TP2;
 public class Computador{
     private String nivel;
     private int id;
-    private double ram;
-    private double armazenamento;
+    private int ram;
+    private int armazenamento;
     private double cpu;
     private String arquitetura;
-    public Computador(String nivel, int id, double ram, double armazenamento, double cpu, String arquitetura){
+
+    public Computador(String nivel, int id, int ram, int armazenamento, double cpu, String arquitetura){
         this.nivel = nivel;
         this.id = id;
         this.ram = ram;
@@ -24,11 +25,11 @@ public class Computador{
         return this.id;
     }
 
-    public double getRam(){
+    public int getRam(){
         return this.ram;
     }
 
-    public double getArmazenamento(){
+    public int getArmazenamento(){
         return this.armazenamento;
     }
 
@@ -40,7 +41,39 @@ public class Computador{
         return this.arquitetura;
     }
 
+    public double getCpu() {
+        return cpu;
+    }
+
+    public void setArmazenamento(int armazenamento) {
+        this.armazenamento = armazenamento;
+    }
+
+    public void setArquitetura(String arquitetura) {
+        this.arquitetura = arquitetura;
+    }
+
+    public void setCpu(double cpu) {
+        this.cpu = cpu;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNivel(String nivel) {
+        this.nivel = nivel;
+    }
+
+    public void setRam(int ram) {
+        this.ram = ram;
+    }
+
     public String toString(){
-        return ("Nível -> " + this.getNivel() + "; ID -> " + this.getId() + "; RAM -> " + this.getRam() + "; Armazenamento -> " + this.getArmazenamento() + "; CPU -> " + this.getCPU() + "; Arquitetura -> " + this.getArquitetura());
+        return ("ID -> " + this.getId() + "; RAM -> " + this.getRam() + "GB; Armazenamento -> " + this.getArmazenamento() + "GB; CPU -> " + this.getCPU() + "GHz; Nível -> " + this.getNivel() + "; Arquitetura -> " + this.getArquitetura());
+    }
+
+    public String getTipo(){
+        return "TP2.Computador";
     }
 }
