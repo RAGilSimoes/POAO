@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class NCSLab{
-    private Random random = new Random();
+    Random random = new Random();
     private int lastID = 1;
     private String[] arrayInformacoes;
     private ArrayList<Computador> arrayComputadoresNCSLab = new ArrayList<Computador>(15);
@@ -43,17 +43,17 @@ public class NCSLab{
 
         switch (tipoComputador) {
             case "Servidor": {
-                ram = (int) Math.pow(2, random.nextInt(7, 10));
-                armazenamento = (int) Math.pow(2, random.nextInt(10, 15));
-                cpu = (double) Math.round((random.nextDouble(3.0, 4.0) * 10)) / 10;
+                ram = (int) Math.pow(2, random.nextInt(3) + 7); //7 a 9
+                armazenamento = (int) Math.pow(2, random.nextInt(5) + 10); //10 a 14
+                cpu = (double) Math.round(((random.nextDouble() + 3) * 10)) / 10; //3 a 4
                 break;
             }
 
             case "Laptop": {
-                ram = (int) Math.pow(2, random.nextInt(4, 7));
-                armazenamento = (int) Math.pow(2, random.nextInt(8, 11));
-                cpu = (double) Math.round((random.nextDouble(2.0, 3.0) * 10)) / 10;
-                if (random.nextInt(0,2) == 1) {
+                ram = (int) Math.pow(2, random.nextInt(3) + 4); //4 a 6
+                armazenamento = (int) Math.pow(2, random.nextInt(3) + 8); //8 a 10
+                cpu = (double) Math.round(((random.nextDouble() + 2) * 10)) / 10; //2 a 3
+                if (random.nextInt(2) == 1) { //0 a 1
                     gpu = "Sim";
                 } else {
                     gpu = "Nao";
@@ -62,9 +62,9 @@ public class NCSLab{
             }
 
             case "Raspberry Pi": {
-                ram = (int) Math.pow(2, random.nextInt(1, 3));
-                armazenamento = (int) Math.pow(2, random.nextInt(4, 8));
-                cpu = (double) Math.round((random.nextDouble(1.0, 2.0) * 10)) / 10;
+                ram = (int) Math.pow(2, random.nextInt(3) + 1); //1 a 3
+                armazenamento = (int) Math.pow(2, random.nextInt(4) + 4); //4 a 7
+                cpu = (double) Math.round(((random.nextDouble() + 1)* 10)) / 10; //1 a 2
                 break;
             }
         }
@@ -74,7 +74,7 @@ public class NCSLab{
 
     public String criaArquitetura() {
         String arquitetura;
-        if (random.nextInt(0,2) == 1) {
+        if (random.nextInt(2) == 1) {
             arquitetura = "x64";
         } else {
             arquitetura = "ARM";
