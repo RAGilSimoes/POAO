@@ -7,6 +7,9 @@ import java.util.ArrayList;
  * @version 1.0
  */
 
+/**
+ * lorem ipsum
+ */
 public class Exercicio2 {
     /**
      * codigo principal
