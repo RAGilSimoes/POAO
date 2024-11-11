@@ -1,6 +1,6 @@
 package Projeto;
 
-public class Produto{
+abstract class Produto{
     protected int codigo;
     protected String nome;
     protected String descricao;
