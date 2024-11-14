@@ -1,12 +1,12 @@
-package POAO.Ficha4.exercicio1;
+package Ficha4.exercicio1;
 
-public class Data {
+public class data {
     private int dia;
     private int mes;
     private int ano;
     private String[] meses = {"janeiro","fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"};
 
-    public Data(int dia, int mes, int ano) {
+    public data(int dia, int mes, int ano) {
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
