@@ -14,5 +14,9 @@ abstract class Produto{
         this.quantidade = quantidade;
         this.valorSemIVA = valorSemIVA;
     }
+
+    public String toString() {
+        return ("Codigo -> " + this.codigo + "; Nome -> " + this.nome + "; Descricao -> " + this.descricao + "; Quantidade -> " + this.quantidade + "; Valor sem IVA -> " + this.valorSemIVA);
+    }
 }
 

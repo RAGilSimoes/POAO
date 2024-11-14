@@ -9,4 +9,8 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar {
         this.quantidadeCertificacoes = quantidadeCertificacoes;
         this.certificacoes = certificacoes;
     }
+
+    public String toString(){
+        return (super.toString() + "; Certificacoes -> " + this.quantidadeCertificacoes);
+    }
 }

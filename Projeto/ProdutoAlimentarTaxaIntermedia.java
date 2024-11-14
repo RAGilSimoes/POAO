@@ -7,4 +7,8 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar {
         super(codigo, nome, descricao, quantidade, valorSemIVA, biologico, taxa);
         this.categoria = categoria;
     }
+
+    public String toString(){
+        return (super.toString() + "; Categoria -> " + this.categoria);
+    }
 }

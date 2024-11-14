@@ -9,5 +9,9 @@ abstract class ProdutoAlimentar extends Produto{
         this.biologico = biologico;
         this.taxa = taxa;
     }
+
+    public String toString() {
+        return (super.toString() + "; Biologico -> " + this.biologico + "; Taxa -> " + this.taxa);
+    }
 }
 
