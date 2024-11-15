@@ -1,11 +1,11 @@
 package Projeto;
 
 abstract class ProdutoFarmacia extends Produto {
-    protected boolean precricao;
+    protected boolean prescricao;
 
     public ProdutoFarmacia(int codigo, String nome, String descricao, int quantidade, double valorSemIVA, boolean prescricao){
         super(codigo, nome, descricao, quantidade, valorSemIVA);
-        this.precricao = prescricao;
+        this.prescricao = prescricao;
     }
 }
 
