@@ -193,4 +193,17 @@ public class POOFS {
                 System.out.println("\nIntroduza um caracter numérico válido!");
         }
     }
+
+
+    public void listarClientes() {
+        if (clientes.isEmpty()) {
+            System.out.println("\nA lista de clientes está vazia.");
+        }
+        else {
+            System.out.println("\nLista dos clientes:");
+            for (int i = 0; i < clientes.size(); i++) {
+                System.out.println("Cliente " + (i+1) + ": " + clientes.get(i));
+            }
+        }
+    }
 }
