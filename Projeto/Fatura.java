@@ -6,7 +6,7 @@ public class Fatura {
     protected int nFatura;
     protected Cliente cliente;
     protected Data dataFatura;
-    ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+    ArrayList<Produto> listaProdutos;
 
 
     public Fatura(int nFatura, Cliente cliente, Data dataFatura, ArrayList<Produto> listaProdutos) {

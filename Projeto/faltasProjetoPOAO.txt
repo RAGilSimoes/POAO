@@ -1,0 +1,17 @@
+Mudar os switch dos menus para caracteres e retirar a proteção dos menus -> feito
+
+Fazer proteção do nome -> feito
+
+Fazer proteção do nif -> feito
+
+Fazer proteção da localização -> feito
+
+Quando adicionar um clinte metemos o código em função? -> feito
+
+poder eliminar um cliente -> feito
+
+proteger nif para não ser igual -> feito
+
+meter tudo o que for relativo aos clientes e Às informações deles para a classe cliente -> feito
+
+meter constantes tipo array e assim em final ->
