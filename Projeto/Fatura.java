@@ -55,46 +55,139 @@ public class Fatura {
         return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente().getNome() + "; Localização do Cliente -> " + this.getCliente().getLocalizacao() + "; Número de produtos -> " + this.getListaProdutos().size() + "; Valor total sem IVA -> " + "; Valor total com IVA -> ");
     }
 
-    protected Fatura criaFatura(ArrayList<Cliente> arrayClientes, POOFS poofs){
-        VerificaDigitos verificaDigitos = new VerificaDigitos();
-        Fatura fatura;
+    protected boolean existeNumeroFatura(String nFaturaProcurar, ArrayList<Fatura> arrayFaturas){
+        boolean nFaturaValido = true;
+        for (Fatura fatura: arrayFaturas){
+            String nFaturaExistente = fatura.getnFatura();
+            if (nFaturaExistente.equals(nFaturaProcurar)){
+                System.out.println("\nNúmero de fatura já existente.");
+                nFaturaValido = false;
+            }
+        }
+        return nFaturaValido;
+    }
 
+    protected boolean verificaNumeroFatura(String numeroFatura, ArrayList<Fatura> arrayFaturas){
+        boolean verificacao;
+        if (numeroFatura.length() != 9 || FuncoesUteis.verificaCaracteres(numeroFatura,'0', '9')){
+            System.out.println("\nO número de fatura introduzido não é válido");
+            verificacao = false;
+        } else {
+            verificacao = existeNumeroFatura(numeroFatura, arrayFaturas);
+        }
+        return verificacao;
+    }
+
+    protected Fatura criaFatura(ArrayList<Cliente> arrayClientes, ArrayList<Fatura> arrayFaturas){
         Scanner scannerObterResposta = new Scanner(System.in);
 
-        System.out.print("\nInsira o número da fatura: ");
-        String numeroFatura = scannerObterResposta.nextLine();
+        String numeroFatura = null;
+        String quantidadeProdutosInserir = null;
+        int quantidadeProdutos = 0;
 
-        poofs.listarClientes();
+        boolean verificacaoNumeroFatura = false;
+        boolean verificacaoQuantidade = false;
+        boolean verificaEscolhaProduto = false;
+
+        while (!verificacaoNumeroFatura) {
+            System.out.print("\nIntroduza o número da fatura (tamanho 9 dígitos): ");
+            numeroFatura = scannerObterResposta.nextLine();
+            verificacaoNumeroFatura = verificaNumeroFatura(numeroFatura, arrayFaturas);
+        }
+
+        POOFS.listarClientes(arrayClientes);
         System.out.print("\nIntroduza o número do cliente que pretende associar a esta fatura: ");
-        int numeroEscolhaCliente = poofs.protecaoEscolha(1, arrayClientes.size());
+        int numeroEscolhaCliente = FuncoesUteis.protecaoEscolha(1, arrayClientes.size());
         Cliente cliente = arrayClientes.get(numeroEscolhaCliente - 1);
 
-        System.out.print("\nIntroduza a data da fatura no formato dd/mm/aaaa: ");
-        String data = scannerObterResposta.nextLine();
-        String[] dataSeparada = data.split("/");
-        Data dataFatura = new Data(Integer.parseInt(dataSeparada[0]), Integer.parseInt(dataSeparada[1]), Integer.parseInt(dataSeparada[2]));
+        Data dataFatura = Data.verificaData();
 
-        System.out.print("\nIntroduza a quantidade de produtos que pretende inserir na fatura: ");
-        int quantidadeProdutosInserir = scannerObterResposta.nextInt();
+        while (!verificacaoQuantidade) {
+            System.out.print("\nIntroduza a quantidade de produtos que pretende inserir na fatura (mínimo 1 produto): ");
+            quantidadeProdutosInserir = scannerObterResposta.nextLine();
+            verificacaoQuantidade = FuncoesUteis.verificaInt(quantidadeProdutosInserir);
+            if(verificacaoQuantidade) {
+                quantidadeProdutos = Integer.parseInt(quantidadeProdutosInserir);
+            }
+        }
+
         ArrayList<Produto> arrayProdutos= new ArrayList<Produto>();
 
-        for(int i = 0; i < quantidadeProdutosInserir; i++){
-            System.out.print("\nIntroduza o tipo de produto que prentede inserir (Alimentar/Farmacia): ");
-            String tipoProduto = scannerObterResposta.next();
-            switch (tipoProduto) {
-                case "Alimentar":
-                    System.out.print("\nIntroduza o tipo de taxa associada ao produto (Reduzida/Intermedia/Normal): ");
-                    String tipoTaxa = scannerObterResposta.next();
-                    switch (tipoTaxa){
-                        case "Reduzida":
-                            ProdutoAlimentarTaxaReduzida produtoAlimentarTaxaReduzida = new ProdutoAlimentarTaxaReduzida(0, null, null, 0, 0, null, null, 0, null);
-                            produtoAlimentarTaxaReduzida = produtoAlimentarTaxaReduzida.criaProdutoTaxaReduzida();
+        for(int i = 0; i < quantidadeProdutos; i++){
+            do{
+                System.out.print("\nIntroduza o tipo de produto que prentede inserir (Alimentar/Farmacia): ");
+                String tipoProduto = scannerObterResposta.nextLine();
+                switch (tipoProduto) {
+                    case "Alimentar":
+                        do {
+                            System.out.print("\nIntroduza o tipo de taxa associada ao produto (Reduzida/Intermedia/Normal): ");
+                            String tipoTaxa = scannerObterResposta.nextLine();
+                            switch (tipoTaxa){
+                                case "Reduzida":
+                                    ProdutoAlimentarTaxaReduzida produtoAlimentarTaxaReduzida = ProdutoAlimentarTaxaReduzida.criaProdutoTaxaReduzida();
 
-                            arrayProdutos.add(produtoAlimentarTaxaReduzida);
-                    }
-            }
+                                    arrayProdutos.add(produtoAlimentarTaxaReduzida);
+                                    System.out.println("\nProduto adicionado com sucesso!");
+                                    verificaEscolhaProduto = true;
+                                    break;
+
+                                case "Intermedia":
+                                    ProdutoAlimentarTaxaIntermedia produtoAlimentarTaxaIntermedia = ProdutoAlimentarTaxaIntermedia.criaProdutoTaxaIntermedia();
+
+                                    arrayProdutos.add(produtoAlimentarTaxaIntermedia);
+                                    System.out.println("\nProduto adicionado com sucesso!");
+                                    verificaEscolhaProduto = true;
+                                    break;
+
+                                case "Normal":
+                                    ProdutoAlimentarTaxaNormal produtoAlimentarTaxaNormal = ProdutoAlimentarTaxaNormal.criaProdutoTaxaNormal();
+
+                                    arrayProdutos.add(produtoAlimentarTaxaNormal);
+                                    System.out.println("\nProduto adicionado com sucesso!");
+                                    verificaEscolhaProduto = true;
+                                    break;
+
+                                default:
+                                    System.out.println("Opção inválida.");
+                                    break;
+                            }
+                        } while(!verificaEscolhaProduto);
+                        break;
+
+                    case "Farmacia":
+                        do {
+                            System.out.print("\nO produto tem prescrição médica? (Sim/Nao) -> ");
+                            String prescricao = scannerObterResposta.next();
+                            switch (prescricao){
+                                case "Sim":
+                                    ProdutoFarmaciaComPrescricao produtoFarmaciaComPrescricao = ProdutoFarmaciaComPrescricao.criaProdutoComPrescricao();
+
+                                    arrayProdutos.add(produtoFarmaciaComPrescricao);
+                                    System.out.println("\nProduto adicionado com sucesso!");
+                                    verificaEscolhaProduto = true;
+                                    break;
+
+                                case "Nao":
+                                    ProdutoFarmaciaSemPrescricao produtoFarmaciaSemPrescricao = ProdutoFarmaciaSemPrescricao.criaProdutoSemPrescricao();
+
+                                    arrayProdutos.add(produtoFarmaciaSemPrescricao);
+                                    System.out.println("\nProduto adicionado com sucesso!");
+                                    verificaEscolhaProduto = true;
+                                    break;
+
+                                default:
+                                    System.out.println("Opção inválida.");
+                                    break;
+                            }
+                        } while(!verificaEscolhaProduto);
+                        break;
+
+                    default:
+                        System.out.println("Opção inválida.");
+                        break;
+                }
+            } while(!verificaEscolhaProduto);
         }
         return new Fatura(numeroFatura, cliente, dataFatura, arrayProdutos);
     }
 }
-

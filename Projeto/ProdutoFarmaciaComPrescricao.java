@@ -1,11 +1,31 @@
 package Projeto;
 
+import java.util.Scanner;
+
 public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
     protected String medico;
     protected int[] arrayTaxas = {6,5,4};
 
-    public ProdutoFarmaciaComPrescricao(int codigo, String nome, String descricao, int quantidade, double valorSemIVA, boolean prescricao, String medico){
+    public ProdutoFarmaciaComPrescricao(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String prescricao, String medico){
         super(codigo, nome, descricao, quantidade, valorSemIVA, prescricao);
         this.medico = medico;
+    }
+
+    protected static ProdutoFarmaciaComPrescricao criaProdutoComPrescricao(){
+        String prescricao = "Sim";
+        boolean verificacaoNome = false;
+        String medicoPrescritor = null;
+
+        Scanner scannerObterResposta = new Scanner(System.in);
+
+        String[] arrayInformacoesProdutoFarmacia = ProdutoFarmacia.obterInformacaoProdutoFarmacia();
+
+        do {
+            System.out.print("Introduza o nome do médico que prescreveu o produto: ");
+            medicoPrescritor = scannerObterResposta.nextLine();
+            verificacaoNome = FuncoesUteis.verificaNome(medicoPrescritor);
+        } while(!verificacaoNome);
+
+        return new ProdutoFarmaciaComPrescricao(arrayInformacoesProdutoFarmacia[0], arrayInformacoesProdutoFarmacia[1], arrayInformacoesProdutoFarmacia[2], arrayInformacoesProdutoFarmacia[3], arrayInformacoesProdutoFarmacia[4], prescricao, medicoPrescritor);
     }
 }

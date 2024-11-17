@@ -8,25 +8,6 @@ public class POOFS {
     ArrayList<Cliente> arrayClientes = new ArrayList<Cliente>();
     ArrayList<Fatura> arrayFaturas = new ArrayList<Fatura>();
 
-    public void setArrayClientes(ArrayList<Cliente> arrayClientes) {
-        if(arrayClientes != null){
-            this.arrayClientes = arrayClientes;
-        }
-    }
-
-    public void setArrayFaturas(ArrayList<Fatura> arrayFaturas) {
-        if(arrayFaturas != null){
-            this.arrayFaturas = arrayFaturas;
-        }
-    }
-
-    public ArrayList<Cliente> getArrayClientes() {
-        return arrayClientes;
-    }
-
-    public ArrayList<Fatura> getArrayFaturas() {
-        return arrayFaturas;
-    }
 
     private void menus(String tipoMenu){
         switch (tipoMenu) {
@@ -34,7 +15,7 @@ public class POOFS {
                 System.out.println("\nIntroduz a ação que pretende efetuar: ");
                 System.out.println("1 - Criar/Editar/Eliminar Cliente");
                 System.out.println("2 - Listar Clientes");
-                System.out.println("3 - Criar/Editar Faturas");
+                System.out.println("3 - Criar/Editar/Eliminar Fatura");
                 System.out.println("4 - Listar Faturas");
                 System.out.println("5 - Visualizar Fatura");
                 System.out.println("6 - Importar Fatura");
@@ -62,27 +43,6 @@ public class POOFS {
     }
 
 
-    protected int protecaoEscolha(int menor, int maior){
-        int escolha = 0;
-        boolean sairVerificacao = false;
-        do {
-            try {
-                Scanner scannerEscolha = new Scanner(System.in);
-                escolha = scannerEscolha.nextInt();
-                if(escolha >= menor && escolha <= maior){
-                    sairVerificacao = true;
-                } else {
-                    System.out.println("\nIntroduza um caracter numérico válido!");
-                }
-            } catch (InputMismatchException exception) {
-                System.out.println("\nIntroduza um caracter numérico válido!");
-            }
-        } while(!sairVerificacao);
-
-        return escolha;
-    }
-
-
     public void menu() {
         String escolha;
         boolean sair = false;
@@ -98,7 +58,7 @@ public class POOFS {
                     break;
 
                 case "2":
-                    listarClientes();
+                    listarClientes(arrayClientes);
                     break;
 
                 case "3":
@@ -159,10 +119,10 @@ public class POOFS {
                         System.out.println("\nA lista de clientes está vazia.");
                         break;
                     } else {
-                        listarClientes();
+                        listarClientes(arrayClientes);
 
                         System.out.println("\nIntroduza o número do cliente que pretende editar: ");
-                        int numeroClienteProcurar = protecaoEscolha(1, arrayClientes.size());
+                        int numeroClienteProcurar = FuncoesUteis.protecaoEscolha(1, arrayClientes.size());
 
                         Cliente clienteAlterar = arrayClientes.get(numeroClienteProcurar - 1);
 
@@ -179,11 +139,11 @@ public class POOFS {
                         System.out.println("\nA lista de clientes está vazia.");
                         break;
                     } else {
-                        listarClientes();
+                        listarClientes(arrayClientes);
 
                         System.out.println("\nIntroduza o número do cliente que pretende eliminar: ");
 
-                        int numeroClienteEliminar = protecaoEscolha(1, arrayClientes.size());
+                        int numeroClienteEliminar = FuncoesUteis.protecaoEscolha(1, arrayClientes.size());
 
                         Cliente clienteEliminar = arrayClientes.get(numeroClienteEliminar - 1);
 
@@ -207,7 +167,7 @@ public class POOFS {
     }
 
 
-    protected void listarClientes() {
+    protected static void listarClientes(ArrayList<Cliente> arrayClientes) {
         if (arrayClientes.isEmpty()) {
             System.out.println("\nA lista de clientes está vazia.");
         }
@@ -218,6 +178,7 @@ public class POOFS {
             }
         }
     }
+
 
     private void criarEditarEliminarFaturas() {
         boolean sair = false;
@@ -236,9 +197,7 @@ public class POOFS {
                         break;
                     } else {
                         Fatura fatura = new Fatura(null, null, null, null);
-                        POOFS poofs = new POOFS();
-                        poofs.setArrayClientes(arrayClientes);
-                        fatura = fatura.criaFatura(arrayClientes, poofs);
+                        fatura = fatura.criaFatura(arrayClientes, arrayFaturas);
                         arrayFaturas.add(fatura);
                         System.out.println("\nFatura adicionada com sucesso!");
                         break;
@@ -281,6 +240,7 @@ public class POOFS {
             }
         }while(!sair);
     }
+
 
     private void listarFaturas() {
         if(arrayFaturas.isEmpty()) {

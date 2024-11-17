@@ -8,7 +8,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar {
     protected int[] arrayTaxas = {6,5,4};
     protected int reducaoTaxa = -1;
 
-    public ProdutoAlimentarTaxaReduzida(int codigo, String nome, String descricao, int quantidade, double valorSemIVA, String biologico, String taxa, int quantidadeCertificacoes, String[] certificacoes){
+    public ProdutoAlimentarTaxaReduzida(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String biologico, String taxa, int quantidadeCertificacoes, String[] certificacoes){
         super(codigo, nome, descricao, quantidade, valorSemIVA, biologico, taxa);
         this.quantidadeCertificacoes = quantidadeCertificacoes;
         this.certificacoes = certificacoes;
@@ -18,34 +18,34 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar {
         return (super.toString() + "; Certificacoes -> " + this.quantidadeCertificacoes);
     }
 
-    protected ProdutoAlimentarTaxaReduzida criaProdutoTaxaReduzida(){
+    protected static ProdutoAlimentarTaxaReduzida criaProdutoTaxaReduzida(){
         String tipoTaxa = "Reduzida";
+
+        boolean verificacaoQuantidade = false;
+        String quantidadeCertificacoesProduto = null;
+        int quantidadeCertificacoes = 0;
+
         Scanner scannerObterResposta = new Scanner(System.in);
-        System.out.print("\nIntroduza o código do produto: ");
-        int codigoProduto = Integer.parseInt(scannerObterResposta.nextLine());
-        System.out.print("Introduza o nome do produto: ");
-        String nomeProduto = scannerObterResposta.nextLine();
-        System.out.print("Introduza a descricao do produto: ");
-        String descricaoProduto = scannerObterResposta.nextLine();
-        System.out.print("Introduza a quantidade do produto: ");
-        int quantidadeProduto = Integer.parseInt(scannerObterResposta.nextLine());
-        System.out.print("Introduza o preço sem IVA do produto: ");
-        double precoSemIVAProduto = Double.parseDouble(scannerObterResposta.nextLine());
 
-        System.out.print("O produto é biológico? ");
-        String biologicoProduto = scannerObterResposta.nextLine();
+        String[] arrayInformacoesProdutoAlimentar = ProdutoAlimentar.obterInformacaoProdutoAlimentar();
 
-        System.out.print("Introduza a quantidade de certificações do produto: ");
-        int quantidadeCertificacoesProduto = Integer.parseInt(scannerObterResposta.nextLine());
+        while (!verificacaoQuantidade) {
+            System.out.print("Introduza a quantidade de certificações do produto: ");
+            quantidadeCertificacoesProduto = scannerObterResposta.nextLine();
+            verificacaoQuantidade = FuncoesUteis.verificaInt(quantidadeCertificacoesProduto);
+            if(verificacaoQuantidade) {
+                quantidadeCertificacoes = Integer.parseInt(quantidadeCertificacoesProduto);
+            }
+        }
 
-        String[] arrayCertificacoes = new String[quantidadeCertificacoesProduto];
+        String[] arrayCertificacoes = new String[quantidadeCertificacoes];
 
-        for(int l = 0; l < quantidadeCertificacoesProduto; l++){
+        for(int l = 0; l < quantidadeCertificacoes; l++){
             System.out.print("Introduza as certificações do produto: ");
             String certificacoesProduto = scannerObterResposta.nextLine();
             arrayCertificacoes[l] = certificacoesProduto;
         }
 
-        return new ProdutoAlimentarTaxaReduzida(codigoProduto, nomeProduto, descricaoProduto, quantidadeProduto, precoSemIVAProduto, biologicoProduto, tipoTaxa, quantidadeCertificacoesProduto, arrayCertificacoes);
+        return new ProdutoAlimentarTaxaReduzida(arrayInformacoesProdutoAlimentar[0], arrayInformacoesProdutoAlimentar[1], arrayInformacoesProdutoAlimentar[2], arrayInformacoesProdutoAlimentar[3], arrayInformacoesProdutoAlimentar[4], arrayInformacoesProdutoAlimentar[5], tipoTaxa, quantidadeCertificacoes, arrayCertificacoes);
     }
 }

@@ -55,9 +55,9 @@ public class Cliente {
         return nifValido;
     }
 
-    protected boolean verificaNif(String nif, boolean verificacao, ArrayList<Cliente> arrayClientes){
-        VerificaDigitos verificaDigitos = new VerificaDigitos();
-        if (nif.length() != 9 || verificaDigitos.verificaDigitos(nif,'0', '9')){
+    protected boolean verificaNif(String nif, ArrayList<Cliente> arrayClientes){
+        boolean verificacao;
+        if (nif.length() != 9 || FuncoesUteis.verificaCaracteres(nif,'0', '9')){
             System.out.println("\nO nif introduzido não é válido");
             verificacao = false;
         } else {
@@ -66,20 +66,6 @@ public class Cliente {
         return verificacao;
     }
 
-    protected boolean verificaNome(String nomeRecebido, boolean verificacao){
-        VerificaDigitos verificaDigitos = new VerificaDigitos();
-        String[] nomeSeparado = nomeRecebido.split(" ");
-        for(String nome: nomeSeparado){
-            if (nome.length() <= 2 || (verificaDigitos.verificaDigitos(nome.substring(0,1),'A', 'Z') || verificaDigitos.verificaDigitos(nome.substring(1),'a', 'z'))){
-                System.out.println("\nO nome introduzido não é válido");
-                verificacao = false;
-                break;
-            } else {
-                verificacao = true;
-            }
-        }
-        return verificacao;
-    }
 
     protected String escolherLocalizao(String escolha){
         String localizacao = null;
@@ -116,14 +102,14 @@ public class Cliente {
         while (!verificacaoNome) {
             System.out.print("\nIntroduza o nome do cliente: ");
             nome = scannerCliente.nextLine();
-            verificacaoNome = verificaNome(nome, verificacaoNome);
+            verificacaoNome = FuncoesUteis.verificaNome(nome);
         }
 
 
         while (!verificacaoNIF) {
             System.out.print("Introduza o nif do cliente: ");
             nif = scannerCliente.nextLine();
-            verificacaoNIF = verificaNif(nif, verificacaoNIF, arrayClientes);
+            verificacaoNIF = verificaNif(nif, arrayClientes);
         }
 
         while(localizacao == null){
@@ -149,7 +135,7 @@ public class Cliente {
                         System.out.println("Nome não alterado.");
                         break;
                     } else {
-                        verificacaoNome = clienteRecebido.verificaNome(nome, verificacaoNome);
+                        verificacaoNome = FuncoesUteis.verificaNome(nome);
                         if(verificacaoNome){
                             clienteRecebido.setNome(nome);
                             System.out.println("Nome alterado com sucesso.");
@@ -168,7 +154,7 @@ public class Cliente {
                         System.out.println("Nif não alterado.");
                         break;
                     }else{
-                        verificacaoNif = clienteRecebido.verificaNif(nif, verificacaoNif, arrayClientes);
+                        verificacaoNif = clienteRecebido.verificaNif(nif, arrayClientes);
                         if(verificacaoNif){
                             clienteRecebido.setNif(nif);
                             System.out.println("Nif alterado com sucesso.");
