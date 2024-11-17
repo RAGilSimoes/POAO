@@ -6,6 +6,27 @@ import java.util.Scanner;
 
 public class POOFS {
     ArrayList<Cliente> arrayClientes = new ArrayList<Cliente>();
+    ArrayList<Fatura> arrayFaturas = new ArrayList<Fatura>();
+
+    public void setArrayClientes(ArrayList<Cliente> arrayClientes) {
+        if(arrayClientes != null){
+            this.arrayClientes = arrayClientes;
+        }
+    }
+
+    public void setArrayFaturas(ArrayList<Fatura> arrayFaturas) {
+        if(arrayFaturas != null){
+            this.arrayFaturas = arrayFaturas;
+        }
+    }
+
+    public ArrayList<Cliente> getArrayClientes() {
+        return arrayClientes;
+    }
+
+    public ArrayList<Fatura> getArrayFaturas() {
+        return arrayFaturas;
+    }
 
     private void menus(String tipoMenu){
         switch (tipoMenu) {
@@ -29,21 +50,29 @@ public class POOFS {
                 System.out.println("3 - Eliminar cliente");
                 System.out.println("4 - Voltar para o Menu Principal");
                 break;
+
+            case "Menu Faturas":
+                System.out.println("\nIntroduza a ação que pretende efetuar: ");
+                System.out.println("1 - Criar fatura");
+                System.out.println("2 - Editar fatura");
+                System.out.println("3 - Eliminar fatura");
+                System.out.println("4 - Voltar para o Menu Principal");
+                break;
         }
     }
 
 
-    private int protecaoEscolha(int menor, int maior){
+    protected int protecaoEscolha(int menor, int maior){
         int escolha = 0;
         boolean sairVerificacao = false;
         do {
             try {
                 Scanner scannerEscolha = new Scanner(System.in);
                 escolha = scannerEscolha.nextInt();
-                if(escolha < menor || escolha > maior){
-                    System.out.println("\nIntroduza um caracter numérico válido!");
-                } else {
+                if(escolha >= menor && escolha <= maior){
                     sairVerificacao = true;
+                } else {
+                    System.out.println("\nIntroduza um caracter numérico válido!");
                 }
             } catch (InputMismatchException exception) {
                 System.out.println("\nIntroduza um caracter numérico válido!");
@@ -73,9 +102,11 @@ public class POOFS {
                     break;
 
                 case "3":
+                    criarEditarEliminarFaturas();
                     break;
 
                 case "4":
+                    listarFaturas();
                     break;
 
                 case "5":
@@ -108,16 +139,6 @@ public class POOFS {
         do {
             String escolha;
 
-            Scanner scannerCliente = new Scanner(System.in);
-
-            String nome = null;
-            String nif = null;
-            String localizacao = null;
-            String escolhaLocalizacao = null;
-
-            boolean verificacaoNome= false;
-            boolean verificacaoNIF = false;
-
             menus("Menu Clientes");
 
             Scanner scannerEscolha = new Scanner(System.in);
@@ -126,26 +147,8 @@ public class POOFS {
             switch(escolha) {
                 case "1":
                     Cliente clienteNovo = new Cliente(null, null, null);
-                    while (!verificacaoNome) {
-                        System.out.print("\nIntroduza o nome do cliente: ");
-                        nome = scannerCliente.nextLine();
-                        verificacaoNome = clienteNovo.verificaNome(nome, verificacaoNome);
-                    }
 
-
-                    while (!verificacaoNIF) {
-                        System.out.print("Introduza o nif do cliente: ");
-                        nif = scannerCliente.nextLine();
-                        verificacaoNIF = clienteNovo.verificaNif(nif, verificacaoNIF, arrayClientes);
-                    }
-
-                    while(localizacao == null){
-                        System.out.print("\nEscolha a localização do cliente: \n1-> Portugal | 2-> Madeira | 3-> Açores\n");
-                        escolhaLocalizacao = scannerCliente.nextLine();
-                        localizacao = clienteNovo.escolherLocalizao(escolhaLocalizacao);
-                    }
-
-                    clienteNovo = new Cliente(nome, nif, localizacao);
+                    clienteNovo = clienteNovo.criaCliente(arrayClientes);
                     arrayClientes.add(clienteNovo);
 
                     System.out.println("\nCliente adicionado com sucesso!");
@@ -158,7 +161,7 @@ public class POOFS {
                     } else {
                         listarClientes();
 
-                        System.out.println("\nIntroduza o número do cliente que pretende alterar: ");
+                        System.out.println("\nIntroduza o número do cliente que pretende editar: ");
                         int numeroClienteProcurar = protecaoEscolha(1, arrayClientes.size());
 
                         Cliente clienteAlterar = arrayClientes.get(numeroClienteProcurar - 1);
@@ -179,6 +182,7 @@ public class POOFS {
                         listarClientes();
 
                         System.out.println("\nIntroduza o número do cliente que pretende eliminar: ");
+
                         int numeroClienteEliminar = protecaoEscolha(1, arrayClientes.size());
 
                         Cliente clienteEliminar = arrayClientes.get(numeroClienteEliminar - 1);
@@ -203,7 +207,7 @@ public class POOFS {
     }
 
 
-    private void listarClientes() {
+    protected void listarClientes() {
         if (arrayClientes.isEmpty()) {
             System.out.println("\nA lista de clientes está vazia.");
         }
@@ -211,6 +215,80 @@ public class POOFS {
             System.out.println("\nLista dos clientes:");
             for (int i = 0; i < arrayClientes.size(); i++) {
                 System.out.println("Cliente " + (i+1) + ": " + arrayClientes.get(i));
+            }
+        }
+    }
+
+    private void criarEditarEliminarFaturas() {
+        boolean sair = false;
+        do {
+            String escolha;
+
+            menus("Menu Faturas");
+
+            Scanner scannerEscolha = new Scanner(System.in);
+            escolha = scannerEscolha.nextLine();
+
+            switch(escolha) {
+                case "1":
+                    if(arrayClientes.isEmpty()){
+                        System.out.println("\nA lista de clientes está vazia, por favor crie um cliente antes de tentar inserir uma fatura.");
+                        break;
+                    } else {
+                        Fatura fatura = new Fatura(null, null, null, null);
+                        POOFS poofs = new POOFS();
+                        poofs.setArrayClientes(arrayClientes);
+                        fatura = fatura.criaFatura(arrayClientes, poofs);
+                        arrayFaturas.add(fatura);
+                        System.out.println("\nFatura adicionada com sucesso!");
+                        break;
+                    }
+
+                case "2":
+                    if(arrayFaturas.isEmpty()){
+                        System.out.println("\nA lista de faturas está vazia.");
+                        break;
+                    } else {
+                        listarFaturas();
+
+                        System.out.println("\nIntroduza o número da fatura que pretende editar: ");
+
+                        System.out.println("\nFatura editada com sucesso!");
+                        break;
+                    }
+
+                case "3":
+                    if(arrayFaturas.isEmpty()){
+                        System.out.println("\nA lista de faturas está vazia.");
+                        break;
+                    } else {
+                        listarFaturas();
+
+                        System.out.println("\nIntroduza o número da fatura que pretende eliminar: ");
+
+
+                        System.out.println("\nFatura eliminada com sucesso!");
+                        break;
+                    }
+
+                case "4":
+                    sair = true;
+                    break;
+
+                default:
+                    System.out.println("\nIntroduza um caracter numérico válido!");
+                    break;
+            }
+        }while(!sair);
+    }
+
+    private void listarFaturas() {
+        if(arrayFaturas.isEmpty()) {
+            System.out.println("\nA lista de faturas está vazia.");
+        } else {
+            System.out.println("Lista de faturas: ");
+            for(Fatura fatura: arrayFaturas) {
+                System.out.println(fatura);
             }
         }
     }

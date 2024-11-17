@@ -42,25 +42,13 @@ public class Cliente {
         this.nome = nome;
     }
 
-    protected boolean verificaDigitos(String stringRecebida, char min, char max) {
-        int tamanho = stringRecebida.length();
-        boolean verifica = false;
-        for (int i = 0; i < tamanho; i++) {
-            char caracter = stringRecebida.charAt(i);
-            if (caracter < min || caracter > max) {
-                verifica = true;
-                break;
-            }
-        }
-        return verifica;
-    }
 
     protected boolean existeNif(String nifProcurar, ArrayList<Cliente> arrayClientes){
         boolean nifValido = true;
         for (Cliente cliente: arrayClientes){
             String nifExistente = cliente.getNif();
             if (nifExistente.equals(nifProcurar)){
-                System.out.println("Nif do cliente já existente.");
+                System.out.println("\nNif do cliente já existente.");
                 nifValido = false;
             }
         }
@@ -68,7 +56,8 @@ public class Cliente {
     }
 
     protected boolean verificaNif(String nif, boolean verificacao, ArrayList<Cliente> arrayClientes){
-        if (nif.length() != 9 || verificaDigitos(nif,'0', '9')){
+        VerificaDigitos verificaDigitos = new VerificaDigitos();
+        if (nif.length() != 9 || verificaDigitos.verificaDigitos(nif,'0', '9')){
             System.out.println("\nO nif introduzido não é válido");
             verificacao = false;
         } else {
@@ -78,9 +67,10 @@ public class Cliente {
     }
 
     protected boolean verificaNome(String nomeRecebido, boolean verificacao){
+        VerificaDigitos verificaDigitos = new VerificaDigitos();
         String[] nomeSeparado = nomeRecebido.split(" ");
         for(String nome: nomeSeparado){
-            if (nome.length() <= 2 || (verificaDigitos(nome.substring(0,1),'A', 'Z') || verificaDigitos(nome.substring(1),'a', 'z'))){
+            if (nome.length() <= 2 || (verificaDigitos.verificaDigitos(nome.substring(0,1),'A', 'Z') || verificaDigitos.verificaDigitos(nome.substring(1),'a', 'z'))){
                 System.out.println("\nO nome introduzido não é válido");
                 verificacao = false;
                 break;
@@ -110,6 +100,39 @@ public class Cliente {
         }
 
         return localizacao;
+    }
+
+    protected Cliente criaCliente(ArrayList<Cliente> arrayClientes) {
+        Scanner scannerCliente = new Scanner(System.in);
+
+        String nome = null;
+        String nif = null;
+        String localizacao = null;
+        String escolhaLocalizacao;
+
+        boolean verificacaoNome = false;
+        boolean verificacaoNIF = false;
+
+        while (!verificacaoNome) {
+            System.out.print("\nIntroduza o nome do cliente: ");
+            nome = scannerCliente.nextLine();
+            verificacaoNome = verificaNome(nome, verificacaoNome);
+        }
+
+
+        while (!verificacaoNIF) {
+            System.out.print("Introduza o nif do cliente: ");
+            nif = scannerCliente.nextLine();
+            verificacaoNIF = verificaNif(nif, verificacaoNIF, arrayClientes);
+        }
+
+        while(localizacao == null){
+            System.out.print("\nEscolha a localização do cliente: \n1-> Portugal | 2-> Madeira | 3-> Açores\n");
+            escolhaLocalizacao = scannerCliente.nextLine();
+            localizacao = escolherLocalizao(escolhaLocalizacao);
+        }
+
+        return new Cliente(nome, nif, localizacao);
     }
 
     protected void alteraInformacao(String tipo, Cliente clienteRecebido, ArrayList<Cliente> arrayClientes){

@@ -15,3 +15,9 @@ proteger nif para não ser igual -> feito
 meter tudo o que for relativo aos clientes e Às informações deles para a classe cliente -> feito
 
 meter constantes tipo array e assim em final ->
+
+faturas: - se não houver clientes na lista, avisa o utilizador e volta para o menu principal
+         - se houver clientes mas não houver o cliente que o utilizar pretende, ao carregar no 0 volta para o menu principal
+         - se não houver clientes, ao perguntar ao utilizador se pretende inserir, proteger para ser sim ou não (switch?)
+         - ignora os nextLine da descricao
+         - meter a parte de construir o produto mais geral

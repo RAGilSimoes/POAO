@@ -1,5 +1,7 @@
 package Projeto;
 
+import java.util.Scanner;
+
 abstract class Produto{
     protected int codigo;
     protected String nome;
