@@ -39,14 +39,14 @@ public class FuncoesUteis {
 
     protected static boolean verificaInt(String stringRecebida){
         boolean verificacao = true;
+        int inteiroRecebido = 0;
         if(stringRecebida.isEmpty()){
-            System.out.println("\nA quantidade introduzida não é válida.");
+            System.out.println("\nO valor introduzido não é válido.");
             verificacao = false;
         } else {
             try {
-                Integer.parseInt(stringRecebida);
+                inteiroRecebido = Integer.parseInt(stringRecebida);
             } catch (NumberFormatException exception) {
-                System.out.println("\nA quantidade introduzida não é válida.");
                 verificacao = false;
             }
         }
@@ -55,14 +55,19 @@ public class FuncoesUteis {
 
     protected static boolean verificaDouble(String stringRecebida){
         boolean verificacao = true;
+        double doubleRecebido = 0.0;
         if(stringRecebida.isEmpty()){
-            System.out.println("\nA quantidade introduzida não é válida.");
+            System.out.println("\nO valor introduzido não é válido.");
             verificacao = false;
         } else {
             try {
-                Double.parseDouble(stringRecebida);
+                doubleRecebido = Double.parseDouble(stringRecebida);
             } catch (NumberFormatException exception) {
-                System.out.println("\nA quantidade introduzida não é válida.");
+                System.out.println("\nO valor introduzido não é válido.");
+                verificacao = false;
+            }
+            if(doubleRecebido == 0.0) {
+                System.out.println("\nO valor introduzido não é válido.");
                 verificacao = false;
             }
         }

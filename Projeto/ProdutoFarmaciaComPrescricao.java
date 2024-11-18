@@ -4,11 +4,28 @@ import java.util.Scanner;
 
 public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
     protected String medico;
-    protected int[] arrayTaxas = {6,5,4};
+    protected final int[] arrayTaxas = {6,5,4};
 
     public ProdutoFarmaciaComPrescricao(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String prescricao, String medico){
         super(codigo, nome, descricao, quantidade, valorSemIVA, prescricao);
         this.medico = medico;
+    }
+
+    protected double obtemValorComIVA(Cliente clienteRecebido){
+        final int[] arrayTaxas = {6,5,4};
+
+        int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
+
+        int quantidadeProduto = Integer.parseInt(this.getQuantidade());
+        double valorPorUnidade = Double.parseDouble(this.getValorSemIVA());
+
+        double taxaAplicadaDecimal = (taxaAplicada / 100.0);
+
+        double valorImposto = (valorPorUnidade * taxaAplicadaDecimal);
+
+        double precoFinalComIVA = (quantidadeProduto * (valorPorUnidade + valorImposto));
+
+        return precoFinalComIVA;
     }
 
     protected static ProdutoFarmaciaComPrescricao criaProdutoComPrescricao(){
@@ -27,5 +44,9 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
         } while(!verificacaoNome);
 
         return new ProdutoFarmaciaComPrescricao(arrayInformacoesProdutoFarmacia[0], arrayInformacoesProdutoFarmacia[1], arrayInformacoesProdutoFarmacia[2], arrayInformacoesProdutoFarmacia[3], arrayInformacoesProdutoFarmacia[4], prescricao, medicoPrescritor);
+    }
+
+    protected String getTipo() {
+        return "Produto Farmacia Com Prescricao";
     }
 }

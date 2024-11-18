@@ -5,8 +5,6 @@ import java.util.Scanner;
 public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar {
     protected int quantidadeCertificacoes;
     protected String[] certificacoes;
-    protected int[] arrayTaxas = {6,5,4};
-    protected int reducaoTaxa = -1;
 
     public ProdutoAlimentarTaxaReduzida(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String biologico, String taxa, int quantidadeCertificacoes, String[] certificacoes){
         super(codigo, nome, descricao, quantidade, valorSemIVA, biologico, taxa);
@@ -18,34 +16,96 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar {
         return (super.toString() + "; Certificacoes -> " + this.quantidadeCertificacoes);
     }
 
+    public int getQuantidadeCertificacoes() {
+        return quantidadeCertificacoes;
+    }
+
+    public String[] getCertificacoes() {
+        return certificacoes;
+    }
+
+    public void setQuantidadeCertificacoes(int quantidadeCertificacoes) {
+        this.quantidadeCertificacoes = quantidadeCertificacoes;
+    }
+
+    public void setCertificacoes(String[] certificacoes) {
+        if(certificacoes != null){
+            this.certificacoes = certificacoes;
+        }
+    }
+
+    protected static String[] obtemCertificacoes(){
+        Scanner scannerObterResposta = new Scanner(System.in);
+        String[] arrayCertificacoesDisponiveis = {"ISO22000", "FSSC22000", "HACCP", "GMP"};
+        int controloCertificacoes = 0;
+
+        String escolha = null;
+
+        String[] arrayCertificacoes = new String[4];
+
+        do {
+            System.out.printf("\nPretende introduzir a certificação %s? \n1-> Sim | 2-> Nao: ", arrayCertificacoesDisponiveis[controloCertificacoes]);
+            escolha = scannerObterResposta.nextLine();
+            switch (escolha) {
+                case "1":
+                    arrayCertificacoes[controloCertificacoes] = arrayCertificacoesDisponiveis[controloCertificacoes];
+                    controloCertificacoes++;
+                    break;
+                case "2":
+                    controloCertificacoes++;
+                    break;
+                default:
+                    System.out.println("Caracter inválido.");
+                    break;
+            }
+        } while(controloCertificacoes < arrayCertificacoesDisponiveis.length);
+
+        return arrayCertificacoes;
+    }
+
+    protected double obtemValorComIVA(Cliente clienteRecebido){
+        final int[] arrayTaxas = {6,5,4};
+        final int reducaoTaxa = -1;
+        int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
+
+        int quantidadeProduto = Integer.parseInt(this.getQuantidade());
+        double valorPorUnidade = Double.parseDouble(this.getValorSemIVA());
+
+        if(this.getQuantidadeCertificacoes() == 4){
+            taxaAplicada += reducaoTaxa;
+        }
+
+        double taxaAplicadaDecimal = (taxaAplicada / 100.0);
+
+        double precoFinalComIVA;
+
+        double valorImposto = (valorPorUnidade * taxaAplicadaDecimal);
+
+        String biologico = this.getBiologico();
+        if(biologico.equalsIgnoreCase("Sim")){
+            double valorImpostoComDesconto = (valorImposto - (valorImposto * 0.1));
+            precoFinalComIVA = ((valorPorUnidade + valorImpostoComDesconto) * quantidadeProduto);
+        } else {
+            precoFinalComIVA = (quantidadeProduto * (valorPorUnidade + valorImposto));
+        }
+
+        return precoFinalComIVA;
+    }
+
+
     protected static ProdutoAlimentarTaxaReduzida criaProdutoTaxaReduzida(){
         String tipoTaxa = "Reduzida";
 
-        boolean verificacaoQuantidade = false;
-        String quantidadeCertificacoesProduto = null;
         int quantidadeCertificacoes = 0;
-
-        Scanner scannerObterResposta = new Scanner(System.in);
 
         String[] arrayInformacoesProdutoAlimentar = ProdutoAlimentar.obterInformacaoProdutoAlimentar();
 
-        while (!verificacaoQuantidade) {
-            System.out.print("Introduza a quantidade de certificações do produto: ");
-            quantidadeCertificacoesProduto = scannerObterResposta.nextLine();
-            verificacaoQuantidade = FuncoesUteis.verificaInt(quantidadeCertificacoesProduto);
-            if(verificacaoQuantidade) {
-                quantidadeCertificacoes = Integer.parseInt(quantidadeCertificacoesProduto);
-            }
-        }
-
-        String[] arrayCertificacoes = new String[quantidadeCertificacoes];
-
-        for(int l = 0; l < quantidadeCertificacoes; l++){
-            System.out.print("Introduza as certificações do produto: ");
-            String certificacoesProduto = scannerObterResposta.nextLine();
-            arrayCertificacoes[l] = certificacoesProduto;
-        }
+        String[] arrayCertificacoes = obtemCertificacoes();
 
         return new ProdutoAlimentarTaxaReduzida(arrayInformacoesProdutoAlimentar[0], arrayInformacoesProdutoAlimentar[1], arrayInformacoesProdutoAlimentar[2], arrayInformacoesProdutoAlimentar[3], arrayInformacoesProdutoAlimentar[4], arrayInformacoesProdutoAlimentar[5], tipoTaxa, quantidadeCertificacoes, arrayCertificacoes);
+    }
+
+    protected String getTipo() {
+        return "Produto Alimentar Taxa Reduzida";
     }
 }

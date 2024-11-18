@@ -1,16 +1,5 @@
-meter constantes tipo array e assim em final ->
-
 faturas: - se houver clientes mas não houver o cliente que o utilizar pretende, ao carregar no 0 volta para o menu principal
-         - ao criar fatura com x cliente, se eliminarmos o cliente tem que eliminar a fatura (quando eliminamos, procurar o array faturas pela fatura do cliente e eliminar)
-         - fazer whiles para a má introdução de valores e caracteres -> a ser feito
-         - fazer protecoes para tudo -> a ser feito
 
-produto alimentar: - ver melhor forma de pedir certificacoes ao utilizador
 
-erros: - introduzir fatura após criar um cliente, diz que o número de fatura não é válido -> feito
-       - introduzir data na fatura dá erro ao introduzir formato errado -> feito
-       - introduzir quantidade de produtos, se meter caracter exceto número dá erro -> feito
-       - escolher produto alimentar e depois meter um caracter que não seja uma das opções dá erro e passa para perguntar se tem prescricao medica -> feito
-       - fazer protecoes produtos -> a verificar
-       - ver melhor forma certificacoes produto
-       - deixa meter categoria normal -> ?
+dá para tirar os whiles quando queremos alterar as informacoes? ->
+verificar a correta utilizacao do verificaInt nas quantidades ->

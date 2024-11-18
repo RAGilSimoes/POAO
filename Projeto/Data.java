@@ -22,15 +22,23 @@ public class Data {
                 System.out.println("\nData introduzida no formato inválido.");
             } else {
                 String[] dataSeparada = dataIntroduzida.split("/");
-                int dia = Integer.parseInt(dataSeparada[0]);
-                int mes = Integer.parseInt(dataSeparada[1]);
-                int ano = Integer.parseInt(dataSeparada[2]);
 
-                if((dia < 1 || dia > 31) || (mes < 1 || mes > 12) || (ano > 2024)){
+                for(String string: dataSeparada){
+                    verificaDataIntroduzida = FuncoesUteis.verificaInt(string);
+                }
+
+                if(!verificaDataIntroduzida){
                     System.out.println("\nData inválida.");
                 } else {
-                    data = new Data(dia, mes, ano);
-                    verificaDataIntroduzida = true;
+                    int dia = Integer.parseInt(dataSeparada[0]);
+                    int mes = Integer.parseInt(dataSeparada[1]);
+                    int ano = Integer.parseInt(dataSeparada[2]);
+                    if((dia < 1 || dia > 31) || (mes < 1 || mes > 12) || (ano > 2024)){
+                        System.out.println("\nData inválida.");
+                        verificaDataIntroduzida = false;
+                    } else {
+                        data = new Data(dia, mes, ano);
+                    }
                 }
             }
         } while(!verificaDataIntroduzida);

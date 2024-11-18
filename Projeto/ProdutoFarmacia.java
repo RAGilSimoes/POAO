@@ -13,5 +13,9 @@ abstract class ProdutoFarmacia extends Produto {
     protected static String[] obterInformacaoProdutoFarmacia() {
         return Produto.obterInformacoesProduto();
     }
+
+    protected String getTipo() {
+        return "Produto Farmacia";
+    }
 }
 

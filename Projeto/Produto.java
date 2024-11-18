@@ -21,6 +21,46 @@ abstract class Produto{
         return ("Codigo -> " + this.codigo + "; Nome -> " + this.nome + "; Descricao -> " + this.descricao + "; Quantidade -> " + this.quantidade + "; Valor sem IVA -> " + this.valorSemIVA);
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public String getQuantidade() {
+        return quantidade;
+    }
+
+    public String getValorSemIVA() {
+        return valorSemIVA;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public void setValorSemIVA(String valorSemIVA) {
+        this.valorSemIVA = valorSemIVA;
+    }
+
     protected static boolean verificaCodigo(String stringRecebida){
         boolean verificacao = true;
         for(int i = 0; i < stringRecebida.length(); i++){
@@ -42,16 +82,25 @@ abstract class Produto{
         return descricao;
     }
 
+
+
+    protected double obtemValorSemIVA(){
+        int quantidade = Integer.parseInt(this.getQuantidade());
+        double precoPorUnidade = Double.parseDouble(this.getValorSemIVA());
+
+        return (quantidade * precoPorUnidade);
+    }
+
+    protected abstract double obtemValorComIVA(Cliente clienteRecebido);
+
     protected static String[] obterInformacoesProduto() {
         Scanner scannerObterResposta = new Scanner(System.in);
 
         String codigoProduto = null;
-        String nomeProduto = null;
         String quantidadeProduto = null;
         String precoSemIVAProduto = null;
 
         boolean verificaoCodigo = false;
-        boolean verificacaoNome = false;
         boolean verificacaoQuantidade = false;
         boolean verificacaoPrecoSemIVA = false;
 
@@ -61,11 +110,8 @@ abstract class Produto{
             verificaoCodigo = verificaCodigo(codigoProduto);
         }
 
-        do {
-            System.out.print("Introduza o nome do produto: ");
-            nomeProduto = scannerObterResposta.nextLine();
-            verificacaoNome = FuncoesUteis.verificaNome(nomeProduto);
-        } while(!verificacaoNome);
+        System.out.print("Introduza o nome do produto: ");
+        String nomeProduto = scannerObterResposta.nextLine();
 
         System.out.print("Introduza a descricao do produto: ");
         String descricaoProduto = scannerObterResposta.nextLine();
@@ -75,6 +121,14 @@ abstract class Produto{
             System.out.print("Introduza a quantidade do produto (mínimo 1): ");
             quantidadeProduto = scannerObterResposta.nextLine();
             verificacaoQuantidade = FuncoesUteis.verificaInt(quantidadeProduto);
+            if(!verificacaoQuantidade){
+                System.out.println("\nO valor introduzido não é válido.");
+            } else {
+                if(quantidadeProduto.equals("0")){
+                    System.out.println("\nO valor introduzido não é válido.");
+                    verificacaoQuantidade = false;
+                }
+            }
         }
 
         while(!verificacaoPrecoSemIVA){
@@ -85,5 +139,7 @@ abstract class Produto{
 
         return new String[]{codigoProduto, nomeProduto, descricaoProduto, quantidadeProduto, precoSemIVAProduto};
     }
+
+    protected abstract String getTipo();
 }
 

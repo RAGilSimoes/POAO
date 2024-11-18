@@ -4,12 +4,42 @@ import java.util.Scanner;
 
 public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia {
     protected String categoria;
-    protected int[] arrayTaxas = {23,23,23};
-    protected int reducaoTaxa = -1;
+    protected final int[] arrayTaxas = {23,23,23};
+    protected final int reducaoTaxa = -1;
 
     public ProdutoFarmaciaSemPrescricao(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String prescricao, String categoria){
         super(codigo, nome, descricao, quantidade, valorSemIVA, prescricao);
         this.categoria  = categoria;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    protected double obtemValorComIVA(Cliente clienteRecebido){
+        final int[] arrayTaxas = {23,23,23};
+        final int reducaoTaxa = -1;
+        int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
+
+        int quantidadeProduto = Integer.parseInt(this.getQuantidade());
+        double valorPorUnidade = Double.parseDouble(this.getValorSemIVA());
+
+        String categoria = this.getCategoria();
+        if(categoria.equalsIgnoreCase("animais")){
+            taxaAplicada += reducaoTaxa;
+        }
+
+        double taxaAplicadaDecimal = (taxaAplicada / 100.0);
+
+        double valorImposto = (valorPorUnidade * taxaAplicadaDecimal);
+
+        double precoFinalComIVA = (quantidadeProduto * (valorPorUnidade + valorImposto));
+
+        return precoFinalComIVA;
     }
 
     protected static ProdutoFarmaciaSemPrescricao criaProdutoSemPrescricao(){
@@ -22,5 +52,9 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia {
         String categoriaProduto = scannerObterResposta.nextLine();
 
         return new ProdutoFarmaciaSemPrescricao(arrayInformacoesProdutoFarmacia[0], arrayInformacoesProdutoFarmacia[1], arrayInformacoesProdutoFarmacia[2], arrayInformacoesProdutoFarmacia[3], arrayInformacoesProdutoFarmacia[4], prescricao, categoriaProduto);
+    }
+
+    protected String getTipo() {
+        return "Produto Farmacia Sem Prescricao";
     }
 }

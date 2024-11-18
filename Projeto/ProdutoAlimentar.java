@@ -4,16 +4,32 @@ import java.util.Scanner;
 
 abstract class ProdutoAlimentar extends Produto{
     protected String biologico;
-    protected String taxa;
+    protected String tipoTaxa;
 
-    public ProdutoAlimentar(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String biologico, String taxa){
+    public ProdutoAlimentar(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String biologico, String tipoTaxa){
         super(codigo, nome, descricao, quantidade, valorSemIVA);
         this.biologico = biologico;
-        this.taxa = taxa;
+        this.tipoTaxa = tipoTaxa;
     }
 
     public String toString() {
-        return (super.toString() + "; Biologico -> " + this.biologico + "; Taxa -> " + this.taxa);
+        return (super.toString() + "; Biologico -> " + this.biologico + "; Taxa -> " + this.tipoTaxa);
+    }
+
+    public String getBiologico() {
+        return biologico;
+    }
+
+    public String getTipoTaxa() {
+        return tipoTaxa;
+    }
+
+    public void setBiologico(String biologico) {
+        this.biologico = biologico;
+    }
+
+    public void setTipoTaxa(String tipoTaxa) {
+        this.tipoTaxa = tipoTaxa;
     }
 
     protected static String[] obterInformacaoProdutoAlimentar() {
@@ -25,15 +41,17 @@ abstract class ProdutoAlimentar extends Produto{
         String[] arrayInformacoesProduto = Produto.obterInformacoesProduto();
 
         do {
-            System.out.print("O produto é biológico? (Sim/Nao) -> ");
+            System.out.print("O produto é biológico? \n1-> Sim | 2-> Nao ");
             biologicoProduto = scannerObterResposta.nextLine();
 
             switch (biologicoProduto) {
-                case "Sim":
+                case "1":
+                    biologicoProduto = "Sim";
                     verificaBiologico = true;
                     break;
 
-                case "Nao":
+                case "2":
+                    biologicoProduto = "Nao";
                     verificaBiologico = true;
                     break;
 
@@ -49,6 +67,11 @@ abstract class ProdutoAlimentar extends Produto{
         arrayInformacoesProdutoAlimentar[5] = biologicoProduto;
 
         return arrayInformacoesProdutoAlimentar;
+    }
+
+
+    protected String getTipo() {
+        return "Produto Alimentar";
     }
 }
 

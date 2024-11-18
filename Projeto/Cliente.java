@@ -72,7 +72,7 @@ public class Cliente {
 
         switch(escolha){
             case "1":
-                localizacao = "Portugal";
+                localizacao = "Continente";
                 break;
             case "2":
                 localizacao = "Madeira";
@@ -113,7 +113,7 @@ public class Cliente {
         }
 
         while(localizacao == null){
-            System.out.print("\nEscolha a localização do cliente: \n1-> Portugal | 2-> Madeira | 3-> Açores\n");
+            System.out.print("\nEscolha a localização do cliente: \n1-> Continente | 2-> Madeira | 3-> Açores\n");
             escolhaLocalizacao = scannerCliente.nextLine();
             localizacao = escolherLocalizao(escolhaLocalizacao);
         }
@@ -121,7 +121,7 @@ public class Cliente {
         return new Cliente(nome, nif, localizacao);
     }
 
-    protected void alteraInformacao(String tipo, Cliente clienteRecebido, ArrayList<Cliente> arrayClientes){
+    protected void alteraInformacaoCliente(String tipo, Cliente clienteRecebido, ArrayList<Cliente> arrayClientes){
         Scanner editarCliente = new Scanner(System.in);
 
         switch (tipo){
@@ -184,14 +184,17 @@ public class Cliente {
                     }
                 }
                 break;
+
+            default:
+                break;
         }
     }
 
 
     protected void alteraInformacoesCliente(Cliente clienteRecebido, ArrayList<Cliente> arrayClientes) {
         System.out.print("\n(Pressione 0 para não alterar alguma informacão)");
-        alteraInformacao("Nome", clienteRecebido, arrayClientes);
-        alteraInformacao("NIF", clienteRecebido, arrayClientes);
-        alteraInformacao("Localizacao", clienteRecebido, arrayClientes);
+        alteraInformacaoCliente("Nome", clienteRecebido, arrayClientes);
+        alteraInformacaoCliente("NIF", clienteRecebido, arrayClientes);
+        alteraInformacaoCliente("Localizacao", clienteRecebido, arrayClientes);
     }
 }
