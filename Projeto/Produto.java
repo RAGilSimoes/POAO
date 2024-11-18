@@ -62,13 +62,14 @@ abstract class Produto{
     }
 
     protected static boolean verificaCodigo(String stringRecebida){
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificacao = true;
         if(stringRecebida.isEmpty()){
             System.out.println("\nO código introduzido não é válido.");
             verificacao = false;
         } else {
             for(int i = 0; i < stringRecebida.length(); i++){
-                if (FuncoesUteis.verificaCaracteres(stringRecebida,'0', '9')){
+                if (funcoesUteis.verificaCaracteres(stringRecebida,'0', '9')){
                     verificacao = false;
                 }
             }
@@ -101,6 +102,7 @@ abstract class Produto{
     protected abstract double obtemValorComIVA(Cliente clienteRecebido);
 
     protected static String[] obterInformacoesProduto() {
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
         Scanner scannerObterResposta = new Scanner(System.in);
 
         String codigoProduto = null;
@@ -127,7 +129,7 @@ abstract class Produto{
         while (!verificacaoQuantidade) {
             System.out.print("Introduza a quantidade do produto (mínimo 1): ");
             quantidadeProduto = scannerObterResposta.nextLine();
-            verificacaoQuantidade = FuncoesUteis.verificaInt(quantidadeProduto);
+            verificacaoQuantidade = funcoesUteis.verificaInt(quantidadeProduto);
             if(!verificacaoQuantidade){
                 System.out.println("\nO valor introduzido não é válido.");
             } else {
@@ -141,7 +143,7 @@ abstract class Produto{
         while(!verificacaoPrecoSemIVA){
             System.out.print("Introduza o preço sem IVA do produto: ");
             precoSemIVAProduto = scannerObterResposta.nextLine();
-            verificacaoPrecoSemIVA = FuncoesUteis.verificaDouble(precoSemIVAProduto);
+            verificacaoPrecoSemIVA = funcoesUteis.verificaDouble(precoSemIVAProduto);
         }
 
         return new String[]{codigoProduto, nomeProduto, descricaoProduto, quantidadeProduto, precoSemIVAProduto};

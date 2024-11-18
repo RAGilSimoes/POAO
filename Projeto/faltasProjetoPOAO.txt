@@ -1,25 +1,13 @@
 faturas: - se houver clientes mas não houver o cliente que o utilizar pretende, ao carregar no 0 volta para o menu principal
 
-
-dá para tirar os whiles quando queremos alterar as informacoes? ->
-verificar a correta utilizacao do verificaInt nas quantidades ->
-
 meter os objetos como implements serializable
 
-erros: - escolher o cliente que se quer mexer a partir da lista deixa meter enters e caracter tipo errado dá erro
-       - (meter verificacao correta)
+erros: - verificar valores faturas //TODO
 
 ficheiro de texto inicial manda para o ficheiro objetos
 nunca escrevemos no fim do programa para o ficheiro de texto
 escreve tudo no ficheiro objetos
 se o ficheiro de objetos existir vai buscar aí os clientes
 
-passar o listarclientes para o cliente para evitar ser static?
-
-classe utility para faturas, outra para clientes, outra para produtos?
-
-meter o listarClientes para dentro do cliente e listarFaturas para dentro da Fatura
 
 separar strings -> string.split("\\W") divide por caracteres especiais
-
-ver bem o uso de static

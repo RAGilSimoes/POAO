@@ -11,7 +11,8 @@ public class Data {
         this.ano = ano;
     }
 
-    protected static Data verificaData(){
+    protected Data verificaData(){
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificaDataIntroduzida = false;
         Data data = new Data(0, 0, 0);
         Scanner scannerObterResposta = new Scanner(System.in);
@@ -24,7 +25,7 @@ public class Data {
                 String[] dataSeparada = dataIntroduzida.split("/");
 
                 for(String string: dataSeparada){
-                    verificaDataIntroduzida = FuncoesUteis.verificaInt(string);
+                    verificaDataIntroduzida = funcoesUteis.verificaInt(string);
                 }
 
                 if(!verificaDataIntroduzida){

@@ -25,20 +25,13 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia {
         final int reducaoTaxa = -1;
         int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
 
-        int quantidadeProduto = Integer.parseInt(this.getQuantidade());
-        double valorPorUnidade = Double.parseDouble(this.getValorSemIVA());
-
         String categoria = this.getCategoria();
         if(categoria.equalsIgnoreCase("animais")){
             taxaAplicada += reducaoTaxa;
         }
 
-        double taxaAplicadaDecimal = (taxaAplicada / 100.0);
-
-        double valorImposto = (valorPorUnidade * taxaAplicadaDecimal);
-
-        double precoFinalComIVA = (quantidadeProduto * (valorPorUnidade + valorImposto));
-
+        CalculaTaxaProdutoFarmacia calculaTaxaProdutoFarmacia = new CalculaTaxaProdutoFarmacia();
+        double precoFinalComIVA = calculaTaxaProdutoFarmacia.calculaPrecoFinalComIVA(taxaAplicada, this);
         return precoFinalComIVA;
     }
 

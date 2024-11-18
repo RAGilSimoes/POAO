@@ -56,8 +56,9 @@ public class Cliente {
     }
 
     protected boolean verificaNif(String nif, ArrayList<Cliente> arrayClientes){
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificacao;
-        if (nif.length() != 9 || FuncoesUteis.verificaCaracteres(nif,'0', '9')){
+        if (nif.length() != 9 || funcoesUteis.verificaCaracteres(nif,'0', '9')){
             System.out.println("\nO nif introduzido não é válido");
             verificacao = false;
         } else {
@@ -89,6 +90,7 @@ public class Cliente {
     }
 
     protected Cliente criaCliente(ArrayList<Cliente> arrayClientes) {
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
         Scanner scannerCliente = new Scanner(System.in);
 
         String nome = null;
@@ -102,7 +104,7 @@ public class Cliente {
         while (!verificacaoNome) {
             System.out.print("\nIntroduza o nome do cliente: ");
             nome = scannerCliente.nextLine();
-            verificacaoNome = FuncoesUteis.verificaNome(nome);
+            verificacaoNome = funcoesUteis.verificaNome(nome);
         }
 
 
@@ -122,6 +124,7 @@ public class Cliente {
     }
 
     protected void alteraInformacaoCliente(String tipo, Cliente clienteRecebido, ArrayList<Cliente> arrayClientes){
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
         Scanner editarCliente = new Scanner(System.in);
 
         switch (tipo){
@@ -135,7 +138,7 @@ public class Cliente {
                         System.out.println("Nome não alterado.");
                         break;
                     } else {
-                        verificacaoNome = FuncoesUteis.verificaNome(nome);
+                        verificacaoNome = funcoesUteis.verificaNome(nome);
                         if(verificacaoNome){
                             clienteRecebido.setNome(nome);
                             System.out.println("Nome alterado com sucesso.");

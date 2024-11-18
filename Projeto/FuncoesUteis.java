@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FuncoesUteis {
-    protected static int protecaoEscolha(int menor, int maior){
+    protected int protecaoEscolha(int menor, int maior){
         String escolha = null;
         boolean sairVerificacao = false;
         int escolhaFinal = 0;
@@ -27,7 +27,6 @@ public class FuncoesUteis {
                 }
             } catch (InputMismatchException exception) {
                 System.out.println("\nIntroduza um caracter numérico válido!");
-                exception.printStackTrace();
                 sairVerificacao = false;
             }
         } while(!sairVerificacao);
@@ -35,7 +34,7 @@ public class FuncoesUteis {
         return escolhaFinal;
     }
 
-    protected static boolean verificaCaracteres(String stringRecebida, char min, char max) {
+    protected boolean verificaCaracteres(String stringRecebida, char min, char max) {
         int tamanho = stringRecebida.length();
         boolean verifica = false;
         for (int i = 0; i < tamanho; i++) {
@@ -48,7 +47,7 @@ public class FuncoesUteis {
         return verifica;
     }
 
-    protected static boolean verificaInt(String stringRecebida){
+    protected boolean verificaInt(String stringRecebida){
         boolean verificacao = true;
         int inteiroRecebido = 0;
         if(stringRecebida.isEmpty()){
@@ -58,13 +57,14 @@ public class FuncoesUteis {
             try {
                 inteiroRecebido = Integer.parseInt(stringRecebida);
             } catch (NumberFormatException exception) {
+                System.out.println("\nO valor introduzido não é válido.");
                 verificacao = false;
             }
         }
         return verificacao;
     }
 
-    protected static boolean verificaDouble(String stringRecebida){
+    protected boolean verificaDouble(String stringRecebida){
         boolean verificacao = true;
         double doubleRecebido = 0.0;
         if(stringRecebida.isEmpty()){
@@ -76,13 +76,12 @@ public class FuncoesUteis {
             } catch (NumberFormatException exception) {
                 System.out.println("\nO valor introduzido não é válido.");
                 verificacao = false;
-                exception.printStackTrace();
             }
         }
         return verificacao;
     }
 
-    protected static boolean verificaNome(String nomeRecebido){
+    protected boolean verificaNome(String nomeRecebido){
         boolean verificacao = false;
         String[] nomeSeparado = nomeRecebido.split(" ");
         for(String nome: nomeSeparado){
@@ -97,7 +96,7 @@ public class FuncoesUteis {
         return verificacao;
     }
 
-    protected static boolean verificaCategoria(String stringRecebida) {
+    protected boolean verificaCategoria(String stringRecebida) {
         boolean verificacao;
         if(verificaCaracteres(stringRecebida, 'a', 'z')) {
             verificacao = true;

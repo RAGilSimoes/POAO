@@ -16,19 +16,13 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
 
         int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
 
-        int quantidadeProduto = Integer.parseInt(this.getQuantidade());
-        double valorPorUnidade = Double.parseDouble(this.getValorSemIVA());
-
-        double taxaAplicadaDecimal = (taxaAplicada / 100.0);
-
-        double valorImposto = (valorPorUnidade * taxaAplicadaDecimal);
-
-        double precoFinalComIVA = (quantidadeProduto * (valorPorUnidade + valorImposto));
-
+        CalculaTaxaProdutoFarmacia calculaTaxaProdutoFarmacia = new CalculaTaxaProdutoFarmacia();
+        double precoFinalComIVA = calculaTaxaProdutoFarmacia.calculaPrecoFinalComIVA(taxaAplicada, this);
         return precoFinalComIVA;
     }
 
     protected static ProdutoFarmaciaComPrescricao criaProdutoComPrescricao(){
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
         String prescricao = "Sim";
         boolean verificacaoNome = false;
         String medicoPrescritor = null;
@@ -40,7 +34,7 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
         do {
             System.out.print("Introduza o nome do médico que prescreveu o produto: ");
             medicoPrescritor = scannerObterResposta.nextLine();
-            verificacaoNome = FuncoesUteis.verificaNome(medicoPrescritor);
+            verificacaoNome = funcoesUteis.verificaNome(medicoPrescritor);
         } while(!verificacaoNome);
 
         return new ProdutoFarmaciaComPrescricao(arrayInformacoesProdutoFarmacia[0], arrayInformacoesProdutoFarmacia[1], arrayInformacoesProdutoFarmacia[2], arrayInformacoesProdutoFarmacia[3], arrayInformacoesProdutoFarmacia[4], prescricao, medicoPrescritor);

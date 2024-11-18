@@ -68,26 +68,12 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar {
         final int reducaoTaxa = -1;
         int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
 
-        int quantidadeProduto = Integer.parseInt(this.getQuantidade());
-        double valorPorUnidade = Double.parseDouble(this.getValorSemIVA());
-
         if(this.getQuantidadeCertificacoes() == 4){
             taxaAplicada += reducaoTaxa;
         }
 
-        double taxaAplicadaDecimal = (taxaAplicada / 100.0);
-
-        double precoFinalComIVA;
-
-        double valorImposto = (valorPorUnidade * taxaAplicadaDecimal);
-
-        String biologico = this.getBiologico();
-        if(biologico.equalsIgnoreCase("Sim")){
-            double valorImpostoComDesconto = (valorImposto - (valorImposto * 0.1));
-            precoFinalComIVA = ((valorPorUnidade + valorImpostoComDesconto) * quantidadeProduto);
-        } else {
-            precoFinalComIVA = (quantidadeProduto * (valorPorUnidade + valorImposto));
-        }
+        CalculaTaxaProdutoAlimentar calculaTaxaProdutoAlimentar = new CalculaTaxaProdutoAlimentar();
+        double precoFinalComIVA = calculaTaxaProdutoAlimentar.calculaPrecoFinalComIVA(taxaAplicada, this);
 
         return precoFinalComIVA;
     }

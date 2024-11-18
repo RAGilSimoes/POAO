@@ -57,7 +57,8 @@ public class POOFS {
                     break;
 
                 case "2":
-                    listarClientes(arrayClientes);
+                    ListarClientes listarClientes = new ListarClientes();
+                    listarClientes.listarClientes(arrayClientes);
                     break;
 
                 case "3":
@@ -65,7 +66,8 @@ public class POOFS {
                     break;
 
                 case "4":
-                    listarFaturas(arrayFaturas);
+                    ListarFaturas listarFaturas = new ListarFaturas();
+                    listarFaturas.listarFaturas(arrayFaturas);
                     break;
 
                 case "5":
@@ -94,6 +96,8 @@ public class POOFS {
 
 
     private void criarEditarEliminarCliente() {
+        ListarClientes listarClientes = new ListarClientes();
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean sair = false;
         do {
             String escolha;
@@ -118,10 +122,10 @@ public class POOFS {
                         System.out.println("\nA lista de clientes está vazia.");
                         break;
                     } else {
-                        listarClientes(arrayClientes);
+                        listarClientes.listarClientes(arrayClientes);
 
                         System.out.println("\nIntroduza o número do cliente que pretende editar: ");
-                        int numeroClienteProcurar = FuncoesUteis.protecaoEscolha(1, arrayClientes.size());
+                        int numeroClienteProcurar = funcoesUteis.protecaoEscolha(1, arrayClientes.size());
 
                         Cliente clienteAlterar = arrayClientes.get(numeroClienteProcurar - 1);
 
@@ -138,11 +142,11 @@ public class POOFS {
                         System.out.println("\nA lista de clientes está vazia.");
                         break;
                     } else {
-                        listarClientes(arrayClientes);
+                        listarClientes.listarClientes(arrayClientes);
 
                         System.out.println("\nIntroduza o número do cliente que pretende eliminar: ");
 
-                        int numeroClienteEliminar = FuncoesUteis.protecaoEscolha(1, arrayClientes.size());
+                        int numeroClienteEliminar = funcoesUteis.protecaoEscolha(1, arrayClientes.size());
 
                         Cliente clienteEliminar = arrayClientes.get(numeroClienteEliminar - 1);
 
@@ -152,7 +156,7 @@ public class POOFS {
                         for(Fatura fatura: arrayFaturas){
                             if(fatura.getCliente() == clienteEliminar){
                                 arrayFaturas.remove(fatura);
-                                System.out.println("\nFatura associada eliminada com sucesso!");
+                                System.out.println("\nFatura Nº " + fatura.getnFatura() + " removida com sucesso!");
                                 temFaturas = true;
                             }
                         }
@@ -177,21 +181,10 @@ public class POOFS {
     }
 
 
-    protected static void listarClientes(ArrayList<Cliente> arrayClientes) {
-        if (arrayClientes.isEmpty()) {
-            System.out.println("\nA lista de clientes está vazia.");
-        }
-        else {
-            System.out.println("\nLista dos clientes:");
-            for (int i = 0; i < arrayClientes.size(); i++) {
-                System.out.println("Cliente " + (i+1) + ": " + arrayClientes.get(i));
-            }
-        }
-    }
-
-
     private void criarEditarEliminarFaturas() {
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean sair = false;
+        ListarFaturas listarFaturas = new ListarFaturas();
         do {
             String escolha;
 
@@ -206,7 +199,8 @@ public class POOFS {
                         System.out.println("\nA lista de clientes está vazia, por favor crie um cliente antes de tentar inserir uma fatura.");
                         break;
                     } else {
-                        Fatura fatura = Fatura.criaFatura(arrayClientes, arrayFaturas);
+                        Fatura fatura = new Fatura(null, null, null, null, 0, 0);
+                        fatura = fatura.criaFatura(arrayClientes, arrayFaturas);
                         arrayFaturas.add(fatura);
                         System.out.println("\nFatura adicionada com sucesso!");
                         break;
@@ -217,14 +211,14 @@ public class POOFS {
                         System.out.println("\nA lista de faturas está vazia.");
                         break;
                     } else {
-                        listarFaturas(arrayFaturas);
+                        listarFaturas.listarFaturas(arrayFaturas);
 
                         System.out.println("\nIntroduza o número da fatura que pretende alterar: ");
-                        int numeroFaturaProcurar = FuncoesUteis.protecaoEscolha(1, arrayClientes.size());
+                        int numeroFaturaProcurar = funcoesUteis.protecaoEscolha(1, arrayClientes.size());
 
                         Fatura faturaAlterar = arrayFaturas.get(numeroFaturaProcurar - 1);
 
-                        System.out.println("\nCliente " + numeroFaturaProcurar + ": " +  faturaAlterar);
+                        System.out.println("\nFatura " + numeroFaturaProcurar + ": " +  faturaAlterar);
 
                         faturaAlterar.alteraInformacoesFatura(faturaAlterar, arrayFaturas, arrayClientes);
 
@@ -237,11 +231,11 @@ public class POOFS {
                         System.out.println("\nA lista de faturas está vazia.");
                         break;
                     } else {
-                        listarFaturas(arrayFaturas);
+                        listarFaturas.listarFaturas(arrayFaturas);
 
                         System.out.println("\nIntroduza o número da fatura que pretende eliminar: ");
 
-                        int numeroFaturaEliminar = FuncoesUteis.protecaoEscolha(1, arrayClientes.size());
+                        int numeroFaturaEliminar = funcoesUteis.protecaoEscolha(1, arrayClientes.size());
 
                         Fatura faturaEliminar = arrayFaturas.get(numeroFaturaEliminar - 1);
 
@@ -262,17 +256,5 @@ public class POOFS {
                     break;
             }
         }while(!sair);
-    }
-
-
-    protected static void listarFaturas(ArrayList<Fatura> arrayFaturas) {
-        if(arrayFaturas.isEmpty()) {
-            System.out.println("\nA lista de faturas está vazia.");
-        } else {
-            System.out.println("Lista de faturas: ");
-            for(Fatura fatura: arrayFaturas) {
-                System.out.println(fatura);
-            }
-        }
     }
 }
