@@ -8,14 +8,17 @@ meter os objetos como implements serializable
 
 erros: - escolher o cliente que se quer mexer a partir da lista deixa meter enters
 
+ficheiro de texto inicial manda para o ficheiro objetos
+nunca escrevemos no fim do programa para o ficheiro de texto
+escreve tudo no ficheiro objetos
+se o ficheiro de objetos existir vai buscar aí os clientes
 
-alteraste alguma coisa do código?
-acho q sim mas ja n me lembro mas n foi quase nd e pelo menos sei q ta td a funcionar tirando os enters
-já vi as alterações, é só corrigir isso então e verificar mesmo tudo
-oq é q eu alterei??? tu não sei, mas lembro-me das alterações OK
+passar o listarclientes para o cliente para evitar ser static?
 
-ja sei oq alterei, no produto tava a dar bue prints tp, eram 4 caracteres q tavam mal? dava 4 prints a dzr invalido, meti isso bem
-ok ok
-👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍vv
+classe utility para faturas, outra para clientes, outra para produtos?
+
+meter o listarClientes para dentro do cliente e listarFaturas para dentro da Fatura
 
 separar strings -> string.split("\\W") divide por caracteres especiais
+
+ver bem o uso de static
