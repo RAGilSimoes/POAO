@@ -63,10 +63,17 @@ abstract class Produto{
 
     protected static boolean verificaCodigo(String stringRecebida){
         boolean verificacao = true;
-        for(int i = 0; i < stringRecebida.length(); i++){
-            if (FuncoesUteis.verificaCaracteres(stringRecebida,'0', '9')){
+        if(stringRecebida.isEmpty()){
+            System.out.println("\nO código introduzido não é válido.");
+            verificacao = false;
+        } else {
+            for(int i = 0; i < stringRecebida.length(); i++){
+                if (FuncoesUteis.verificaCaracteres(stringRecebida,'0', '9')){
+                    verificacao = false;
+                }
+            }
+            if (!verificacao){
                 System.out.println("\nO código introduzido não é válido.");
-                verificacao = false;
             }
         }
         return verificacao;

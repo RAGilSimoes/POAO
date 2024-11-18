@@ -230,6 +230,7 @@ public class Fatura {
             if(verificacaoQuantidade) {
                 if(quantidadeProdutosInserir.equals("0")){
                     System.out.println("\nO valor introduzido não é válido.");
+                    verificacaoQuantidade = false;
                 } else {
                     quantidadeProdutos = Integer.parseInt(quantidadeProdutosInserir);
                 }

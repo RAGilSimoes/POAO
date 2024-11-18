@@ -11,13 +11,15 @@ public class FuncoesUteis {
             try {
                 Scanner scannerEscolha = new Scanner(System.in);
                 escolha = scannerEscolha.nextInt();
-                if(escolha >= menor && escolha <= maior){
+                if(escolha >= menor && escolha <= maior) {
                     sairVerificacao = true;
                 } else {
                     System.out.println("\nIntroduza um caracter numérico válido!");
                 }
             } catch (InputMismatchException exception) {
                 System.out.println("\nIntroduza um caracter numérico válido!");
+                exception.printStackTrace();
+
             }
         } while(!sairVerificacao);
 
@@ -48,6 +50,7 @@ public class FuncoesUteis {
                 inteiroRecebido = Integer.parseInt(stringRecebida);
             } catch (NumberFormatException exception) {
                 verificacao = false;
+                exception.printStackTrace();
             }
         }
         return verificacao;
@@ -65,10 +68,7 @@ public class FuncoesUteis {
             } catch (NumberFormatException exception) {
                 System.out.println("\nO valor introduzido não é válido.");
                 verificacao = false;
-            }
-            if(doubleRecebido == 0.0) {
-                System.out.println("\nO valor introduzido não é válido.");
-                verificacao = false;
+                exception.printStackTrace();
             }
         }
         return verificacao;

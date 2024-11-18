@@ -3,3 +3,19 @@ faturas: - se houver clientes mas não houver o cliente que o utilizar pretende,
 
 dá para tirar os whiles quando queremos alterar as informacoes? ->
 verificar a correta utilizacao do verificaInt nas quantidades ->
+
+meter os objetos como implements serializable
+
+erros: - escolher o cliente que se quer mexer a partir da lista deixa meter enters
+
+
+alteraste alguma coisa do código?
+acho q sim mas ja n me lembro mas n foi quase nd e pelo menos sei q ta td a funcionar tirando os enters
+já vi as alterações, é só corrigir isso então e verificar mesmo tudo
+oq é q eu alterei??? tu não sei, mas lembro-me das alterações OK
+
+ja sei oq alterei, no produto tava a dar bue prints tp, eram 4 caracteres q tavam mal? dava 4 prints a dzr invalido, meti isso bem
+ok ok
+👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍vv
+
+separar strings -> string.split("\\W") divide por caracteres especiais
