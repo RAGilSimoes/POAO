@@ -245,7 +245,7 @@ public class POOFS {
 
                         Fatura faturaEliminar = arrayFaturas.get(numeroFaturaEliminar - 1);
 
-                        System.out.println("\nCliente " + numeroFaturaEliminar + ": " + faturaEliminar);
+                        System.out.println("\nFatura " + numeroFaturaEliminar + ": " + faturaEliminar);
 
                         arrayFaturas.remove(faturaEliminar);
 
