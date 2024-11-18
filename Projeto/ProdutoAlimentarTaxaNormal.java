@@ -12,8 +12,7 @@ public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar {
 
         int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
 
-        CalculaTaxaProdutoAlimentar calculaTaxaProdutoAlimentar = new CalculaTaxaProdutoAlimentar();
-        double precoFinalComIVA = calculaTaxaProdutoAlimentar.calculaPrecoFinalComIVA(taxaAplicada, this);
+        double precoFinalComIVA = this.calculaPrecoFinalComIVA(taxaAplicada, this);
 
         return precoFinalComIVA;
     }

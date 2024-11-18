@@ -30,8 +30,7 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia {
             taxaAplicada += reducaoTaxa;
         }
 
-        CalculaTaxaProdutoFarmacia calculaTaxaProdutoFarmacia = new CalculaTaxaProdutoFarmacia();
-        double precoFinalComIVA = calculaTaxaProdutoFarmacia.calculaPrecoFinalComIVA(taxaAplicada, this);
+        double precoFinalComIVA = this.calculaPrecoFinalComIVA(taxaAplicada, this);
         return precoFinalComIVA;
     }
 

@@ -11,3 +11,5 @@ se o ficheiro de objetos existir vai buscar aí os clientes
 
 
 separar strings -> string.split("\\W") divide por caracteres especiais
+
+verificar código TODOOOOOOOOOOOOOOOO

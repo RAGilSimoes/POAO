@@ -29,8 +29,7 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar {
             taxaAplicada += aumentoTaxa;
         }
 
-        CalculaTaxaProdutoAlimentar calculaTaxaProdutoAlimentar = new CalculaTaxaProdutoAlimentar();
-        double precoFinalComIVA = calculaTaxaProdutoAlimentar.calculaPrecoFinalComIVA(taxaAplicada, this);
+        double precoFinalComIVA = this.calculaPrecoFinalComIVA(taxaAplicada, this);
 
         return precoFinalComIVA;
     }
