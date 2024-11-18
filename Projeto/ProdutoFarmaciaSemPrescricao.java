@@ -23,7 +23,7 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia {
     protected double obtemValorComIVA(Cliente clienteRecebido){
         final int[] arrayTaxas = {23,23,23};
         final int reducaoTaxa = -1;
-        int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
+        int taxaAplicada = this.getTaxaAplicada(clienteRecebido, arrayTaxas);
 
         String categoria = this.getCategoria();
         if(categoria.equalsIgnoreCase("animais")){

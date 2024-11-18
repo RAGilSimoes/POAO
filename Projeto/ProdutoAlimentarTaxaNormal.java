@@ -10,7 +10,7 @@ public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar {
     protected double obtemValorComIVA(Cliente clienteRecebido){
         final int[] arrayTaxas = {23,22,16};
 
-        int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
+        int taxaAplicada = this.getTaxaAplicada(clienteRecebido, arrayTaxas);
 
         double precoFinalComIVA = this.calculaPrecoFinalComIVA(taxaAplicada, this);
 

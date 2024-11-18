@@ -14,7 +14,7 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
     protected double obtemValorComIVA(Cliente clienteRecebido){
         final int[] arrayTaxas = {6,5,4};
 
-        int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
+        int taxaAplicada = this.getTaxaAplicada(clienteRecebido, arrayTaxas);
 
         double precoFinalComIVA = this.calculaPrecoFinalComIVA(taxaAplicada, this);
         return precoFinalComIVA;

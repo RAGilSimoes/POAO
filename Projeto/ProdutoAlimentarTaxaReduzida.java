@@ -66,7 +66,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar {
     protected double obtemValorComIVA(Cliente clienteRecebido){
         final int[] arrayTaxas = {6,5,4};
         final int reducaoTaxa = -1;
-        int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
+        int taxaAplicada = this.getTaxaAplicada(clienteRecebido, arrayTaxas);
 
         if(this.getQuantidadeCertificacoes() == 4){
             taxaAplicada += reducaoTaxa;

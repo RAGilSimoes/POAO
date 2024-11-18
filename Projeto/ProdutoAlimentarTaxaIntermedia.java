@@ -22,7 +22,7 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar {
     protected double obtemValorComIVA(Cliente clienteRecebido){
         final int[] arrayTaxas = {13,12,9};
         final int aumentoTaxa = 1;
-        int taxaAplicada = TaxaAplicada.getTaxaAplicada(clienteRecebido, arrayTaxas);
+        int taxaAplicada = this.getTaxaAplicada(clienteRecebido, arrayTaxas);
 
         String categoria = this.getCategoria();
         if(categoria.equalsIgnoreCase("vinho")){
