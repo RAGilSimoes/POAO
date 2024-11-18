@@ -5,25 +5,34 @@ import java.util.Scanner;
 
 public class FuncoesUteis {
     protected static int protecaoEscolha(int menor, int maior){
-        int escolha = 0;
+        String escolha = null;
         boolean sairVerificacao = false;
+        int escolhaFinal = 0;
         do {
             try {
                 Scanner scannerEscolha = new Scanner(System.in);
-                escolha = scannerEscolha.nextInt();
-                if(escolha >= menor && escolha <= maior) {
-                    sairVerificacao = true;
+                escolha = scannerEscolha.nextLine();
+                boolean verificaEscolha = verificaInt(escolha);
+                if(verificaEscolha) {
+                    escolhaFinal = Integer.parseInt(escolha);
+                    if(escolhaFinal >= menor && escolhaFinal <= maior) {
+                        sairVerificacao = true;
+                    } else {
+                        System.out.println("\nIntroduza um caracter numérico válido!");
+                        sairVerificacao = false;
+                    }
                 } else {
                     System.out.println("\nIntroduza um caracter numérico válido!");
+                    sairVerificacao = false;
                 }
             } catch (InputMismatchException exception) {
                 System.out.println("\nIntroduza um caracter numérico válido!");
                 exception.printStackTrace();
-
+                sairVerificacao = false;
             }
         } while(!sairVerificacao);
 
-        return escolha;
+        return escolhaFinal;
     }
 
     protected static boolean verificaCaracteres(String stringRecebida, char min, char max) {
@@ -50,7 +59,6 @@ public class FuncoesUteis {
                 inteiroRecebido = Integer.parseInt(stringRecebida);
             } catch (NumberFormatException exception) {
                 verificacao = false;
-                exception.printStackTrace();
             }
         }
         return verificacao;

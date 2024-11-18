@@ -6,7 +6,8 @@ verificar a correta utilizacao do verificaInt nas quantidades ->
 
 meter os objetos como implements serializable
 
-erros: - escolher o cliente que se quer mexer a partir da lista deixa meter enters
+erros: - escolher o cliente que se quer mexer a partir da lista deixa meter enters e caracter tipo errado dá erro
+       - (meter verificacao correta)
 
 ficheiro de texto inicial manda para o ficheiro objetos
 nunca escrevemos no fim do programa para o ficheiro de texto
