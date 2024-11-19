@@ -32,13 +32,13 @@ abstract class ProdutoAlimentar extends Produto{
         this.tipoTaxa = tipoTaxa;
     }
 
-    protected static String[] obterInformacaoProdutoAlimentar() {
+    protected String[] obterInformacaoProdutoAlimentar() {
         Scanner scannerObterResposta = new Scanner(System.in);
 
         boolean verificaBiologico = false;
         String biologicoProduto = null;
 
-        String[] arrayInformacoesProduto = Produto.obterInformacoesProduto();
+        String[] arrayInformacoesProduto = obterInformacoesProduto();
 
         do {
             System.out.print("O produto é biológico? \n1-> Sim | 2-> Nao ");

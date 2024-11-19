@@ -14,13 +14,13 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
     protected double obtemValorComIVA(Cliente clienteRecebido){
         final int[] arrayTaxas = {6,5,4};
 
-        int taxaAplicada = this.getTaxaAplicada(clienteRecebido, arrayTaxas);
+        int taxaAplicada = getTaxaAplicada(clienteRecebido, arrayTaxas);
 
-        double precoFinalComIVA = this.calculaPrecoFinalComIVA(taxaAplicada, this);
+        double precoFinalComIVA = calculaPrecoFinalComIVA(taxaAplicada, this);
         return precoFinalComIVA;
     }
 
-    protected static ProdutoFarmaciaComPrescricao criaProdutoComPrescricao(){
+    protected ProdutoFarmaciaComPrescricao criaProdutoComPrescricao(){
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         String prescricao = "Sim";
         boolean verificacaoNome = false;
@@ -28,7 +28,7 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
 
         Scanner scannerObterResposta = new Scanner(System.in);
 
-        String[] arrayInformacoesProdutoFarmacia = ProdutoFarmacia.obterInformacaoProdutoFarmacia();
+        String[] arrayInformacoesProdutoFarmacia = obterInformacaoProdutoFarmacia();
 
         do {
             System.out.print("Introduza o nome do médico que prescreveu o produto: ");

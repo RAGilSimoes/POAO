@@ -34,7 +34,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar {
         }
     }
 
-    protected static String[] obtemCertificacoes(){
+    protected String[] obtemCertificacoes(){
         Scanner scannerObterResposta = new Scanner(System.in);
         String[] arrayCertificacoesDisponiveis = {"ISO22000", "FSSC22000", "HACCP", "GMP"};
         int controloCertificacoes = 0;
@@ -66,24 +66,24 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar {
     protected double obtemValorComIVA(Cliente clienteRecebido){
         final int[] arrayTaxas = {6,5,4};
         final int reducaoTaxa = -1;
-        int taxaAplicada = this.getTaxaAplicada(clienteRecebido, arrayTaxas);
+        int taxaAplicada = getTaxaAplicada(clienteRecebido, arrayTaxas);
 
-        if(this.getQuantidadeCertificacoes() == 4){
+        if(getQuantidadeCertificacoes() == 4){
             taxaAplicada += reducaoTaxa;
         }
 
-        double precoFinalComIVA = this.calculaPrecoFinalComIVA(taxaAplicada, this);
+        double precoFinalComIVA = calculaPrecoFinalComIVA(taxaAplicada, this);
 
         return precoFinalComIVA;
     }
 
 
-    protected static ProdutoAlimentarTaxaReduzida criaProdutoTaxaReduzida(){
+    protected ProdutoAlimentarTaxaReduzida criaProdutoTaxaReduzida(){
         String tipoTaxa = "Reduzida";
 
         int quantidadeCertificacoes = 0;
 
-        String[] arrayInformacoesProdutoAlimentar = ProdutoAlimentar.obterInformacaoProdutoAlimentar();
+        String[] arrayInformacoesProdutoAlimentar = obterInformacaoProdutoAlimentar();
 
         String[] arrayCertificacoes = obtemCertificacoes();
 

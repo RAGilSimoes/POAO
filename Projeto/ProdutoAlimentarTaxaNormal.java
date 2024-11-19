@@ -10,17 +10,17 @@ public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar {
     protected double obtemValorComIVA(Cliente clienteRecebido){
         final int[] arrayTaxas = {23,22,16};
 
-        int taxaAplicada = this.getTaxaAplicada(clienteRecebido, arrayTaxas);
+        int taxaAplicada = getTaxaAplicada(clienteRecebido, arrayTaxas);
 
-        double precoFinalComIVA = this.calculaPrecoFinalComIVA(taxaAplicada, this);
+        double precoFinalComIVA = calculaPrecoFinalComIVA(taxaAplicada, this);
 
         return precoFinalComIVA;
     }
 
-    protected static ProdutoAlimentarTaxaNormal criaProdutoTaxaNormal(){
+    protected ProdutoAlimentarTaxaNormal criaProdutoTaxaNormal(){
         String tipoTaxa = "Normal";
 
-        String[] arrayInformacoesProdutoAlimentar = ProdutoAlimentar.obterInformacaoProdutoAlimentar();
+        String[] arrayInformacoesProdutoAlimentar = obterInformacaoProdutoAlimentar();
 
         return new ProdutoAlimentarTaxaNormal(arrayInformacoesProdutoAlimentar[0], arrayInformacoesProdutoAlimentar[1], arrayInformacoesProdutoAlimentar[2], arrayInformacoesProdutoAlimentar[3], arrayInformacoesProdutoAlimentar[4], arrayInformacoesProdutoAlimentar[5], tipoTaxa);
     }

@@ -10,8 +10,8 @@ abstract class ProdutoFarmacia extends Produto {
         this.prescricao = prescricao;
     }
 
-    protected static String[] obterInformacaoProdutoFarmacia() {
-        return Produto.obterInformacoesProduto();
+    protected String[] obterInformacaoProdutoFarmacia() {
+        return this.obterInformacoesProduto();
     }
 
     protected String getTipo() {

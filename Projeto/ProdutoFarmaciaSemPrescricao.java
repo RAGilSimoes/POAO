@@ -23,22 +23,22 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia {
     protected double obtemValorComIVA(Cliente clienteRecebido){
         final int[] arrayTaxas = {23,23,23};
         final int reducaoTaxa = -1;
-        int taxaAplicada = this.getTaxaAplicada(clienteRecebido, arrayTaxas);
+        int taxaAplicada = getTaxaAplicada(clienteRecebido, arrayTaxas);
 
-        String categoria = this.getCategoria();
+        String categoria = getCategoria();
         if(categoria.equalsIgnoreCase("animais")){
             taxaAplicada += reducaoTaxa;
         }
 
-        double precoFinalComIVA = this.calculaPrecoFinalComIVA(taxaAplicada, this);
+        double precoFinalComIVA = calculaPrecoFinalComIVA(taxaAplicada, this);
         return precoFinalComIVA;
     }
 
-    protected static ProdutoFarmaciaSemPrescricao criaProdutoSemPrescricao(){
+    protected ProdutoFarmaciaSemPrescricao criaProdutoSemPrescricao(){
         String prescricao = "Nao";
         Scanner scannerObterResposta = new Scanner(System.in);
 
-        String[] arrayInformacoesProdutoFarmacia = ProdutoFarmacia.obterInformacaoProdutoFarmacia();
+        String[] arrayInformacoesProdutoFarmacia = obterInformacaoProdutoFarmacia();
 
         System.out.print("Introduza a categoria do produto: ");
         String categoriaProduto = scannerObterResposta.nextLine();

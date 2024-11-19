@@ -61,7 +61,7 @@ abstract class Produto{
         this.valorSemIVA = valorSemIVA;
     }
 
-    protected static boolean verificaCodigo(String stringRecebida){
+    protected boolean verificaCodigo(String stringRecebida){
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificacao = true;
         if(stringRecebida.isEmpty()){
@@ -80,7 +80,7 @@ abstract class Produto{
         return verificacao;
     }
 
-    protected static String verificaDescricao(String stringRecebida) {
+    protected String verificaDescricao(String stringRecebida) {
         String descricao;
         if(stringRecebida.isEmpty()){
             descricao = "Este produto não tem descrição";
@@ -101,7 +101,7 @@ abstract class Produto{
 
     protected abstract double obtemValorComIVA(Cliente clienteRecebido);
 
-    protected static String[] obterInformacoesProduto() {
+    protected String[] obterInformacoesProduto() {
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         Scanner scannerObterResposta = new Scanner(System.in);
 

@@ -34,7 +34,7 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar {
         return precoFinalComIVA;
     }
 
-    protected static ProdutoAlimentarTaxaIntermedia criaProdutoTaxaIntermedia(){
+    protected ProdutoAlimentarTaxaIntermedia criaProdutoTaxaIntermedia(){
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         String tipoTaxa = "Intermedia";
         String categoriaProduto = null;
@@ -43,7 +43,7 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar {
 
         boolean verificacaoCategoria = false;
 
-        String[] arrayInformacoesProdutoAlimentar = ProdutoAlimentar.obterInformacaoProdutoAlimentar();
+        String[] arrayInformacoesProdutoAlimentar = this.obterInformacaoProdutoAlimentar();
 
         while(!verificacaoCategoria){
             System.out.print("Introduza a categoria do produto: ");
