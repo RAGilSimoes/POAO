@@ -1,6 +1,7 @@
 package Projeto;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ListarFaturas {
     protected void listarFaturas(ArrayList<Fatura> arrayFaturas) {
@@ -13,4 +14,16 @@ public class ListarFaturas {
             }
         }
     }
+    protected void mostraFatura(ArrayList<Fatura> arrayFaturas) {
+        Scanner scannerEscolha = new Scanner(System.in);
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
+        listarFaturas(arrayFaturas);
+        System.out.println("Escolha uma fatura: ");
+        int escolha = funcoesUteis.protecaoEscolha(1, arrayFaturas.size());
+        Fatura faturaEscolhida = arrayFaturas.get(escolha);
+
+    }
+
+
 }
+
