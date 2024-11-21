@@ -415,15 +415,4 @@ public class Fatura {
         alteraInformacaoFatura("Valor Sem IVA", faturaRecebida, arrayFaturas, arrayClientes);
         alteraInformacaoFatura("Valor Com IVA", faturaRecebida, arrayFaturas, arrayClientes);
     }
-    protected int valorTotalIVA(ArrayList<Fatura> arrayFaturas){
-        ArrayList<Produto> arrayProdutos = null;
-        double valorSemIVA= 0.0;
-        double valorComIVA= 0.0;
-        for (Fatura fatura: arrayFaturas) {
-            valorSemIVA += fatura.getValorTotalSemIVA();
-            valorComIVA += fatura.getValorTotalComIVA();
-        }
-        int valorIVA = (int)(((valorComIVA-valorSemIVA)/valorSemIVA)*100);
-        return valorIVA;
-    }
 }

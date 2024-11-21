@@ -272,9 +272,12 @@ public class POOFS {
             for (Produto produto : arrayProdutos) {
                 System.out.print(produto);
             }
-            System.out.print("; Valor total sem IVA da fatura -> " + faturaEscolhida.getValorTotalSemIVA() + "€");
-            System.out.print("; Valor total do IVA da fatura -> " + faturaEscolhida.valorTotalIVA(arrayFaturas) + "%");
-            System.out.println("; Valor total com IVA da fatura -> " + faturaEscolhida.getValorTotalComIVA() + "€");
+            double valorSemIVA = faturaEscolhida.getValorTotalSemIVA();
+            double valorComIVA = faturaEscolhida.getValorTotalComIVA();
+            double valorIVA = (valorComIVA - valorSemIVA);
+            System.out.print("; Valor total sem IVA da fatura -> " + valorSemIVA + "€");
+            System.out.print("; Valor total do IVA da fatura -> " + valorIVA + "€");
+            System.out.println("; Valor total com IVA da fatura -> " + valorComIVA + "€");
         }
     }
 
@@ -282,21 +285,21 @@ public class POOFS {
         int numFaturas = arrayFaturas.size();
         int numProdutos = 0;
         double valorSemIVA = 0.0;
-        int valorIVA = 0;
+        double valorIVA = 0.0;
         double valorComIVA = 0.0;
         ArrayList<Produto> arrayProdutos = null;
         for (Fatura fatura: arrayFaturas){
              arrayProdutos = fatura.getListaProdutos();
              numProdutos += arrayProdutos.size();
              valorSemIVA += fatura.getValorTotalSemIVA();
-             valorIVA += fatura.valorTotalIVA(arrayFaturas);
+             valorIVA += (valorComIVA - valorSemIVA);
              Cliente cliente = fatura.getCliente();
              valorComIVA += fatura.calcularValorTotalComIVA(arrayProdutos, cliente);
         }
         System.out.print("\nNúmero de faturas -> " + numFaturas);
         System.out.print("\nNúmero de produtos -> " + numProdutos);
         System.out.print("\nValor total sem IVA -> " + valorSemIVA);
-        System.out.print("\nNúmero total do IVA -> " + valorIVA);
-        System.out.println("\nNúmero total com IVA -> " + valorComIVA);
+        System.out.print("\nValor total do IVA -> " + valorIVA);
+        System.out.println("\nValor total com IVA -> " + valorComIVA);
     }
 }
