@@ -108,10 +108,12 @@ abstract class Produto{
         String codigoProduto = null;
         String quantidadeProduto = null;
         String precoSemIVAProduto = null;
+        String nomeProduto = null;
 
         boolean verificaoCodigo = false;
         boolean verificacaoQuantidade = false;
         boolean verificacaoPrecoSemIVA = false;
+        boolean verificaNome = false;
 
         while(!verificaoCodigo){
             System.out.print("\nIntroduza o código do produto: ");
@@ -119,8 +121,11 @@ abstract class Produto{
             verificaoCodigo = verificaCodigo(codigoProduto);
         }
 
-        System.out.print("Introduza o nome do produto: ");
-        String nomeProduto = scannerObterResposta.nextLine();
+        while(!verificaNome){
+            System.out.print("Introduza o nome do produto: ");
+            nomeProduto = scannerObterResposta.nextLine();
+            verificaNome = funcoesUteis.verificaNome(nomeProduto);
+        }
 
         System.out.print("Introduza a descricao do produto: ");
         String descricaoProduto = scannerObterResposta.nextLine();

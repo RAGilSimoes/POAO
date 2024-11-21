@@ -45,6 +45,8 @@ public class POOFS {
     public void menu() {
         String escolha;
         boolean sair = false;
+        ListarFaturas listarFaturas = new ListarFaturas();
+        ListarClientes listarClientes = new ListarClientes();
 
         do {
             menus("Menu Principal");
@@ -57,7 +59,6 @@ public class POOFS {
                     break;
 
                 case "2":
-                    ListarClientes listarClientes = new ListarClientes();
                     listarClientes.listarClientes(arrayClientes);
                     break;
 
@@ -66,11 +67,11 @@ public class POOFS {
                     break;
 
                 case "4":
-                    ListarFaturas listarFaturas = new ListarFaturas();
                     listarFaturas.listarFaturas(arrayFaturas);
                     break;
 
                 case "5":
+                    mostraFatura(arrayFaturas);
                     break;
 
                 case "6":
@@ -246,7 +247,6 @@ public class POOFS {
                         System.out.println("\nFatura eliminada com sucesso!");
                         break;
                     }
-
                 case "4":
                     sair = true;
                     break;
@@ -256,5 +256,38 @@ public class POOFS {
                     break;
             }
         }while(!sair);
+    }
+
+    protected void mostraFatura(ArrayList<Fatura> arrayFaturas) {
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
+        ListarFaturas listarFaturas = new ListarFaturas();
+        listarFaturas.listarFaturas(arrayFaturas);
+        if (!arrayFaturas.isEmpty()) {
+            System.out.print("\nEscolha uma fatura: ");
+            int escolha = funcoesUteis.protecaoEscolha(1, arrayFaturas.size());
+            Fatura faturaEscolhida = arrayFaturas.get(escolha - 1);
+            System.out.print("\nFatura: " + faturaEscolhida);
+            ArrayList<Produto> arrayProdutos = faturaEscolhida.getListaProdutos();
+            for (Produto produto : arrayProdutos) {
+                System.out.print(produto);
+            }
+            System.out.print("; Valor total sem IVA da fatura -> " + faturaEscolhida.getValorTotalSemIVA() + "€");
+            System.out.print("; Valor total do IVA da fatura -> " + faturaEscolhida.valorTotalIVA(arrayFaturas) + "%");
+            System.out.println("; Valor total com IVA da fatura -> " + faturaEscolhida.getValorTotalComIVA() + "€");
+        }
+    }
+
+    private void estatistica(ArrayList<Fatura> arrayFaturas){
+        int numFaturas = arrayFaturas.size();
+        int numProdutos = 0;
+        double valorSemIVA = 0.0;
+        ArrayList<Produto> arrayProdutos = null;
+        for (Fatura fatura: arrayFaturas){
+             arrayProdutos = fatura.getListaProdutos();
+             numProdutos += arrayProdutos.size();
+             valorSemIVA += fatura.getValorTotalSemIVA();
+
+        }
+
     }
 }

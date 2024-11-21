@@ -13,3 +13,15 @@ se o ficheiro de objetos existir vai buscar aí os clientes
 separar strings -> string.split("\\W") divide por caracteres especiais
 
 verificar código TODOOOOOOOOOOOOOOOO
+
+silviaRepasRomao.indexOf(ricardoAndreSimoes);
+        import turtle as ric
+        ric.setpos(silvia)
+        ric.pd(silvia)
+        for i in range (∞):
+            ric.forward(silvia)
+            ric.backward(silvia)
+
+meter tudo que é raw em variáveis
+
+perguntar ao utilizador se quer importar e exportar faturas

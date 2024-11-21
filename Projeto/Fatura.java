@@ -72,7 +72,7 @@ public class Fatura {
     }
 
     public String toString(){
-        return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente().getNome() + "; Localização do Cliente -> " + this.getCliente().getLocalizacao() + "; Número de produtos -> " + this.getListaProdutos().size() + "; Valor total sem IVA -> " + this.valorTotalSemIVA + "; Valor total com IVA -> " + this.valorTotalComIVA);
+        return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente().getNome() + "; Localização do Cliente -> " + this.getCliente().getLocalizacao() + "; Número de produtos -> " + this.getListaProdutos().size() + "; Valor total sem IVA -> " + this.valorTotalSemIVA + "; Valor total com IVA -> " + this.valorTotalComIVA + " ");
     }
 
     protected boolean existeNumeroFatura(String nFaturaProcurar, ArrayList<Fatura> arrayFaturas){
@@ -396,7 +396,7 @@ public class Fatura {
         alteraInformacaoFatura("Data", faturaRecebida, arrayFaturas, arrayClientes);
 
         while(!verificacao){
-            System.out.print("\nIntroduza a quantidade de produtos que pretende alterar: ");
+            System.out.print("\n: ");
             String escolha = scannerEscolha.nextLine();
             verificacao = funcoesUteis.verificaInt(escolha);
             if(verificacao){
@@ -414,5 +414,16 @@ public class Fatura {
         }
         alteraInformacaoFatura("Valor Sem IVA", faturaRecebida, arrayFaturas, arrayClientes);
         alteraInformacaoFatura("Valor Com IVA", faturaRecebida, arrayFaturas, arrayClientes);
+    }
+    protected int valorTotalIVA(ArrayList<Fatura> arrayFaturas){
+        ArrayList<Produto> arrayProdutos = null;
+        double valorSemIVA= 0.0;
+        double valorComIVA= 0.0;
+        for (Fatura fatura: arrayFaturas) {
+            valorSemIVA += fatura.getValorTotalSemIVA();
+            valorComIVA += fatura.getValorTotalComIVA();
+        }
+        int valorIVA = (int)(((valorComIVA-valorSemIVA)/valorSemIVA)*100);
+        return valorIVA;
     }
 }
