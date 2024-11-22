@@ -49,13 +49,12 @@ public class FuncoesUteis {
 
     protected boolean verificaInt(String stringRecebida){
         boolean verificacao = true;
-        int inteiroRecebido = 0;
         if(stringRecebida.isEmpty()){
             System.out.println("\nO valor introduzido não é válido.");
             verificacao = false;
         } else {
             try {
-                inteiroRecebido = Integer.parseInt(stringRecebida);
+                Integer.parseInt(stringRecebida);
             } catch (NumberFormatException exception) {
                 System.out.println("\nO valor introduzido não é válido.");
                 verificacao = false;
@@ -66,13 +65,12 @@ public class FuncoesUteis {
 
     protected boolean verificaDouble(String stringRecebida){
         boolean verificacao = true;
-        double doubleRecebido = 0.0;
         if(stringRecebida.isEmpty()){
             System.out.println("\nO valor introduzido não é válido.");
             verificacao = false;
         } else {
             try {
-                doubleRecebido = Double.parseDouble(stringRecebida);
+                Double.parseDouble(stringRecebida);
             } catch (NumberFormatException exception) {
                 System.out.println("\nO valor introduzido não é válido.");
                 verificacao = false;

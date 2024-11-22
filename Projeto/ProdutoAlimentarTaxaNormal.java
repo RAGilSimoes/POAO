@@ -1,7 +1,5 @@
 package Projeto;
 
-import java.util.Scanner;
-
 public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar {
     public ProdutoAlimentarTaxaNormal(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String biologico, String taxa){
         super(codigo, nome, descricao, quantidade, valorSemIVA, biologico, taxa);

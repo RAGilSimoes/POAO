@@ -1,8 +1,6 @@
 package Projeto;
 
-import javax.management.loading.PrivateClassLoader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ListarFaturas {
     protected void listarFaturas(ArrayList<Fatura> arrayFaturas) {

@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
     protected String medico;
-    protected final int[] arrayTaxas = {6,5,4};
 
     public ProdutoFarmaciaComPrescricao(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String prescricao, String medico){
         super(codigo, nome, descricao, quantidade, valorSemIVA, prescricao);

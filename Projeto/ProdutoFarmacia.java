@@ -1,7 +1,5 @@
 package Projeto;
 
-import java.util.Scanner;
-
 abstract class ProdutoFarmacia extends Produto {
     protected String prescricao;
 
