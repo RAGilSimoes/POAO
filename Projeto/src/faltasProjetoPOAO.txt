@@ -1,0 +1,18 @@
+faturas: - se houver clientes mas não houver o cliente que o utilizar pretende, ao carregar no 0 volta para o menu principal
+
+meter os objetos como implements serializable
+
+erros: - verificar valores faturas //TODO
+
+ficheiro de texto inicial manda para o ficheiro objetos
+nunca escrevemos no fim do programa para o ficheiro de texto
+escreve tudo no ficheiro objetos
+se o ficheiro de objetos existir vai buscar aí os clientes
+
+
+separar strings -> string.split("\\W") divide por caracteres especiais
+
+verificar código TODOOOOOOOOOOOOOOOO
+
+ver os privates e protecteds
+alterar o javadoc já criado pelo intellij
