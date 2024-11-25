@@ -180,7 +180,7 @@ public class Fatura implements Serializable {
     protected boolean verificaNumeroFatura(String numeroFatura, ArrayList<Fatura> arrayFaturas){
         boolean verificacao;
         FuncoesUteis funcoesUteis = new FuncoesUteis();
-        if (numeroFatura.length() != 9 || funcoesUteis.verificaCaracteres(numeroFatura,'0', '9')){
+        if (numeroFatura.length() != 9 || funcoesUteis.verificaCaracteres(numeroFatura,'0', '9') || numeroFatura.equalsIgnoreCase("000000000")){
             System.out.println("\nO número de fatura introduzido não é válido");
             verificacao = false;
         } else {
@@ -310,7 +310,7 @@ public class Fatura implements Serializable {
         } while(!verificaEscolhaProduto);
     }
 
-    private void listaProdutos(ArrayList<Produto> arrayProdutos){
+    private void listaProdutos(ArrayList<Produto> arrayProdutos) {
         for(Produto produto: arrayProdutos){
             System.out.println("Produto " + (arrayProdutos.indexOf(produto) + 1) + ": " + produto);
         }
@@ -381,7 +381,7 @@ public class Fatura implements Serializable {
         return new Fatura(numeroFatura, cliente, dataFatura, arrayProdutosFatura, valorTotalSemIVA, valorTotalComIVA);
     }
 
-    private void alteraInformacaoFatura(String tipo, Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes){
+    private void alteraInformacaoFatura(String tipo, Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutosPOOFS){
         Scanner scannerObterResposta = new Scanner(System.in);
         FuncoesUteis funcoesUteis = new FuncoesUteis();
 
@@ -451,51 +451,8 @@ public class Fatura implements Serializable {
                     System.out.println("Nenhum produto alterado.");
                     break;
                 } else {
-                    boolean verificacaoEscolha = false;
-                    do{
-                        System.out.println("Pretende introduzir um produto de que tipo? \n1-> Alimentar com Taxa Reduzida \n2-> Alimentar com Taxa Intermedia \n3-> Alimentar com Taxa Normal \n4-> Farmacia Com Prescricao \n5-> Farmacia Sem Prescricao");
-                        String escolha = scannerObterResposta.nextLine();
-                        switch (escolha){
-                            case "1":
-                                ProdutoAlimentarTaxaReduzida produtoAlimentarTaxaReduzida = new ProdutoAlimentarTaxaReduzida(null, null, null, null, null, null, null, 0, null);
-                                produtoAlimentarTaxaReduzida = produtoAlimentarTaxaReduzida.criaProdutoTaxaReduzida(arrayProdutos);
-                                arrayProdutos.set(numeroProdutoAlterar - variavelControloIndices, produtoAlimentarTaxaReduzida);
-                                verificacaoEscolha = true;
-                                break;
-
-                            case "2":
-                                ProdutoAlimentarTaxaIntermedia produtoAlimentarTaxaIntermedia = new ProdutoAlimentarTaxaIntermedia(null, null, null, null, null, null, null, null);
-                                produtoAlimentarTaxaIntermedia = produtoAlimentarTaxaIntermedia.criaProdutoTaxaIntermedia(arrayProdutos);
-                                arrayProdutos.set(numeroProdutoAlterar - variavelControloIndices, produtoAlimentarTaxaIntermedia);
-                                verificacaoEscolha = true;
-                                break;
-
-                            case "3":
-                                ProdutoAlimentarTaxaNormal produtoAlimentarTaxaNormal = new ProdutoAlimentarTaxaNormal(null, null, null, null, null, null, null);
-                                produtoAlimentarTaxaNormal = produtoAlimentarTaxaNormal.criaProdutoTaxaNormal(arrayProdutos);
-                                arrayProdutos.set(numeroProdutoAlterar - variavelControloIndices, produtoAlimentarTaxaNormal);
-                                verificacaoEscolha = true;
-                                break;
-
-                            case "4":
-                                ProdutoFarmaciaComPrescricao produtoFarmaciaComPrescricao = new ProdutoFarmaciaComPrescricao(null, null, null, null, null, null, null);
-                                produtoFarmaciaComPrescricao = produtoFarmaciaComPrescricao.criaProdutoComPrescricao(arrayProdutos);
-                                arrayProdutos.set(numeroProdutoAlterar - variavelControloIndices, produtoFarmaciaComPrescricao);
-                                verificacaoEscolha = true;
-                                break;
-
-                            case "5":
-                                ProdutoFarmaciaSemPrescricao produtoFarmaciaSemPrescricao = new ProdutoFarmaciaSemPrescricao(null, null, null, null, null, null, null);
-                                produtoFarmaciaSemPrescricao = produtoFarmaciaSemPrescricao.criaProdutoSemPrescricao(arrayProdutos);
-                                arrayProdutos.set(numeroProdutoAlterar - variavelControloIndices, produtoFarmaciaSemPrescricao);
-                                verificacaoEscolha = true;
-                                break;
-
-                            default:
-                                System.out.println("\nOpção inválida.");
-                                break;
-                        }
-                    } while(!verificacaoEscolha);
+                    Produto produtoEscolhido = arrayProdutos.get(numeroProdutoAlterar - variavelControloIndices);
+                    System.out.println(produtoEscolhido);
                 }
                 break;
 
@@ -521,19 +478,21 @@ public class Fatura implements Serializable {
      * @param arrayFaturas   the array faturas
      * @param arrayClientes  the array clientes
      */
-    protected void alteraInformacoesFatura(Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes) {
+    protected void alteraInformacoesFatura(Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos) {
         Scanner scannerEscolha = new Scanner(System.in);
         FuncoesUteis funcoesUteis = new FuncoesUteis();
 
         boolean verificacao = false;
 
         System.out.print("\n(Pressione 0 para não alterar alguma informacão)");
-        alteraInformacaoFatura("Numero Fatura", faturaRecebida, arrayFaturas, arrayClientes);
-        alteraInformacaoFatura("Cliente", faturaRecebida, arrayFaturas, arrayClientes);
-        alteraInformacaoFatura("Data", faturaRecebida, arrayFaturas, arrayClientes);
+        alteraInformacaoFatura("Numero Fatura", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
+        alteraInformacaoFatura("Cliente", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
+        alteraInformacaoFatura("Data", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
 
+        System.out.println("\nLista de Produtos da fatura: ");
+        listaProdutos(faturaRecebida.getListaProdutos());
         while(!verificacao){
-            System.out.print("\n: ");
+            System.out.print("\nIntroduza a nova quantidade de produtos a alterar na fatura: ");
             String escolha = scannerEscolha.nextLine();
             verificacao = funcoesUteis.verificaInt(escolha);
             if(verificacao){
@@ -542,14 +501,14 @@ public class Fatura implements Serializable {
                     System.out.println("\nNenhum produto vai ser alterado.");
                 } else {
                     for(int i = 0; i < quantidade; i++){
-                        alteraInformacaoFatura("Produtos", faturaRecebida, arrayFaturas, arrayClientes);
+                        alteraInformacaoFatura("Produtos", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
                     }
                 }
             } else {
                 System.out.println("Opção inválida!");
             }
         }
-        alteraInformacaoFatura("Valor Sem IVA", faturaRecebida, arrayFaturas, arrayClientes);
-        alteraInformacaoFatura("Valor Com IVA", faturaRecebida, arrayFaturas, arrayClientes);
+        alteraInformacaoFatura("Valor Sem IVA", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
+        alteraInformacaoFatura("Valor Com IVA", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
     }
 }

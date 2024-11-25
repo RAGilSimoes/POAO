@@ -68,9 +68,13 @@ public class Data {
 
             for(String string: dataSeparada){
                 verificaDataIntroduzida = funcoesUteis.verificaInt(string);
+                if(!verificaDataIntroduzida){
+                    verificaDataIntroduzida = false;
+                    break;
+                }
             }
 
-            if(verificaDataIntroduzida){
+            if(!verificaDataIntroduzida){
                 System.out.println("\nData inválida.");
                 verificaDataIntroduzida = false;
             } else {

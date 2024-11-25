@@ -261,7 +261,7 @@ public class POOFS {
 
                         System.out.println("\nFatura " + numeroFaturaProcurar + ": " +  faturaAlterar);
 
-                        faturaAlterar.alteraInformacoesFatura(faturaAlterar, arrayFaturas, arrayClientes);
+                        faturaAlterar.alteraInformacoesFatura(faturaAlterar, arrayFaturas, arrayClientes, arrayProdutos);
 
                         System.out.println("\nFatura editada com sucesso!");
                         break;
