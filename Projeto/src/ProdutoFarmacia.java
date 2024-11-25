@@ -1,9 +1,10 @@
-package Projeto.src;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * The type Produto farmacia.
  */
-abstract class ProdutoFarmacia extends Produto {
+abstract class ProdutoFarmacia extends Produto implements Serializable {
     /**
      * The Prescricao.
      */
@@ -29,8 +30,8 @@ abstract class ProdutoFarmacia extends Produto {
      *
      * @return the string [ ]
      */
-    protected String[] obterInformacaoProdutoFarmacia() {
-        return this.obterInformacoesProduto();
+    protected String[] obterInformacaoProdutoFarmacia(ArrayList<Produto> arrayProdutos) {
+        return this.obterInformacoesProduto(arrayProdutos);
     }
 
     protected String getTipo() {
@@ -53,6 +54,7 @@ abstract class ProdutoFarmacia extends Produto {
         double valorImposto = (valorPorUnidade * taxaAplicadaDecimal);
 
         double precoFinalComIVA = (quantidadeProduto * (valorPorUnidade + valorImposto));
+        precoFinalComIVA = (Math.floor(precoFinalComIVA * 100) /100);
 
         return precoFinalComIVA;
     }

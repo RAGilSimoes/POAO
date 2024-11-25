@@ -1,9 +1,10 @@
-package Projeto.src;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * The type Produto alimentar taxa normal.
  */
-public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar {
+public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar implements Serializable {
     /**
      * Instantiates a new Produto alimentar taxa normal.
      *
@@ -34,10 +35,10 @@ public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar {
      *
      * @return the produto alimentar taxa normal
      */
-    protected ProdutoAlimentarTaxaNormal criaProdutoTaxaNormal(){
+    protected ProdutoAlimentarTaxaNormal criaProdutoTaxaNormal(ArrayList<Produto> arrayProdutos){
         String tipoTaxa = "Normal";
 
-        String[] arrayInformacoesProdutoAlimentar = obterInformacaoProdutoAlimentar();
+        String[] arrayInformacoesProdutoAlimentar = obterInformacaoProdutoAlimentar(arrayProdutos);
 
         return new ProdutoAlimentarTaxaNormal(arrayInformacoesProdutoAlimentar[0], arrayInformacoesProdutoAlimentar[1], arrayInformacoesProdutoAlimentar[2], arrayInformacoesProdutoAlimentar[3], arrayInformacoesProdutoAlimentar[4], arrayInformacoesProdutoAlimentar[5], tipoTaxa);
     }

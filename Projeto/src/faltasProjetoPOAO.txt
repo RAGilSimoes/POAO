@@ -16,3 +16,12 @@ verificar código TODOOOOOOOOOOOOOOOO
 
 ver os privates e protecteds
 alterar o javadoc já criado pelo intellij
+
+criar um arrayProdutos para armazenar os produtos vindos do ficheiro texto?
+verificar o código do produto consoante a existencia do codigo no arrayProdutos?
+
+quando alteramos um produto numa fatura também tem que alterar produto no arrayProdutos geral
+ver valor faturacomiva
+editar fatura perguntar ao utilizador se pretende alterar a informacao e caso sim faz a funcao
+nas protecoes, nao meter sempre os erros
+generalizar o tratamento dos produtos para ter em funcao

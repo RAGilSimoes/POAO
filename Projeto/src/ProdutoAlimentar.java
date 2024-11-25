@@ -1,11 +1,11 @@
-package Projeto.src;
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * The type Produto alimentar.
  */
-abstract class ProdutoAlimentar extends Produto{
+abstract class ProdutoAlimentar extends Produto implements Serializable {
     /**
      * The Biologico.
      */
@@ -77,13 +77,13 @@ abstract class ProdutoAlimentar extends Produto{
      *
      * @return the string [ ]
      */
-    protected String[] obterInformacaoProdutoAlimentar() {
+    protected String[] obterInformacaoProdutoAlimentar(ArrayList<Produto> arrayProdutos) {
         Scanner scannerObterResposta = new Scanner(System.in);
 
         boolean verificaBiologico = false;
         String biologicoProduto = null;
 
-        String[] arrayInformacoesProduto = obterInformacoesProduto();
+        String[] arrayInformacoesProduto = obterInformacoesProduto(arrayProdutos);
 
         do {
             System.out.print("O produto é biológico? \n1-> Sim | 2-> Nao ");
@@ -143,7 +143,7 @@ abstract class ProdutoAlimentar extends Produto{
         } else {
             precoFinalComIVA = (quantidadeProduto * (valorPorUnidade + valorImposto));
         }
-
+        precoFinalComIVA = (Math.floor(precoFinalComIVA * 100) /100);
         return precoFinalComIVA;
     }
 }

@@ -1,11 +1,11 @@
-package Projeto.src;
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * The type Produto farmacia sem prescricao.
  */
-public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia {
+public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia implements Serializable {
     /**
      * The Categoria.
      */
@@ -64,11 +64,11 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia {
      *
      * @return the produto farmacia sem prescricao
      */
-    protected ProdutoFarmaciaSemPrescricao criaProdutoSemPrescricao(){
+    protected ProdutoFarmaciaSemPrescricao criaProdutoSemPrescricao(ArrayList<Produto> arrayProdutos){
         String prescricao = "Nao";
         Scanner scannerObterResposta = new Scanner(System.in);
 
-        String[] arrayInformacoesProdutoFarmacia = obterInformacaoProdutoFarmacia();
+        String[] arrayInformacoesProdutoFarmacia = obterInformacaoProdutoFarmacia(arrayProdutos);
 
         System.out.print("Introduza a categoria do produto: ");
         String categoriaProduto = scannerObterResposta.nextLine();

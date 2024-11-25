@@ -1,11 +1,11 @@
-package Projeto.src;
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * The type Produto alimentar taxa reduzida.
  */
-public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar {
+public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Serializable {
     /**
      * The Quantidade certificacoes.
      */
@@ -125,12 +125,12 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar {
      *
      * @return the produto alimentar taxa reduzida
      */
-    protected ProdutoAlimentarTaxaReduzida criaProdutoTaxaReduzida(){
+    protected ProdutoAlimentarTaxaReduzida criaProdutoTaxaReduzida(ArrayList<Produto> arrayProdutos){
         String tipoTaxa = "Reduzida";
 
         int quantidadeCertificacoes = 0;
 
-        String[] arrayInformacoesProdutoAlimentar = obterInformacaoProdutoAlimentar();
+        String[] arrayInformacoesProdutoAlimentar = obterInformacaoProdutoAlimentar(arrayProdutos);
 
         String[] arrayCertificacoes = obtemCertificacoes();
 

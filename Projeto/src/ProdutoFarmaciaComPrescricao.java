@@ -1,11 +1,11 @@
-package Projeto.src;
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * The type Produto farmacia com prescricao.
  */
-public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
+public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Serializable {
     /**
      * The Medico.
      */
@@ -41,7 +41,7 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
      *
      * @return the produto farmacia com prescricao
      */
-    protected ProdutoFarmaciaComPrescricao criaProdutoComPrescricao(){
+    protected ProdutoFarmaciaComPrescricao criaProdutoComPrescricao(ArrayList<Produto> arrayProdutos){
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         String prescricao = "Sim";
         boolean verificacaoNome = false;
@@ -49,7 +49,7 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia {
 
         Scanner scannerObterResposta = new Scanner(System.in);
 
-        String[] arrayInformacoesProdutoFarmacia = obterInformacaoProdutoFarmacia();
+        String[] arrayInformacoesProdutoFarmacia = obterInformacaoProdutoFarmacia(arrayProdutos);
 
         do {
             System.out.print("Introduza o nome do médico que prescreveu o produto: ");

@@ -1,11 +1,11 @@
-package Projeto.src;
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * The type Produto alimentar taxa intermedia.
  */
-public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar {
+public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements Serializable {
     /**
      * The Categoria.
      */
@@ -62,7 +62,7 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar {
      *
      * @return the produto alimentar taxa intermedia
      */
-    protected ProdutoAlimentarTaxaIntermedia criaProdutoTaxaIntermedia(){
+    protected ProdutoAlimentarTaxaIntermedia criaProdutoTaxaIntermedia(ArrayList<Produto> arrayProdutos){
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         String tipoTaxa = "Intermedia";
         String categoriaProduto = null;
@@ -71,7 +71,7 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar {
 
         boolean verificacaoCategoria = false;
 
-        String[] arrayInformacoesProdutoAlimentar = this.obterInformacaoProdutoAlimentar();
+        String[] arrayInformacoesProdutoAlimentar = this.obterInformacaoProdutoAlimentar(arrayProdutos);
 
         while(!verificacaoCategoria){
             System.out.print("Introduza a categoria do produto: ");

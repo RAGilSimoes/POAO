@@ -1,12 +1,11 @@
-package Projeto.src;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * The type Fatura.
  */
-public class Fatura {
+public class Fatura implements Serializable {
     /**
      * The N fatura.
      */
@@ -166,7 +165,7 @@ public class Fatura {
         return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente().getNome() + "; Localização do Cliente -> " + this.getCliente().getLocalizacao() + "; Número de produtos -> " + this.getListaProdutos().size() + "; Valor total sem IVA -> " + this.valorTotalSemIVA + "; Valor total com IVA -> " + this.valorTotalComIVA + " ");
     }
 
-    private boolean existeNumeroFatura(String nFaturaProcurar, ArrayList<Fatura> arrayFaturas){
+    protected boolean existeNumeroFatura(String nFaturaProcurar, ArrayList<Fatura> arrayFaturas){
         boolean nFaturaValido = true;
         for (Fatura fatura: arrayFaturas){
             String nFaturaExistente = fatura.getnFatura();
@@ -178,7 +177,7 @@ public class Fatura {
         return nFaturaValido;
     }
 
-    private boolean verificaNumeroFatura(String numeroFatura, ArrayList<Fatura> arrayFaturas){
+    protected boolean verificaNumeroFatura(String numeroFatura, ArrayList<Fatura> arrayFaturas){
         boolean verificacao;
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         if (numeroFatura.length() != 9 || funcoesUteis.verificaCaracteres(numeroFatura,'0', '9')){
@@ -201,6 +200,7 @@ public class Fatura {
         for(Produto produto: arrayProdutos){
             valorTotalSemIVA += produto.obtemValorSemIVA();
         }
+        valorTotalSemIVA = (Math.floor(valorTotalSemIVA * 100) /100);
 
         return valorTotalSemIVA;
     }
@@ -217,11 +217,12 @@ public class Fatura {
         for(Produto produto: arrayProdutos){
             valorTotalComIVA += produto.obtemValorComIVA(clienteRecebido);
         }
+        valorTotalComIVA = (Math.floor(valorTotalComIVA * 100) /100);
 
         return valorTotalComIVA;
     }
 
-    private void obtemProduto(ArrayList<Produto> arrayProdutos){
+    private void obtemProduto(ArrayList<Produto> arrayProdutos, ArrayList<Produto> arrayProdutosFatura){
         Scanner scannerObterResposta = new Scanner(System.in);
         boolean verificaEscolhaProduto = false;
         do{
@@ -235,27 +236,30 @@ public class Fatura {
                         switch (tipoTaxa){
                             case "1":
                                 ProdutoAlimentarTaxaReduzida produtoAlimentarTaxaReduzida = new ProdutoAlimentarTaxaReduzida(null, null, null, null, null, null, null, 0, null);
-                                produtoAlimentarTaxaReduzida = produtoAlimentarTaxaReduzida.criaProdutoTaxaReduzida();
+                                produtoAlimentarTaxaReduzida = produtoAlimentarTaxaReduzida.criaProdutoTaxaReduzida(arrayProdutos);
 
                                 arrayProdutos.add(produtoAlimentarTaxaReduzida);
+                                arrayProdutosFatura.add(produtoAlimentarTaxaReduzida);
                                 System.out.println("\nProduto adicionado com sucesso!");
                                 verificaEscolhaProduto = true;
                                 break;
 
                             case "2":
                                 ProdutoAlimentarTaxaIntermedia produtoAlimentarTaxaIntermedia = new ProdutoAlimentarTaxaIntermedia(null, null, null, null, null, null, null, null);
-                                produtoAlimentarTaxaIntermedia = produtoAlimentarTaxaIntermedia.criaProdutoTaxaIntermedia();
+                                produtoAlimentarTaxaIntermedia = produtoAlimentarTaxaIntermedia.criaProdutoTaxaIntermedia(arrayProdutos);
 
                                 arrayProdutos.add(produtoAlimentarTaxaIntermedia);
+                                arrayProdutosFatura.add(produtoAlimentarTaxaIntermedia);
                                 System.out.println("\nProduto adicionado com sucesso!");
                                 verificaEscolhaProduto = true;
                                 break;
 
                             case "3":
                                 ProdutoAlimentarTaxaNormal produtoAlimentarTaxaNormal = new ProdutoAlimentarTaxaNormal(null, null, null, null, null, null, null);
-                                produtoAlimentarTaxaNormal = produtoAlimentarTaxaNormal.criaProdutoTaxaNormal();
+                                produtoAlimentarTaxaNormal = produtoAlimentarTaxaNormal.criaProdutoTaxaNormal(arrayProdutos);
 
                                 arrayProdutos.add(produtoAlimentarTaxaNormal);
+                                arrayProdutosFatura.add(produtoAlimentarTaxaNormal);
                                 System.out.println("\nProduto adicionado com sucesso!");
                                 verificaEscolhaProduto = true;
                                 break;
@@ -274,18 +278,20 @@ public class Fatura {
                         switch (prescricao){
                             case "1":
                                 ProdutoFarmaciaComPrescricao produtoFarmaciaComPrescricao = new ProdutoFarmaciaComPrescricao(null, null, null, null, null, null, null);
-                                produtoFarmaciaComPrescricao = produtoFarmaciaComPrescricao.criaProdutoComPrescricao();
+                                produtoFarmaciaComPrescricao = produtoFarmaciaComPrescricao.criaProdutoComPrescricao(arrayProdutos);
 
                                 arrayProdutos.add(produtoFarmaciaComPrescricao);
+                                arrayProdutosFatura.add(produtoFarmaciaComPrescricao);
                                 System.out.println("\nProduto adicionado com sucesso!");
                                 verificaEscolhaProduto = true;
                                 break;
 
                             case "2":
                                 ProdutoFarmaciaSemPrescricao produtoFarmaciaSemPrescricao = new ProdutoFarmaciaSemPrescricao(null, null, null, null, null, null, null);
-                                produtoFarmaciaSemPrescricao = produtoFarmaciaSemPrescricao.criaProdutoSemPrescricao();
+                                produtoFarmaciaSemPrescricao = produtoFarmaciaSemPrescricao.criaProdutoSemPrescricao(arrayProdutos);
 
                                 arrayProdutos.add(produtoFarmaciaSemPrescricao);
+                                arrayProdutosFatura.add(produtoFarmaciaSemPrescricao);
                                 System.out.println("\nProduto adicionado com sucesso!");
                                 verificaEscolhaProduto = true;
                                 break;
@@ -317,7 +323,7 @@ public class Fatura {
      * @param arrayFaturas  the array faturas
      * @return the fatura
      */
-    protected Fatura criaFatura(ArrayList<Cliente> arrayClientes, ArrayList<Fatura> arrayFaturas){
+    protected Fatura criaFatura(ArrayList<Cliente> arrayClientes, ArrayList<Fatura> arrayFaturas, ArrayList<Produto> arrayProdutos){
         Scanner scannerObterResposta = new Scanner(System.in);
         FuncoesUteis funcoesUteis = new FuncoesUteis();
 
@@ -327,6 +333,7 @@ public class Fatura {
 
         boolean verificacaoNumeroFatura = false;
         boolean verificacaoQuantidade = false;
+        boolean verificacaoData = false;
 
         while (!verificacaoNumeroFatura) {
             System.out.print("\nIntroduza o número da fatura (tamanho 9 dígitos): ");
@@ -341,7 +348,14 @@ public class Fatura {
         Cliente cliente = arrayClientes.get(numeroEscolhaCliente - 1);
 
         Data dataFatura = new Data(0,0,0);
-        dataFatura = dataFatura.verificaData();
+        while (!verificacaoData) {
+            System.out.print("\nIntroduza a data da fatura no formato dd/mm/aaaa: ");
+            String dataIntroduzida = scannerObterResposta.nextLine();
+            verificacaoData = dataFatura.verificaData(dataIntroduzida);
+            if (verificacaoData) {
+                dataFatura = dataFatura.passaParaObjetoData(dataIntroduzida);
+            }
+        }
 
         while (!verificacaoQuantidade) {
             System.out.print("\nIntroduza a quantidade de produtos que pretende inserir na fatura (mínimo 1 produto): ");
@@ -353,20 +367,18 @@ public class Fatura {
                 } else {
                     quantidadeProdutos = Integer.parseInt(quantidadeProdutosInserir);
                 }
-            } else {
-                System.out.println("\nO valor introduzido não é válido.");
             }
         }
 
-        ArrayList<Produto> arrayProdutos= new ArrayList<Produto>();
+        ArrayList<Produto> arrayProdutosFatura = new ArrayList<Produto>();
 
         for(int i = 0; i < quantidadeProdutos; i++){
-            obtemProduto(arrayProdutos);
+            obtemProduto(arrayProdutos, arrayProdutosFatura);
         }
 
         double valorTotalSemIVA = calcularValorTotalSemIVA(arrayProdutos);
         double valorTotalComIVA = calcularValorTotalComIVA(arrayProdutos, cliente);
-        return new Fatura(numeroFatura, cliente, dataFatura, arrayProdutos, valorTotalSemIVA, valorTotalComIVA);
+        return new Fatura(numeroFatura, cliente, dataFatura, arrayProdutosFatura, valorTotalSemIVA, valorTotalComIVA);
     }
 
     private void alteraInformacaoFatura(String tipo, Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes){
@@ -414,10 +426,17 @@ public class Fatura {
                 break;
 
             case "Data":
-                System.out.println("\nIntroduza a nova data da fatura (se não pretender alterar introduza a mesma data): ");
-                Data data = new Data(0,0,0);
-                data = data.verificaData();
-                faturaRecebida.setDataFatura(data);
+                boolean verificacaoData = false;
+                Data dataFatura = new Data(0,0,0);
+                while (!verificacaoData) {
+                    System.out.print("\nIntroduza a nova data da fatura (se não pretender alterar introduza a mesma data): ");
+                    String dataIntroduzida = scannerObterResposta.nextLine();
+                    verificacaoData = dataFatura.verificaData(dataIntroduzida);
+                    if (verificacaoData) {
+                        dataFatura = dataFatura.passaParaObjetoData(dataIntroduzida);
+                        faturaRecebida.setDataFatura(dataFatura);
+                    }
+                }
                 break;
 
             case "Produtos":
@@ -439,35 +458,35 @@ public class Fatura {
                         switch (escolha){
                             case "1":
                                 ProdutoAlimentarTaxaReduzida produtoAlimentarTaxaReduzida = new ProdutoAlimentarTaxaReduzida(null, null, null, null, null, null, null, 0, null);
-                                produtoAlimentarTaxaReduzida = produtoAlimentarTaxaReduzida.criaProdutoTaxaReduzida();
+                                produtoAlimentarTaxaReduzida = produtoAlimentarTaxaReduzida.criaProdutoTaxaReduzida(arrayProdutos);
                                 arrayProdutos.set(numeroProdutoAlterar - variavelControloIndices, produtoAlimentarTaxaReduzida);
                                 verificacaoEscolha = true;
                                 break;
 
                             case "2":
                                 ProdutoAlimentarTaxaIntermedia produtoAlimentarTaxaIntermedia = new ProdutoAlimentarTaxaIntermedia(null, null, null, null, null, null, null, null);
-                                produtoAlimentarTaxaIntermedia = produtoAlimentarTaxaIntermedia.criaProdutoTaxaIntermedia();
+                                produtoAlimentarTaxaIntermedia = produtoAlimentarTaxaIntermedia.criaProdutoTaxaIntermedia(arrayProdutos);
                                 arrayProdutos.set(numeroProdutoAlterar - variavelControloIndices, produtoAlimentarTaxaIntermedia);
                                 verificacaoEscolha = true;
                                 break;
 
                             case "3":
                                 ProdutoAlimentarTaxaNormal produtoAlimentarTaxaNormal = new ProdutoAlimentarTaxaNormal(null, null, null, null, null, null, null);
-                                produtoAlimentarTaxaNormal = produtoAlimentarTaxaNormal.criaProdutoTaxaNormal();
+                                produtoAlimentarTaxaNormal = produtoAlimentarTaxaNormal.criaProdutoTaxaNormal(arrayProdutos);
                                 arrayProdutos.set(numeroProdutoAlterar - variavelControloIndices, produtoAlimentarTaxaNormal);
                                 verificacaoEscolha = true;
                                 break;
 
                             case "4":
                                 ProdutoFarmaciaComPrescricao produtoFarmaciaComPrescricao = new ProdutoFarmaciaComPrescricao(null, null, null, null, null, null, null);
-                                produtoFarmaciaComPrescricao = produtoFarmaciaComPrescricao.criaProdutoComPrescricao();
+                                produtoFarmaciaComPrescricao = produtoFarmaciaComPrescricao.criaProdutoComPrescricao(arrayProdutos);
                                 arrayProdutos.set(numeroProdutoAlterar - variavelControloIndices, produtoFarmaciaComPrescricao);
                                 verificacaoEscolha = true;
                                 break;
 
                             case "5":
                                 ProdutoFarmaciaSemPrescricao produtoFarmaciaSemPrescricao = new ProdutoFarmaciaSemPrescricao(null, null, null, null, null, null, null);
-                                produtoFarmaciaSemPrescricao = produtoFarmaciaSemPrescricao.criaProdutoSemPrescricao();
+                                produtoFarmaciaSemPrescricao = produtoFarmaciaSemPrescricao.criaProdutoSemPrescricao(arrayProdutos);
                                 arrayProdutos.set(numeroProdutoAlterar - variavelControloIndices, produtoFarmaciaSemPrescricao);
                                 verificacaoEscolha = true;
                                 break;

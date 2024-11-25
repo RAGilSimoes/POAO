@@ -1,11 +1,11 @@
-package Projeto.src;
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * The type Produto.
  */
-abstract class Produto{
+abstract class Produto implements Serializable {
     /**
      * The Codigo.
      */
@@ -138,7 +138,19 @@ abstract class Produto{
         this.valorSemIVA = valorSemIVA;
     }
 
-    private boolean verificaCodigo(String stringRecebida){
+    private boolean existeCodigo(ArrayList<Produto> arrayProdutos, String codigoProcurar) {
+        boolean codigoValido = true;
+        for (Produto produto: arrayProdutos){
+            String nProdutoExistente = produto.getCodigo();
+            if (nProdutoExistente.equals(codigoProcurar)){
+                System.out.println("\nCodigo de produto ja existente.");
+                codigoValido = false;
+            }
+        }
+        return codigoValido;
+    }
+
+    protected boolean verificaCodigo(String stringRecebida, ArrayList<Produto> arrayProdutos){
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificacao = true;
         if(stringRecebida.isEmpty()){
@@ -152,6 +164,9 @@ abstract class Produto{
             }
             if (!verificacao){
                 System.out.println("\nO código introduzido não é válido.");
+                verificacao = false;
+            } else {
+                verificacao = existeCodigo(arrayProdutos, stringRecebida);
             }
         }
         return verificacao;
@@ -176,8 +191,9 @@ abstract class Produto{
     protected double obtemValorSemIVA(){
         int quantidade = Integer.parseInt(this.getQuantidade());
         double precoPorUnidade = Double.parseDouble(this.getValorSemIVA());
-
-        return (quantidade * precoPorUnidade);
+        double valorSemIVA = (quantidade * precoPorUnidade);
+        valorSemIVA = (Math.floor(valorSemIVA * 100) /100);
+        return valorSemIVA;
     }
 
     /**
@@ -193,7 +209,7 @@ abstract class Produto{
      *
      * @return the string [ ]
      */
-    protected String[] obterInformacoesProduto() {
+    protected String[] obterInformacoesProduto(ArrayList<Produto> arrayProdutos) {
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         Scanner scannerObterResposta = new Scanner(System.in);
 
@@ -210,7 +226,7 @@ abstract class Produto{
         while(!verificaoCodigo){
             System.out.print("\nIntroduza o código do produto: ");
             codigoProduto = scannerObterResposta.nextLine();
-            verificaoCodigo = verificaCodigo(codigoProduto);
+            verificaoCodigo = verificaCodigo(codigoProduto, arrayProdutos);
         }
 
         while(!verificaNome){

@@ -1,5 +1,3 @@
-package Projeto.src;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,6 +14,8 @@ public class POOFS {
      */
     ArrayList<Fatura> arrayFaturas = new ArrayList<Fatura>();
 
+    ArrayList<Produto> arrayProdutos = new ArrayList<Produto>();
+
 
     private void menus(String tipoMenu){
         switch (tipoMenu) {
@@ -29,7 +29,8 @@ public class POOFS {
                 System.out.println("6 - Importar Fatura");
                 System.out.println("7 - Exportar Fatura");
                 System.out.println("8 - Estatísticas");
-                System.out.println("9 - Sair");
+                System.out.println("9 - Help");
+                System.out.println("0 - Sair");
                 break;
 
             case "Menu Clientes":
@@ -47,6 +48,20 @@ public class POOFS {
                 System.out.println("3 - Eliminar fatura");
                 System.out.println("4 - Voltar para o Menu Principal");
                 break;
+
+            case "Help":
+                System.out.println("\nFormatação de cada objeto no ficheiro texto das faturas: ");
+                System.out.println("Fatura -> F;NFatura;NIFCliente;Data;QuantidadeProdutos;(TipoProduto-CodigoProduto)*QuantidadeProdutos;ValorSemIVA;ValorComIVA");
+
+                System.out.println("\nFormatação de cada objeto no ficheiro texto dos clientes: ");
+                System.out.println("Cliente -> Nome/NIF/Localização");
+
+                System.out.println("\nFormatação de cada objeto no ficheiro texto dos produtos: ");
+                System.out.println("Produto Alimentar Taxa Reduzida -> R/Código/Nome/Descrição/Quantidade/ValorSemIVA/Biológico/Taxa/QuantidadeCertificações/Certificações");
+                System.out.println("Produto Alimentar Taxa Intermedia -> I/Código/Nome/Descrição/Quantidade/ValorSemIVA/Biológico/Taxa/Categoria");
+                System.out.println("Produto Alimentar Taxa Normal -> N/Código/Nome/Descrição/Quantidade/ValorSemIVA/Biológico/Taxa");
+                System.out.println("Produto Farmácia Com Prescrição -> P/Código/Nome/Descrição/Quantidade/ValorSemIVA/Prescrição/NomeMedico");
+                System.out.println("Produto Farmácia Sem Prescrição -> S/Código/Nome/Descrição/Quantidade/ValorSemIVA/Prescrição/Categoria");
         }
     }
 
@@ -59,6 +74,8 @@ public class POOFS {
         boolean sair = false;
         ListarFaturas listarFaturas = new ListarFaturas();
         ListarClientes listarClientes = new ListarClientes();
+        TrataInformacoesFicheiros trataInformacoesFicheiros = new TrataInformacoesFicheiros();
+        importaInformacoesAutomaticamente(arrayFaturas, arrayClientes, arrayProdutos);
 
         do {
             menus("Menu Principal");
@@ -90,6 +107,8 @@ public class POOFS {
                     break;
 
                 case "7":
+                    trataInformacoesFicheiros.escreveFicheiroTextoClientes(arrayClientes);
+                    trataInformacoesFicheiros.escreveFicheiroTextoFaturas(arrayFaturas);
                     break;
 
                 case "8":
@@ -97,6 +116,10 @@ public class POOFS {
                     break;
 
                 case "9":
+                    menus("Help");
+                    break;
+
+                case "0":
                     System.out.println("\nAdeus 😢");
                     sair = true;
                     break;
@@ -167,13 +190,17 @@ public class POOFS {
                         System.out.println("\nCliente " + numeroClienteEliminar + ": " +  clienteEliminar);
 
                         boolean temFaturas = false;
-                        for(Fatura fatura: arrayFaturas){
-                            if(fatura.getCliente() == clienteEliminar){
-                                arrayFaturas.remove(fatura);
-                                System.out.println("\nFatura Nº " + fatura.getnFatura() + " removida com sucesso!");
-                                temFaturas = true;
+                        if(!arrayFaturas.isEmpty()){
+                            for(Fatura fatura: arrayFaturas){
+                                if(fatura.getCliente() == clienteEliminar){
+                                    arrayFaturas.remove(fatura);
+                                    System.out.println("\nFatura Nº " + fatura.getnFatura() + " removida com sucesso!");
+                                    temFaturas = true;
+                                    break;
+                                }
                             }
                         }
+
                         if(!temFaturas){
                             System.out.println("\nO cliente não tinha faturas associadas.");
                         }
@@ -199,12 +226,12 @@ public class POOFS {
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean sair = false;
         ListarFaturas listarFaturas = new ListarFaturas();
+        Scanner scannerEscolha = new Scanner(System.in);
         do {
             String escolha;
 
             menus("Menu Faturas");
 
-            Scanner scannerEscolha = new Scanner(System.in);
             escolha = scannerEscolha.nextLine();
 
             switch(escolha) {
@@ -214,7 +241,7 @@ public class POOFS {
                         break;
                     } else {
                         Fatura fatura = new Fatura(null, null, null, null, 0, 0);
-                        fatura = fatura.criaFatura(arrayClientes, arrayFaturas);
+                        fatura = fatura.criaFatura(arrayClientes, arrayFaturas, arrayProdutos);
                         arrayFaturas.add(fatura);
                         System.out.println("\nFatura adicionada com sucesso!");
                         break;
@@ -313,5 +340,16 @@ public class POOFS {
         System.out.print("\nValor total sem IVA -> " + valorSemIVA);
         System.out.print("\nValor total do IVA -> " + valorIVA);
         System.out.println("\nValor total com IVA -> " + valorComIVA);
+    }
+
+    private void importaInformacoesAutomaticamente(ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos) {
+        TrataInformacoesFicheiros tratamentoInformacoesFicheiros = new TrataInformacoesFicheiros();
+        boolean existeFicheiroObjeto = tratamentoInformacoesFicheiros.verificaExistenciaFicheiroObjeto();
+        if(existeFicheiroObjeto){
+            System.out.println("Se estás a ver isto é porque existe ficheiro objeto");
+        } else {
+            tratamentoInformacoesFicheiros.trataInformacoesClientes(arrayClientes);
+            System.out.println("Se estás a ver isto é porque não existe ficheiro objeto");
+        }
     }
 }

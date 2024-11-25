@@ -1,12 +1,11 @@
-package Projeto.src;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * The type Cliente.
  */
-public class Cliente {
+public class Cliente implements Serializable {
     /**
      * The Nome.
      */
@@ -92,7 +91,7 @@ public class Cliente {
     }
 
 
-    private boolean existeNif(String nifProcurar, ArrayList<Cliente> arrayClientes){
+    protected boolean existeNif(String nifProcurar, ArrayList<Cliente> arrayClientes){
         boolean nifValido = true;
         for (Cliente cliente: arrayClientes){
             String nifExistente = cliente.getNif();
@@ -104,7 +103,7 @@ public class Cliente {
         return nifValido;
     }
 
-    private boolean verificaNif(String nif, ArrayList<Cliente> arrayClientes){
+    protected boolean verificaNif(String nif, ArrayList<Cliente> arrayClientes){
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificacao;
         if (nif.length() != 9 || funcoesUteis.verificaCaracteres(nif,'0', '9')){
@@ -117,25 +116,26 @@ public class Cliente {
     }
 
 
-    private String escolherLocalizao(String escolha){
-        String localizacao = null;
+    protected boolean escolherLocalizao(String escolha){
+        boolean verificacao = true;
 
         switch(escolha){
-            case "1":
-                localizacao = "Continente";
+            case "Continente":
+                escolha = "Continente";
                 break;
-            case "2":
-                localizacao = "Madeira";
+            case "Madeira":
+                escolha = "Madeira";
                 break;
-            case "3":
-                localizacao = "Açores";
+            case "Açores":
+                escolha = "Açores";
                 break;
             default:
-                System.out.println("Introduza um caracter numérico válido.");
+                System.out.println("Introduza uma opção válida");
+                verificacao = false;
                 break;
         }
 
-        return localizacao;
+        return verificacao;
     }
 
     /**
@@ -150,11 +150,11 @@ public class Cliente {
 
         String nome = null;
         String nif = null;
-        String localizacao = null;
-        String escolhaLocalizacao;
+        String escolhaLocalizacao = null;
 
         boolean verificacaoNome = false;
         boolean verificacaoNIF = false;
+        boolean verificacaoLocalizacao = false;
 
         while (!verificacaoNome) {
             System.out.print("\nIntroduza o nome do cliente: ");
@@ -169,13 +169,13 @@ public class Cliente {
             verificacaoNIF = verificaNif(nif, arrayClientes);
         }
 
-        while(localizacao == null){
-            System.out.print("\nEscolha a localização do cliente: \n1-> Continente | 2-> Madeira | 3-> Açores\n");
+        while(!verificacaoLocalizacao){
+            System.out.print("\nEscolha a localização do cliente: \nContinente | Madeira | Açores\n");
             escolhaLocalizacao = scannerCliente.nextLine();
-            localizacao = escolherLocalizao(escolhaLocalizacao);
+            verificacaoLocalizacao = escolherLocalizao(escolhaLocalizacao);
         }
 
-        return new Cliente(nome, nif, localizacao);
+        return new Cliente(nome, nif, escolhaLocalizacao);
     }
 
     private void alteraInformacaoCliente(String tipo, Cliente clienteRecebido, ArrayList<Cliente> arrayClientes){
@@ -222,22 +222,20 @@ public class Cliente {
                 break;
 
             case "Localizacao":
-                String localizacao = null;
-                String escolhalocalizacao = null;
+                String escolhaLocalizacao = null;
                 boolean verificacaoLocalizacao = false;
                 while(!verificacaoLocalizacao){
-                    System.out.print("\nEscolha a nova localização do cliente: \n1-> Portugal | 2-> Madeira | 3-> Açores\n");
-                    escolhalocalizacao = editarCliente.nextLine();
-                    if (escolhalocalizacao.equals("0")){
+                    System.out.print("\nEscolha a nova localização do cliente: \nPortugal | Madeira | Açores\n");
+                    escolhaLocalizacao = editarCliente.nextLine();
+                    if (escolhaLocalizacao.equals("0")){
                         System.out.println("Localização não alterada.");
                         break;
                     }else{
-                        localizacao = clienteRecebido.escolherLocalizao(escolhalocalizacao);
-
-                        if(localizacao != null){
-                            clienteRecebido.setLocalizacao(localizacao);
+                        System.out.print("\nEscolha a localização do cliente: \nContinente | Madeira | Açores\n");
+                        verificacaoLocalizacao = escolherLocalizao(escolhaLocalizacao);
+                        if(verificacaoLocalizacao) {
+                            clienteRecebido.setLocalizacao(escolhaLocalizacao);
                             System.out.println("Localização alterada com sucesso.");
-                            verificacaoLocalizacao = true;
                         }
                     }
                 }
