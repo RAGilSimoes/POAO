@@ -27,15 +27,12 @@ public class FuncoesUteis {
                         sairVerificacao = true;
                     } else {
                         System.out.println("\nIntroduza um caracter numérico válido!");
-                        sairVerificacao = false;
                     }
                 } else {
                     System.out.println("\nIntroduza um caracter numérico válido!");
-                    sairVerificacao = false;
                 }
             } catch (InputMismatchException exception) {
                 System.out.println("\nIntroduza um caracter numérico válido!");
-                sairVerificacao = false;
             }
         } while(!sairVerificacao);
 

@@ -26,12 +26,11 @@ editar fatura perguntar ao utilizador se pretende alterar a informacao e caso si
 nas protecoes, nao meter sempre os erros
 generalizar o tratamento dos produtos para ter em funcao
 
-ficheiro texto:
-C;Nome;NIF;Localização
-TipoProduto;Codigo;Nome;Descricao;Quantidade;ValorSemIVA;...
-F;NFatura;NIFCliente;Data;CodigoProduto;ValoSemIVA;ValorComIVA
-
 
 erros: -ver melhor forma de alterar os produtos da fatura, não se deve alterar o tipo de produto
        -ver melhor forma de códigos para os produtos
        -ver como obter o tipo correto de produtos a partir do arrayProdutos para listar os produtos
+       -ver folha mesa
+
+ideia: meter os produtos no array produtos, perguntar ao utilizador se pretende associar algum produto ou criar um produto novo na fatura
+       para alterar, trocar apenas a quantidade, preço sem iva

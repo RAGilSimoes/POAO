@@ -172,13 +172,14 @@ public class Fatura implements Serializable {
             if (nFaturaExistente.equals(nFaturaProcurar)){
                 System.out.println("\nNúmero de fatura já existente.");
                 nFaturaValido = false;
+                break;
             }
         }
         return nFaturaValido;
     }
 
     protected boolean verificaNumeroFatura(String numeroFatura, ArrayList<Fatura> arrayFaturas){
-        boolean verificacao;
+        boolean verificacao = true;
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         if (numeroFatura.length() != 9 || funcoesUteis.verificaCaracteres(numeroFatura,'0', '9') || numeroFatura.equalsIgnoreCase("000000000")){
             System.out.println("\nO número de fatura introduzido não é válido");

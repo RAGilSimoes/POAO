@@ -50,18 +50,14 @@ public class POOFS {
                 break;
 
             case "Help":
-                System.out.println("\nFormatação de cada objeto no ficheiro texto das faturas: ");
-                System.out.println("Fatura -> F;NFatura;NIFCliente;Data;QuantidadeProdutos;(TipoProduto-CodigoProduto)*QuantidadeProdutos;ValorSemIVA;ValorComIVA");
-
-                System.out.println("\nFormatação de cada objeto no ficheiro texto dos clientes: ");
-                System.out.println("Cliente -> Nome/NIF/Localização");
-
-                System.out.println("\nFormatação de cada objeto no ficheiro texto dos produtos: ");
-                System.out.println("Produto Alimentar Taxa Reduzida -> R/Código/Nome/Descrição/Quantidade/ValorSemIVA/Biológico/Taxa/QuantidadeCertificações/Certificações");
-                System.out.println("Produto Alimentar Taxa Intermedia -> I/Código/Nome/Descrição/Quantidade/ValorSemIVA/Biológico/Taxa/Categoria");
-                System.out.println("Produto Alimentar Taxa Normal -> N/Código/Nome/Descrição/Quantidade/ValorSemIVA/Biológico/Taxa");
-                System.out.println("Produto Farmácia Com Prescrição -> P/Código/Nome/Descrição/Quantidade/ValorSemIVA/Prescrição/NomeMedico");
-                System.out.println("Produto Farmácia Sem Prescrição -> S/Código/Nome/Descrição/Quantidade/ValorSemIVA/Prescrição/Categoria");
+                System.out.println("\nFormatação de cada objeto no ficheiro texto das informações: ");
+                System.out.println("Cliente -> C#Nome/NIF/Localização");
+                System.out.println("Produto Alimentar Taxa Reduzida -> R#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Taxa/QuantidadeCertificações/Certificações");
+                System.out.println("Produto Alimentar Taxa Intermedia -> I#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Taxa/Categoria");
+                System.out.println("Produto Alimentar Taxa Normal -> N#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Taxa");
+                System.out.println("Produto Farmácia Com Prescrição -> P#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Prescrição/NomeMedico");
+                System.out.println("Produto Farmácia Sem Prescrição -> S#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Prescrição/Categoria");
+                System.out.println("Fatura -> F#NFatura;NIFCliente;Data;CódigoProduto/CódigoProduto");
         }
     }
 
@@ -107,8 +103,7 @@ public class POOFS {
                     break;
 
                 case "7":
-                    trataInformacoesFicheiros.escreveFicheiroTextoClientes(arrayClientes);
-                    trataInformacoesFicheiros.escreveFicheiroTextoFaturas(arrayFaturas);
+                    trataInformacoesFicheiros.escreveFicheiroTextoInformacoes(arrayClientes, arrayFaturas, arrayProdutos);
                     break;
 
                 case "8":
@@ -348,7 +343,7 @@ public class POOFS {
         if(existeFicheiroObjeto){
             System.out.println("Se estás a ver isto é porque existe ficheiro objeto");
         } else {
-            tratamentoInformacoesFicheiros.trataInformacoesClientes(arrayClientes);
+            tratamentoInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos);
             System.out.println("Se estás a ver isto é porque não existe ficheiro objeto");
         }
     }

@@ -1,0 +1,4 @@
+Amaro/123456789/Continente
+Afonso/987654321/Açores
+Ric/000000000/Continente
+902124231;123456789;11/9/2004;;0.0;0.0
