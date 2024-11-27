@@ -162,7 +162,7 @@ public class Fatura implements Serializable {
     }
 
     public String toString(){
-        return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente().getNome() + "; Localização do Cliente -> " + this.getCliente().getLocalizacao() + "; Número de produtos -> " + this.getListaProdutos().size() + "; Valor total sem IVA -> " + this.valorTotalSemIVA + "; Valor total com IVA -> " + this.valorTotalComIVA + " ");
+        return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente().getNome() + "; Localização do Cliente -> " + this.getCliente().getLocalizacao() + "; Número de produtos -> " + this.getListaProdutos().size() + "; Valor total sem IVA -> " + this.valorTotalSemIVA + "; Valor total com IVA -> " + this.valorTotalComIVA);
     }
 
     protected boolean existeNumeroFatura(String nFaturaProcurar, ArrayList<Fatura> arrayFaturas){
@@ -333,8 +333,11 @@ public class Fatura implements Serializable {
         int quantidadeProdutos = 0;
 
         boolean verificacaoNumeroFatura = false;
+        boolean verificacaoCliente = false;
         boolean verificacaoQuantidade = false;
         boolean verificacaoData = false;
+
+        Cliente cliente = new Cliente(null, null, null);
 
         while (!verificacaoNumeroFatura) {
             System.out.print("\nIntroduza o número da fatura (tamanho 9 dígitos): ");
@@ -342,11 +345,18 @@ public class Fatura implements Serializable {
             verificacaoNumeroFatura = verificaNumeroFatura(numeroFatura, arrayFaturas);
         }
 
-        ListarClientes listarClientes = new ListarClientes();
-        listarClientes.listarClientes(arrayClientes);
-        System.out.print("\nIntroduza o número do cliente que pretende associar a esta fatura: ");
-        int numeroEscolhaCliente = funcoesUteis.protecaoEscolha(1, arrayClientes.size());
-        Cliente cliente = arrayClientes.get(numeroEscolhaCliente - 1);
+        while(!verificacaoCliente) {
+            ListarClientes listarClientes = new ListarClientes();
+            listarClientes.listarClientes(arrayClientes);
+            System.out.print("\nIntroduza o número do cliente que pretende associar a esta fatura: ");
+            int numeroEscolhaCliente = funcoesUteis.protecaoEscolha(1, arrayClientes.size());
+            try {
+                cliente = arrayClientes.get(numeroEscolhaCliente - 1);
+                verificacaoCliente = true;
+            } catch (IndexOutOfBoundsException exception) {
+                System.out.println("Opção inválida");
+            }
+        }
 
         Data dataFatura = new Data(0,0,0);
         while (!verificacaoData) {
@@ -373,8 +383,39 @@ public class Fatura implements Serializable {
 
         ArrayList<Produto> arrayProdutosFatura = new ArrayList<Produto>();
 
-        for(int i = 0; i < quantidadeProdutos; i++){
-            obtemProduto(arrayProdutos, arrayProdutosFatura);
+        for(int i = 0; i < quantidadeProdutos; i++) {
+            if(arrayProdutos.isEmpty()) {
+                obtemProduto(arrayProdutos, arrayProdutosFatura);
+            } else {
+                System.out.println("\nPretende associar ou criar um produto? 1-> Associar | 2-> Criar");
+                boolean verificacao = false;
+                while (!verificacao) {
+                    String escolha = scannerObterResposta.nextLine();
+                    boolean verificaEscolha = funcoesUteis.verificaInt(escolha);
+                    if (verificaEscolha) {
+                        switch (escolha) {
+                            case "1":
+                                int controloIndices = 1;
+                                System.out.println("Lista de Produtos: ");
+                                listaProdutos(arrayProdutos);
+                                System.out.print("\nIntroduza o indice do produto: ");
+                                int indice = funcoesUteis.protecaoEscolha(1, arrayProdutos.size());
+                                Produto produto = arrayProdutos.get(indice - controloIndices);
+                                arrayProdutosFatura.add(produto);
+                                System.out.println("\nProduto associado com sucesso");
+                                verificacao = true;
+                                break;
+                            case "2":
+                                obtemProduto(arrayProdutos, arrayProdutosFatura);
+                                verificacao = true;
+                                break;
+                            default:
+                                System.out.println("Opção inválida.");
+                                break;
+                        }
+                    }
+                }
+            }
         }
 
         double valorTotalSemIVA = calcularValorTotalSemIVA(arrayProdutos);
@@ -382,7 +423,7 @@ public class Fatura implements Serializable {
         return new Fatura(numeroFatura, cliente, dataFatura, arrayProdutosFatura, valorTotalSemIVA, valorTotalComIVA);
     }
 
-    private void alteraInformacaoFatura(String tipo, Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutosPOOFS){
+    private void alteraInformacaoFatura(String tipo, Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutosPOOFS, ArrayList<Produto> arrayProdutosFatura){
         Scanner scannerObterResposta = new Scanner(System.in);
         FuncoesUteis funcoesUteis = new FuncoesUteis();
 
@@ -391,18 +432,13 @@ public class Fatura implements Serializable {
                 String numeroFatura = null;
                 boolean verificacaoNumeroFatura = false;
                 while (!verificacaoNumeroFatura) {
-                    System.out.print("\nIntroduza o novo número da fatura (tamanho 9 dígitos, se não pretender alterar introduza 9 0's): ");
+                    System.out.print("\nIntroduza o novo número da fatura (tamanho 9 dígitos): ");
                     numeroFatura = scannerObterResposta.nextLine();
                     verificacaoNumeroFatura = verificaNumeroFatura(numeroFatura, arrayFaturas);
 
-                    if (numeroFatura.equals("000000000")) {
-                        System.out.println("Número da fatura não alterado.");
-                        break;
-                    } else {
-                        if(verificacaoNumeroFatura){
-                            faturaRecebida.setnFatura(numeroFatura);
-                            System.out.println("Número da fatura alterado com sucesso.");
-                        }
+                    if(verificacaoNumeroFatura){
+                        faturaRecebida.setnFatura(numeroFatura);
+                        System.out.println("Número da fatura alterado com sucesso.");
                     }
                 }
                 break;
@@ -415,14 +451,9 @@ public class Fatura implements Serializable {
                     System.out.print("\nIntroduza o novo cliente que pretende associar a esta fatura: ");
                     int numeroEscolhaCliente = funcoesUteis.protecaoEscolha(0, arrayClientes.size());
 
-                    if (numeroEscolhaCliente == 0) {
-                        System.out.println("Cliente associado à fatura não alterado.");
-                        verificacaoCliente = true;
-                    } else {
-                        Cliente cliente = arrayClientes.get(numeroEscolhaCliente - 1);
-                        faturaRecebida.setCliente(cliente);
-                        verificacaoCliente = true;
-                    }
+                    Cliente cliente = arrayClientes.get(numeroEscolhaCliente - 1);
+                    faturaRecebida.setCliente(cliente);
+                    verificacaoCliente = true;
                 }
                 break;
 
@@ -442,18 +473,49 @@ public class Fatura implements Serializable {
 
             case "Produtos":
                 int variavelControloIndices = 1;
-                ArrayList<Produto> arrayProdutos = faturaRecebida.getListaProdutos();
-                listaProdutos(arrayProdutos);
 
                 System.out.print("\nIntroduza o número do produto que pretende alterar: ");
-                int numeroProdutoAlterar = funcoesUteis.protecaoEscolha(0, arrayProdutos.size());
+                int numeroProdutoAlterar = funcoesUteis.protecaoEscolha(0, arrayProdutosFatura.size());
 
-                if (numeroProdutoAlterar == 0) {
-                    System.out.println("Nenhum produto alterado.");
-                    break;
-                } else {
-                    Produto produtoEscolhido = arrayProdutos.get(numeroProdutoAlterar - variavelControloIndices);
-                    System.out.println(produtoEscolhido);
+                Produto produtoFatura = arrayProdutosFatura.get(numeroProdutoAlterar - variavelControloIndices);
+                String codigoProdutoFatura = produtoFatura.getCodigo();
+
+                boolean verificacao = false;
+                while(!verificacao) {
+                    System.out.print("\nIntroduza a nova quantidade de unidades do produto: ");
+                    String quantidade = scannerObterResposta.nextLine();
+                    boolean verificaQuantidade = funcoesUteis.verificaInt(quantidade);
+                    if(verificaQuantidade) {
+                        int quantidadeUnidade = Integer.parseInt(quantidade);
+                        produtoFatura.setQuantidade(String.valueOf(quantidadeUnidade));
+                        verificacao = true;
+                    } else {
+                        System.out.println("Opção inválida");
+                    }
+                }
+
+                verificacao = false;
+                while(!verificacao) {
+                    System.out.print("\nIntroduza o novo preço por Unidade do produto: ");
+                    String preco = scannerObterResposta.nextLine();
+                    boolean verificaPreco = funcoesUteis.verificaDouble(preco);
+                    if(verificaPreco) {
+                        double precoUnidade = Double.parseDouble(preco);
+                        produtoFatura.setValorUnidade(String.valueOf(precoUnidade));
+                        verificacao = true;
+                    } else {
+                        System.out.println("Opção inválida");
+                    }
+                }
+
+
+                for(Produto produto: arrayProdutosPOOFS) {
+                    String codigoProdutoPOOFS = produto.getCodigo();
+                    if(codigoProdutoFatura.equalsIgnoreCase(codigoProdutoPOOFS)) {
+                        int indiceProdutoPOOFS = arrayProdutosPOOFS.indexOf(produto);
+                        arrayProdutosPOOFS.set(indiceProdutoPOOFS, produtoFatura);
+                        break;
+                    }
                 }
                 break;
 
@@ -482,34 +544,108 @@ public class Fatura implements Serializable {
     protected void alteraInformacoesFatura(Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos) {
         Scanner scannerEscolha = new Scanner(System.in);
         FuncoesUteis funcoesUteis = new FuncoesUteis();
+        ArrayList<Produto> arrayProdutosFatura = faturaRecebida.getListaProdutos();
 
         boolean verificacao = false;
+        String escolha;
 
-        System.out.print("\n(Pressione 0 para não alterar alguma informacão)");
-        alteraInformacaoFatura("Numero Fatura", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
-        alteraInformacaoFatura("Cliente", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
-        alteraInformacaoFatura("Data", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
-
-        System.out.println("\nLista de Produtos da fatura: ");
-        listaProdutos(faturaRecebida.getListaProdutos());
-        while(!verificacao){
-            System.out.print("\nIntroduza a nova quantidade de produtos a alterar na fatura: ");
-            String escolha = scannerEscolha.nextLine();
-            verificacao = funcoesUteis.verificaInt(escolha);
-            if(verificacao){
-                int quantidade = Integer.parseInt(escolha);
-                if(quantidade == 0){
-                    System.out.println("\nNenhum produto vai ser alterado.");
-                } else {
-                    for(int i = 0; i < quantidade; i++){
-                        alteraInformacaoFatura("Produtos", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
-                    }
-                }
-            } else {
-                System.out.println("Opção inválida!");
+        System.out.println("\nPretende alterar o Número da Fatura? (S/N)");
+        while(!verificacao) {
+            escolha = scannerEscolha.nextLine();
+            switch (escolha) {
+                case "S":
+                    alteraInformacaoFatura("Numero Fatura", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos, arrayProdutosFatura);
+                    verificacao = true;
+                    break;
+                case "N":
+                    System.out.println("Número de fatura não alterado");
+                    verificacao = true;
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
             }
         }
-        alteraInformacaoFatura("Valor Sem IVA", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
-        alteraInformacaoFatura("Valor Com IVA", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos);
+
+        verificacao = false;
+        System.out.println("\nPretende alterar o Cliente associado à fatura? (S/N)");
+        while(!verificacao) {
+            escolha = scannerEscolha.nextLine();
+            switch (escolha) {
+                case "S":
+                    alteraInformacaoFatura("Cliente", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos, arrayProdutosFatura);
+                    verificacao = true;
+                    break;
+                case "N":
+                    System.out.println("Cliente associado à fatura não alterado");
+                    verificacao = true;
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+        }
+
+        verificacao = false;
+        System.out.println("\nPretende alterar a Data da fatura? (S/N)");
+        while(!verificacao) {
+            escolha = scannerEscolha.nextLine();
+            switch (escolha) {
+                case "S":
+                    alteraInformacaoFatura("Data", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos, arrayProdutosFatura);
+                    verificacao = true;
+                    break;
+                case "N":
+                    System.out.println("Data da fatura não alterada");
+                    verificacao = true;
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+        }
+
+
+        verificacao = false;
+        System.out.println("\nPretende alterar algum produto da Fatura? (S/N)");
+        while(!verificacao) {
+            escolha = scannerEscolha.nextLine();
+            switch (escolha) {
+                case "S":
+                    System.out.println("\nLista de Produtos da fatura: ");
+                    listaProdutos(arrayProdutosFatura);
+                    while(!verificacao){
+                        System.out.print("\nIntroduza a quantidade de produtos existentes na fatura que pretende alterar: ");
+                        escolha = scannerEscolha.nextLine();
+                        verificacao = funcoesUteis.verificaInt(escolha);
+                        if(verificacao){
+                            int quantidade = Integer.parseInt(escolha);
+                            if(quantidade == 0){
+                                System.out.println("\nNenhum produto vai ser alterado.");
+                            } else {
+                                if(quantidade > arrayProdutosFatura.size() || quantidade < 0) {
+                                    System.out.println("\nOpção inválida.");
+                                    verificacao = false;
+                                } else {
+                                    for(int i = 0; i < quantidade; i++){
+                                        alteraInformacaoFatura("Produtos", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos, arrayProdutosFatura);
+                                    }
+                                    alteraInformacaoFatura("Valor Sem IVA", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos,arrayProdutosFatura);
+                                    alteraInformacaoFatura("Valor Com IVA", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos, arrayProdutosFatura);
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                case "N":
+                    System.out.println("Produtos da fatura não alterados");
+                    verificacao = true;
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+        }
     }
 }

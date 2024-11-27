@@ -128,7 +128,7 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
      */
     protected double calculaPrecoFinalComIVA(int taxaAplicada, ProdutoAlimentar produtoAlimentarRecebido){
         int quantidadeProduto = Integer.parseInt(produtoAlimentarRecebido.getQuantidade());
-        double valorPorUnidade = Double.parseDouble(produtoAlimentarRecebido.getValorSemIVA());
+        double valorPorUnidade = Double.parseDouble(produtoAlimentarRecebido.getValorUnidade());
 
         double taxaAplicadaDecimal = (taxaAplicada / 100.0);
 

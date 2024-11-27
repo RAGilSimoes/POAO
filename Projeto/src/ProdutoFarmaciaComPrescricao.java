@@ -27,6 +27,14 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
         this.medico = medico;
     }
 
+    public String getMedico() {
+        return medico;
+    }
+
+    public String toString(){
+        return (super.toString() + "; Médico -> " + this.getMedico());
+    }
+
     protected double obtemValorComIVA(Cliente clienteRecebido){
         final int[] arrayTaxas = {6,5,4};
 

@@ -189,15 +189,10 @@ public class Cliente implements Serializable {
                 while (!verificacaoNome) {
                     System.out.print("\nIntroduza o novo nome do cliente: ");
                     nome = editarCliente.nextLine();
-                    if (nome.equals("0")) {
-                        System.out.println("Nome não alterado.");
-                        break;
-                    } else {
-                        verificacaoNome = funcoesUteis.verificaNome(nome);
-                        if(verificacaoNome){
-                            clienteRecebido.setNome(nome);
-                            System.out.println("Nome alterado com sucesso.");
-                        }
+                    verificacaoNome = funcoesUteis.verificaNome(nome);
+                    if(verificacaoNome){
+                        clienteRecebido.setNome(nome);
+                        System.out.println("Nome alterado com sucesso.");
                     }
                 }
                 break;
@@ -208,15 +203,11 @@ public class Cliente implements Serializable {
                 while (!verificacaoNif) {
                     System.out.print("\nIntroduza o novo nif do cliente: ");
                     nif= editarCliente.nextLine();
-                    if (nif.equals("0")){
-                        System.out.println("Nif não alterado.");
-                        break;
-                    }else{
-                        verificacaoNif = clienteRecebido.verificaNif(nif, arrayClientes);
-                        if(verificacaoNif){
-                            clienteRecebido.setNif(nif);
-                            System.out.println("Nif alterado com sucesso.");
-                        }
+                    verificacaoNif = clienteRecebido.verificaNif(nif, arrayClientes);
+                    if(verificacaoNif){
+                        clienteRecebido.setNif(nif);
+                        System.out.println("Nif alterado com sucesso.");
+                        verificacaoNif = true;
                     }
                 }
                 break;
@@ -225,18 +216,12 @@ public class Cliente implements Serializable {
                 String escolhaLocalizacao = null;
                 boolean verificacaoLocalizacao = false;
                 while(!verificacaoLocalizacao){
-                    System.out.print("\nEscolha a nova localização do cliente: \nPortugal | Madeira | Açores\n");
+                    System.out.print("\nEscolha a localização do cliente: \nContinente | Madeira | Açores\n");
                     escolhaLocalizacao = editarCliente.nextLine();
-                    if (escolhaLocalizacao.equals("0")){
-                        System.out.println("Localização não alterada.");
-                        break;
-                    }else{
-                        System.out.print("\nEscolha a localização do cliente: \nContinente | Madeira | Açores\n");
-                        verificacaoLocalizacao = escolherLocalizao(escolhaLocalizacao);
-                        if(verificacaoLocalizacao) {
-                            clienteRecebido.setLocalizacao(escolhaLocalizacao);
-                            System.out.println("Localização alterada com sucesso.");
-                        }
+                    verificacaoLocalizacao = escolherLocalizao(escolhaLocalizacao);
+                    if(verificacaoLocalizacao) {
+                        clienteRecebido.setLocalizacao(escolhaLocalizacao);
+                        System.out.println("Localização alterada com sucesso.");
                     }
                 }
                 break;
@@ -254,9 +239,64 @@ public class Cliente implements Serializable {
      * @param arrayClientes   the array clientes
      */
     protected void alteraInformacoesCliente(Cliente clienteRecebido, ArrayList<Cliente> arrayClientes) {
-        System.out.print("\n(Pressione 0 para não alterar alguma informacão)");
-        alteraInformacaoCliente("Nome", clienteRecebido, arrayClientes);
-        alteraInformacaoCliente("NIF", clienteRecebido, arrayClientes);
-        alteraInformacaoCliente("Localizacao", clienteRecebido, arrayClientes);
+        Scanner scannerEscolha = new Scanner(System.in);
+        FuncoesUteis funcoesUteis = new FuncoesUteis();
+        boolean verificacao = false;
+
+        System.out.println("\nPretende alterar o nome do cliente? (S/N)");
+        String escolha = scannerEscolha.nextLine();
+        while(!verificacao) {
+            switch (escolha) {
+                case "S":
+                    alteraInformacaoCliente("Nome", clienteRecebido, arrayClientes);
+                    verificacao = true;
+                    break;
+                case "N":
+                    System.out.println("Nome do cliente não alterado");
+                    verificacao = true;
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+        }
+
+        verificacao = false;
+        System.out.println("\nPretende alterar o NIF do cliente? (S/N)");
+        escolha = scannerEscolha.nextLine();
+        while(!verificacao) {
+            switch (escolha) {
+                case "S":
+                    alteraInformacaoCliente("NIF", clienteRecebido, arrayClientes);
+                    verificacao = true;
+                    break;
+                case "N":
+                    System.out.println("NIF do cliente não alterado");
+                    verificacao = true;
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+        }
+
+        verificacao = false;
+        System.out.println("\nPretende alterar a Localização do cliente? (S/N)");
+        escolha = scannerEscolha.nextLine();
+        while(!verificacao) {
+            switch (escolha) {
+                case "S":
+                    alteraInformacaoCliente("Localizacao", clienteRecebido, arrayClientes);
+                    verificacao = true;
+                    break;
+                case "N":
+                    System.out.println("Localização do cliente não alterado");
+                    verificacao = true;
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+        }
     }
 }

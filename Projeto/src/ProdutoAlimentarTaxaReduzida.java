@@ -13,7 +13,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
     /**
      * The Certificacoes.
      */
-    protected String[] certificacoes;
+    protected ArrayList<String> certificacoes;
 
     /**
      * Instantiates a new Produto alimentar taxa reduzida.
@@ -28,14 +28,14 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
      * @param quantidadeCertificacoes the quantidade certificacoes
      * @param certificacoes           the certificacoes
      */
-    public ProdutoAlimentarTaxaReduzida(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String biologico, String taxa, int quantidadeCertificacoes, String[] certificacoes){
+    public ProdutoAlimentarTaxaReduzida(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String biologico, String taxa, int quantidadeCertificacoes, ArrayList<String> certificacoes){
         super(codigo, nome, descricao, quantidade, valorSemIVA, biologico, taxa);
         this.quantidadeCertificacoes = quantidadeCertificacoes;
         this.certificacoes = certificacoes;
     }
 
     public String toString(){
-        return (super.toString() + "; Certificacoes -> " + this.quantidadeCertificacoes);
+        return (super.toString() + "; Certificacoes -> " + this.certificacoes);
     }
 
     /**
@@ -52,7 +52,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
      *
      * @return the string [ ]
      */
-    public String[] getCertificacoes() {
+    public ArrayList<String> getCertificacoes() {
         return certificacoes;
     }
 
@@ -70,27 +70,27 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
      *
      * @param certificacoes the certificacoes
      */
-    public void setCertificacoes(String[] certificacoes) {
+    public void setCertificacoes(ArrayList<String> certificacoes) {
         if(certificacoes != null){
             this.certificacoes = certificacoes;
         }
     }
 
-    private String[] obtemCertificacoes(){
+    private ArrayList<String> obtemCertificacoes(){
         Scanner scannerObterResposta = new Scanner(System.in);
         String[] arrayCertificacoesDisponiveis = {"ISO22000", "FSSC22000", "HACCP", "GMP"};
         int controloCertificacoes = 0;
 
         String escolha = null;
 
-        String[] arrayCertificacoes = new String[4];
+        ArrayList<String> arrayCertificacoes = new ArrayList<String>();
 
         do {
             System.out.printf("\nPretende introduzir a certificação %s? \n1-> Sim | 2-> Nao: ", arrayCertificacoesDisponiveis[controloCertificacoes]);
             escolha = scannerObterResposta.nextLine();
             switch (escolha) {
                 case "1":
-                    arrayCertificacoes[controloCertificacoes] = arrayCertificacoesDisponiveis[controloCertificacoes];
+                    arrayCertificacoes.add(arrayCertificacoesDisponiveis[controloCertificacoes]);
                     controloCertificacoes++;
                     break;
                 case "2":
@@ -128,11 +128,11 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
     protected ProdutoAlimentarTaxaReduzida criaProdutoTaxaReduzida(ArrayList<Produto> arrayProdutos){
         String tipoTaxa = "Reduzida";
 
-        int quantidadeCertificacoes = 0;
-
         String[] arrayInformacoesProdutoAlimentar = obterInformacaoProdutoAlimentar(arrayProdutos);
 
-        String[] arrayCertificacoes = obtemCertificacoes();
+        ArrayList<String> arrayCertificacoes = obtemCertificacoes();
+
+        int quantidadeCertificacoes = arrayCertificacoes.size();
 
         return new ProdutoAlimentarTaxaReduzida(arrayInformacoesProdutoAlimentar[0], arrayInformacoesProdutoAlimentar[1], arrayInformacoesProdutoAlimentar[2], arrayInformacoesProdutoAlimentar[3], arrayInformacoesProdutoAlimentar[4], arrayInformacoesProdutoAlimentar[5], tipoTaxa, quantidadeCertificacoes, arrayCertificacoes);
     }

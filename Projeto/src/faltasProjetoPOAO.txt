@@ -1,36 +1,32 @@
 faturas: - se houver clientes mas não houver o cliente que o utilizar pretende, ao carregar no 0 volta para o menu principal
-
-meter os objetos como implements serializable
-
+--------------------------------------------------------------------------------------------------
 erros: - verificar valores faturas //TODO
-
+--------------------------------------------------------------------------------------------------
 ficheiro de texto inicial manda para o ficheiro objetos
 nunca escrevemos no fim do programa para o ficheiro de texto
 escreve tudo no ficheiro objetos
 se o ficheiro de objetos existir vai buscar aí os clientes
-
-
-separar strings -> string.split("\\W") divide por caracteres especiais
-
+--------------------------------------------------------------------------------------------------
 verificar código TODOOOOOOOOOOOOOOOO
-
+--------------------------------------------------------------------------------------------------
 ver os privates e protecteds
 alterar o javadoc já criado pelo intellij
-
+--------------------------------------------------------------------------------------------------
 criar um arrayProdutos para armazenar os produtos vindos do ficheiro texto?
-verificar o código do produto consoante a existencia do codigo no arrayProdutos?
-
-quando alteramos um produto numa fatura também tem que alterar produto no arrayProdutos geral
+--------------------------------------------------------------------------------------------------
 ver valor faturacomiva
-editar fatura perguntar ao utilizador se pretende alterar a informacao e caso sim faz a funcao
 nas protecoes, nao meter sempre os erros
 generalizar o tratamento dos produtos para ter em funcao
-
-
-erros: -ver melhor forma de alterar os produtos da fatura, não se deve alterar o tipo de produto
-       -ver melhor forma de códigos para os produtos
-       -ver como obter o tipo correto de produtos a partir do arrayProdutos para listar os produtos
+--------------------------------------------------------------------------------------------------
+erros: -ver como obter o tipo correto de produtos a partir do arrayProdutos para listar os produtos
        -ver folha mesa
-
-ideia: meter os produtos no array produtos, perguntar ao utilizador se pretende associar algum produto ou criar um produto novo na fatura
-       para alterar, trocar apenas a quantidade, preço sem iva
+       -proteger categoria dos produtos
+       -meter a apresentação de erros mais reduzida
+--------------------------------------------------------------------------------------------------
+se o array de produtos estiver vazio perguntar se quer criar um produto novo/se estiver com coisas, listar produtos e perguntar se quer associar algum produto ou se quer criar um novo -> verificar
+--------------------------------------------------------------------------------------------------
+fazer funcao tratar informacao ficheiro texto para produtos e para escrever produtos, ver como obter o tipo de produto a partir do array de produtos quando for para escrever
+--------------------------------------------------------------------------------------------------
+fazer funcao para ficheiro objetos
+--------------------------------------------------------------------------------------------------
+para escrever as informacoes dos produtos, como saber que tipo de produto é para ir para a função??????????

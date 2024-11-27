@@ -37,11 +37,36 @@ public class TrataInformacoesFicheiros {
         arrayClientes.add(cliente);
     }
 
-    protected String escreveFicheiroTextoClientes(Cliente cliente){
+    protected String criaInformacaoCliente(Cliente cliente){
         String nome = cliente.getNome();
         String NIF = cliente.getNif();
         String localizacao = cliente.getLocalizacao();
-        String resultado = (nome + "/" + NIF + "/" + localizacao);
+        String resultado = ("C#" + nome + "/" + NIF + "/" + localizacao);
+        return resultado;
+    }
+
+    protected String criaInformacaoProduto(Produto produto){
+        String codigo = produto.getCodigo();
+        String nome = produto.getNome();
+        String descricao = produto.getDescricao();
+        String quantidade = produto.getQuantidade();
+        String valorPorUnidade = produto.getValorUnidade();
+        String resultado = (codigo + "/"  + nome + "/" + descricao + "/" + quantidade + "/" + valorPorUnidade);
+        return resultado;
+    }
+
+    protected String criaInformacaoProdutoAlimentar(ProdutoAlimentar produtoAlimentar) {
+        String informacaoProduto = criaInformacaoProduto(produtoAlimentar);
+        String biologico = produtoAlimentar.getBiologico();
+        String taxa = produtoAlimentar.getTipoTaxa();
+        String resultado = (informacaoProduto + "/" + biologico + "/" + taxa);
+        return resultado;
+    }
+
+    protected String criaInformacaoProdutoFarmacia(ProdutoFarmacia produtoFarmacia) {
+        String informacaoProduto = criaInformacaoProduto(produtoFarmacia);
+        String prescricao = produtoFarmacia.getPrescricao();
+        String resultado = (informacaoProduto + "/" + prescricao);
         return resultado;
     }
 
@@ -66,7 +91,6 @@ public class TrataInformacoesFicheiros {
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         String[] informacoesLinha = linha.split(";");
         Fatura fatura = new Fatura(null, null, null, null, 0, 0);
-        Cliente cliente = new Cliente(null, null, null);
         boolean verificaNumeroFatura = fatura.verificaNumeroFatura(informacoesLinha[1], arrayFaturas);
         if(verificaNumeroFatura) {
             fatura.setnFatura(informacoesLinha[0]);
@@ -121,7 +145,7 @@ public class TrataInformacoesFicheiros {
     }
 
 
-    protected String escreveFicheiroTextoFatura(Fatura fatura){
+    protected String criaInformacaoFatura(Fatura fatura){
         String numeroFatura = fatura.getnFatura();
         String NIF = fatura.getCliente().getNif();
         Data data = fatura.getDataFatura();
@@ -136,7 +160,7 @@ public class TrataInformacoesFicheiros {
         }
         String valorSemIVA = String.valueOf(fatura.getValorTotalSemIVA());
         String valorComIVA = String.valueOf(fatura.getValorTotalComIVA());
-        String resultado = (numeroFatura+ ";" + NIF + ";" + data.getDia() + "/" + data.getMes() + "/" + data.getAno() + ";" + codigosProdutos + ";" + valorSemIVA + ";" + valorComIVA);
+        String resultado = ("F#" + numeroFatura+ ";" + NIF + ";" + data.getDia() + "/" + data.getMes() + "/" + data.getAno() + ";" + codigosProdutos + ";" + valorSemIVA + ";" + valorComIVA);
         return resultado;
     }
 
@@ -201,14 +225,17 @@ public class TrataInformacoesFicheiros {
             FileWriter fileWriter = new FileWriter(ficheiroTexto);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for(Cliente cliente: arrayClientes) {
-                String stringCliente = escreveFicheiroTextoClientes(cliente);
-                System.out.println(stringCliente);
+                String stringCliente = criaInformacaoCliente(cliente);
                 bufferedWriter.write(stringCliente);
                 bufferedWriter.newLine();
             }
+
+            for(Produto produto: arrayProdutos) {
+                System.out.println(produto);
+            }
+
             for(Fatura fatura: arrayFaturas) {
-                String stringFatura = escreveFicheiroTextoFatura(fatura);
-                System.out.println(stringFatura);
+                String stringFatura = criaInformacaoFatura(fatura);
                 if(arrayFaturas.indexOf(fatura) == (arrayFaturas.size() - 1)){
                     bufferedWriter.write(stringFatura);
                 } else {

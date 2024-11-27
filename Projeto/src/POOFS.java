@@ -52,7 +52,7 @@ public class POOFS {
             case "Help":
                 System.out.println("\nFormatação de cada objeto no ficheiro texto das informações: ");
                 System.out.println("Cliente -> C#Nome/NIF/Localização");
-                System.out.println("Produto Alimentar Taxa Reduzida -> R#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Taxa/QuantidadeCertificações/Certificações");
+                System.out.println("Produto Alimentar Taxa Reduzida -> R#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Taxa/Certificações");
                 System.out.println("Produto Alimentar Taxa Intermedia -> I#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Taxa/Categoria");
                 System.out.println("Produto Alimentar Taxa Normal -> N#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Taxa");
                 System.out.println("Produto Farmácia Com Prescrição -> P#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Prescrição/NomeMedico");
@@ -100,6 +100,7 @@ public class POOFS {
                     break;
 
                 case "6":
+                    trataInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos);
                     break;
 
                 case "7":
@@ -304,14 +305,14 @@ public class POOFS {
             System.out.print("\nFatura: " + faturaEscolhida);
             ArrayList<Produto> arrayProdutos = faturaEscolhida.getListaProdutos();
             for (Produto produto : arrayProdutos) {
-                System.out.print(produto);
+                System.out.print("; " + produto);
             }
             double valorSemIVA = faturaEscolhida.getValorTotalSemIVA();
             double valorComIVA = faturaEscolhida.getValorTotalComIVA();
             double valorIVA = (valorComIVA - valorSemIVA);
-            System.out.print("; Valor total sem IVA da fatura -> " + valorSemIVA + "€");
-            System.out.print("; Valor total do IVA da fatura -> " + valorIVA + "€");
-            System.out.println("; Valor total com IVA da fatura -> " + valorComIVA + "€");
+            System.out.printf("; Valor total sem IVA da fatura -> %.2f€", valorSemIVA);
+            System.out.printf("; Valor total do IVA da fatura -> %.2f€", valorIVA);
+            System.out.printf("; Valor total com IVA da fatura -> %.2f€\n", valorComIVA);
         }
     }
 

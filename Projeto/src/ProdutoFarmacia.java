@@ -38,6 +38,14 @@ abstract class ProdutoFarmacia extends Produto implements Serializable {
         return "Produto Farmacia";
     }
 
+    public String getPrescricao() {
+        return prescricao;
+    }
+
+    public String toString(){
+        return (super.toString() + "; Prescrição -> " + this.getPrescricao());
+    }
+
     /**
      * Calcula preco final com iva double.
      *
@@ -47,7 +55,7 @@ abstract class ProdutoFarmacia extends Produto implements Serializable {
      */
     protected double calculaPrecoFinalComIVA(int taxaAplicada, ProdutoFarmacia produtoFarmacia){
         int quantidadeProduto = Integer.parseInt(produtoFarmacia.getQuantidade());
-        double valorPorUnidade = Double.parseDouble(produtoFarmacia.getValorSemIVA());
+        double valorPorUnidade = Double.parseDouble(produtoFarmacia.getValorUnidade());
 
         double taxaAplicadaDecimal = (taxaAplicada / 100.0);
 

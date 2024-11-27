@@ -27,6 +27,10 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia implements Ser
         this.categoria  = categoria;
     }
 
+    public String toString(){
+        return (super.toString() + "; Categoria -> " + this.getCategoria());
+    }
+
     /**
      * Gets categoria.
      *

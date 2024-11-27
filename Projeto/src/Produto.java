@@ -25,7 +25,7 @@ abstract class Produto implements Serializable {
     /**
      * The Valor sem iva.
      */
-    protected String valorSemIVA;
+    protected String valorUnidade;
 
     /**
      * Instantiates a new Produto.
@@ -34,18 +34,18 @@ abstract class Produto implements Serializable {
      * @param nome        the nome
      * @param descricao   the descricao
      * @param quantidade  the quantidade
-     * @param valorSemIVA the valor sem iva
+     * @param valorUnidade the valor sem iva
      */
-    public Produto(String codigo, String nome, String descricao, String quantidade, String valorSemIVA){
+    public Produto(String codigo, String nome, String descricao, String quantidade, String valorUnidade){
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
         this.quantidade = quantidade;
-        this.valorSemIVA = valorSemIVA;
+        this.valorUnidade = valorUnidade;
     }
 
     public String toString() {
-        return ("Codigo -> " + this.codigo + "; Nome -> " + this.nome + "; Descricao -> " + this.descricao + "; Quantidade -> " + this.quantidade + "; Valor sem IVA -> " + this.valorSemIVA);
+        return ("Codigo -> " + this.codigo + "; Nome -> " + this.nome + "; Descricao -> " + this.descricao + "; Quantidade -> " + this.quantidade + "; Valor por Unidade -> " + this.valorUnidade);
     }
 
     /**
@@ -89,8 +89,8 @@ abstract class Produto implements Serializable {
      *
      * @return the valor sem iva
      */
-    public String getValorSemIVA() {
-        return valorSemIVA;
+    public String getValorUnidade() {
+        return valorUnidade;
     }
 
     /**
@@ -132,10 +132,10 @@ abstract class Produto implements Serializable {
     /**
      * Sets valor sem iva.
      *
-     * @param valorSemIVA the valor sem iva
+     * @param valorUnidade the valor sem iva
      */
-    public void setValorSemIVA(String valorSemIVA) {
-        this.valorSemIVA = valorSemIVA;
+    public void setValorUnidade(String valorUnidade) {
+        this.valorUnidade = valorUnidade;
     }
 
     private boolean existeCodigo(ArrayList<Produto> arrayProdutos, String codigoProcurar) {
@@ -190,7 +190,7 @@ abstract class Produto implements Serializable {
      */
     protected double obtemValorSemIVA(){
         int quantidade = Integer.parseInt(this.getQuantidade());
-        double precoPorUnidade = Double.parseDouble(this.getValorSemIVA());
+        double precoPorUnidade = Double.parseDouble(this.getValorUnidade());
         double valorSemIVA = (quantidade * precoPorUnidade);
         valorSemIVA = (Math.floor(valorSemIVA * 100) /100);
         return valorSemIVA;
@@ -254,7 +254,7 @@ abstract class Produto implements Serializable {
         }
 
         while(!verificacaoPrecoSemIVA){
-            System.out.print("Introduza o preço sem IVA do produto: ");
+            System.out.print("Introduza o valor por unidade do produto: ");
             precoSemIVAProduto = scannerObterResposta.nextLine();
             verificacaoPrecoSemIVA = funcoesUteis.verificaDouble(precoSemIVAProduto);
         }
