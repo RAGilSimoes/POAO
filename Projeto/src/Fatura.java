@@ -428,21 +428,6 @@ public class Fatura implements Serializable {
         FuncoesUteis funcoesUteis = new FuncoesUteis();
 
         switch (tipo){
-            case "Numero Fatura":
-                String numeroFatura = null;
-                boolean verificacaoNumeroFatura = false;
-                while (!verificacaoNumeroFatura) {
-                    System.out.print("\nIntroduza o novo número da fatura (tamanho 9 dígitos): ");
-                    numeroFatura = scannerObterResposta.nextLine();
-                    verificacaoNumeroFatura = verificaNumeroFatura(numeroFatura, arrayFaturas);
-
-                    if(verificacaoNumeroFatura){
-                        faturaRecebida.setnFatura(numeroFatura);
-                        System.out.println("Número da fatura alterado com sucesso.");
-                    }
-                }
-                break;
-
             case "Cliente":
                 boolean verificacaoCliente = false;
                 ListarClientes listarClientes = new ListarClientes();
@@ -553,11 +538,11 @@ public class Fatura implements Serializable {
         while(!verificacao) {
             escolha = scannerEscolha.nextLine();
             switch (escolha) {
-                case "S":
+                case "S", "s":
                     alteraInformacaoFatura("Numero Fatura", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos, arrayProdutosFatura);
                     verificacao = true;
                     break;
-                case "N":
+                case "N", "n":
                     System.out.println("Número de fatura não alterado");
                     verificacao = true;
                     break;
@@ -572,11 +557,11 @@ public class Fatura implements Serializable {
         while(!verificacao) {
             escolha = scannerEscolha.nextLine();
             switch (escolha) {
-                case "S":
+                case "S", "s":
                     alteraInformacaoFatura("Cliente", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos, arrayProdutosFatura);
                     verificacao = true;
                     break;
-                case "N":
+                case "N", "n":
                     System.out.println("Cliente associado à fatura não alterado");
                     verificacao = true;
                     break;
@@ -591,11 +576,11 @@ public class Fatura implements Serializable {
         while(!verificacao) {
             escolha = scannerEscolha.nextLine();
             switch (escolha) {
-                case "S":
+                case "S", "s":
                     alteraInformacaoFatura("Data", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos, arrayProdutosFatura);
                     verificacao = true;
                     break;
-                case "N":
+                case "N", "n":
                     System.out.println("Data da fatura não alterada");
                     verificacao = true;
                     break;
@@ -611,7 +596,7 @@ public class Fatura implements Serializable {
         while(!verificacao) {
             escolha = scannerEscolha.nextLine();
             switch (escolha) {
-                case "S":
+                case "S", "s":
                     System.out.println("\nLista de Produtos da fatura: ");
                     listaProdutos(arrayProdutosFatura);
                     while(!verificacao){
@@ -638,7 +623,7 @@ public class Fatura implements Serializable {
                     }
                     break;
 
-                case "N":
+                case "N", "n":
                     System.out.println("Produtos da fatura não alterados");
                     verificacao = true;
                     break;

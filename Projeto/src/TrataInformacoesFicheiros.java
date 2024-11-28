@@ -98,7 +98,7 @@ public class TrataInformacoesFicheiros {
             throw new IOException();
         }
         Cliente clienteFatura = verificaNIFFicheiros(informacoesLinha[1], arrayClientes);
-        if(clienteFatura != null) {
+        if(clienteFatura.getNome() != null) {
             fatura.setCliente(clienteFatura);
         } else {
             throw new IOException();

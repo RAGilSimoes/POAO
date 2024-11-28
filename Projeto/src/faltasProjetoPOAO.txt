@@ -20,7 +20,6 @@ generalizar o tratamento dos produtos para ter em funcao
 --------------------------------------------------------------------------------------------------
 erros: -ver como obter o tipo correto de produtos a partir do arrayProdutos para listar os produtos
        -ver folha mesa
-       -proteger categoria dos produtos
        -meter a apresentação de erros mais reduzida
 --------------------------------------------------------------------------------------------------
 se o array de produtos estiver vazio perguntar se quer criar um produto novo/se estiver com coisas, listar produtos e perguntar se quer associar algum produto ou se quer criar um novo -> verificar
@@ -29,4 +28,8 @@ fazer funcao tratar informacao ficheiro texto para produtos e para escrever prod
 --------------------------------------------------------------------------------------------------
 fazer funcao para ficheiro objetos
 --------------------------------------------------------------------------------------------------
-para escrever as informacoes dos produtos, como saber que tipo de produto é para ir para a função??????????
+para escrever as informacoes dos produtos, como saber que tipo de produto é para ir para a função? -> gettipo nos produtos
+
+importar e exportar apenas informacoes da fatura num ficheiro diferente
+
+importar ficheiros sem cliente deixa meter a fatura sem cliente

@@ -247,11 +247,11 @@ public class Cliente implements Serializable {
         String escolha = scannerEscolha.nextLine();
         while(!verificacao) {
             switch (escolha) {
-                case "S":
+                case "S" , "s":
                     alteraInformacaoCliente("Nome", clienteRecebido, arrayClientes);
                     verificacao = true;
                     break;
-                case "N":
+                case "N" , "n":
                     System.out.println("Nome do cliente não alterado");
                     verificacao = true;
                     break;
