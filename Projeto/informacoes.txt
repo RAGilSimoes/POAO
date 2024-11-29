@@ -1,4 +1,7 @@
 C#Amaro/123456789/Continente
 C#Afonso/987654321/Açores
 C#Ric/000000000/Continente
-F#123456789;123456789;11/11/1111;001/002;14.0;14.84
+N#901/Banana/Boa/2/2.3/Nao/Normal
+P#902/Strepfen/Este produto não tem descrição/5/5.42/Sim/Mario
+F#123456789;123456789;11/11/1111;;0.0;0.0
+F#987654321;123456789;11/11/1111;901/902;31.69;34.36

@@ -24,12 +24,10 @@ erros: -ver como obter o tipo correto de produtos a partir do arrayProdutos para
 --------------------------------------------------------------------------------------------------
 se o array de produtos estiver vazio perguntar se quer criar um produto novo/se estiver com coisas, listar produtos e perguntar se quer associar algum produto ou se quer criar um novo -> verificar
 --------------------------------------------------------------------------------------------------
-fazer funcao tratar informacao ficheiro texto para produtos e para escrever produtos, ver como obter o tipo de produto a partir do array de produtos quando for para escrever
+fazer funcao para ler as informações dos produtos do ficheiro texto e meter no array
 --------------------------------------------------------------------------------------------------
 fazer funcao para ficheiro objetos
 --------------------------------------------------------------------------------------------------
-para escrever as informacoes dos produtos, como saber que tipo de produto é para ir para a função? -> gettipo nos produtos
-
 importar e exportar apenas informacoes da fatura num ficheiro diferente
-
-importar ficheiros sem cliente deixa meter a fatura sem cliente
+--------------------------------------------------------------------------------------------------
+protecao para a fatura no ficheiro tem que ter produtos, feito
