@@ -18,12 +18,12 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia implements Ser
      * @param nome        the nome
      * @param descricao   the descricao
      * @param quantidade  the quantidade
-     * @param valorSemIVA the valor sem iva
+     * @param valorUnidade the valor sem iva
      * @param prescricao  the prescricao
      * @param categoria   the categoria
      */
-    public ProdutoFarmaciaSemPrescricao(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String prescricao, String categoria){
-        super(codigo, nome, descricao, quantidade, valorSemIVA, prescricao);
+    public ProdutoFarmaciaSemPrescricao(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao, String categoria){
+        super(codigo, nome, descricao, quantidade, valorUnidade, prescricao);
         this.categoria  = categoria;
     }
 

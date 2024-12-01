@@ -19,13 +19,13 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
      * @param nome        the nome
      * @param descricao   the descricao
      * @param quantidade  the quantidade
-     * @param valorSemIVA the valor sem iva
+     * @param valorUnidade the valor sem iva
      * @param biologico   the biologico
      * @param taxa        the taxa
      * @param categoria   the categoria
      */
-    public ProdutoAlimentarTaxaIntermedia(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String biologico, String taxa, String categoria){
-        super(codigo, nome, descricao, quantidade, valorSemIVA, biologico, taxa);
+    public ProdutoAlimentarTaxaIntermedia(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa, String categoria){
+        super(codigo, nome, descricao, quantidade, valorUnidade, biologico, taxa);
         this.categoria = categoria;
     }
 
@@ -40,6 +40,10 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
      */
     public String getCategoria() {
         return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     protected double obtemValorComIVA(Cliente clienteRecebido){

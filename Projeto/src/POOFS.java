@@ -52,9 +52,9 @@ public class POOFS {
             case "Help":
                 System.out.println("\nFormatação de cada objeto no ficheiro texto das informações: ");
                 System.out.println("Cliente -> C#Nome/NIF/Localização");
-                System.out.println("Produto Alimentar Taxa Reduzida -> R#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Taxa/Certificações");
-                System.out.println("Produto Alimentar Taxa Intermedia -> I#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Taxa/Categoria");
-                System.out.println("Produto Alimentar Taxa Normal -> N#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Taxa");
+                System.out.println("Produto Alimentar Taxa Reduzida -> R#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Certificações");
+                System.out.println("Produto Alimentar Taxa Intermedia -> I#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico/Categoria");
+                System.out.println("Produto Alimentar Taxa Normal -> N#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Biológico");
                 System.out.println("Produto Farmácia Com Prescrição -> P#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Prescrição/NomeMedico");
                 System.out.println("Produto Farmácia Sem Prescrição -> S#Código/Nome/Descrição/Quantidade/ValorPorUnidade/Prescrição/Categoria");
                 System.out.println("Fatura -> F#NFatura;NIFCliente;Data;CódigoProduto/CódigoProduto");
@@ -302,15 +302,15 @@ public class POOFS {
             System.out.print("\nEscolha uma fatura: ");
             int escolha = funcoesUteis.protecaoEscolha(1, arrayFaturas.size());
             Fatura faturaEscolhida = arrayFaturas.get(escolha - 1);
-            System.out.print("\nFatura: " + faturaEscolhida);
+            System.out.println("\n" + faturaEscolhida);
             ArrayList<Produto> arrayProdutos = faturaEscolhida.getListaProdutos();
             for (Produto produto : arrayProdutos) {
-                System.out.print("; " + produto);
+                System.out.println(produto);
             }
             double valorSemIVA = faturaEscolhida.getValorTotalSemIVA();
             double valorComIVA = faturaEscolhida.getValorTotalComIVA();
             double valorIVA = (valorComIVA - valorSemIVA);
-            System.out.printf("; Valor total sem IVA da fatura -> %.2f€", valorSemIVA);
+            System.out.printf("Valor total sem IVA da fatura -> %.2f€", valorSemIVA);
             System.out.printf("; Valor total do IVA da fatura -> %.2f€", valorIVA);
             System.out.printf("; Valor total com IVA da fatura -> %.2f€\n", valorComIVA);
         }
@@ -345,7 +345,6 @@ public class POOFS {
             System.out.println("Se estás a ver isto é porque existe ficheiro objeto");
         } else {
             tratamentoInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos);
-            System.out.println("Se estás a ver isto é porque não existe ficheiro objeto");
         }
     }
 }

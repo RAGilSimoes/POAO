@@ -9,25 +9,15 @@ se o ficheiro de objetos existir vai buscar aí os clientes
 --------------------------------------------------------------------------------------------------
 verificar código TODOOOOOOOOOOOOOOOO
 --------------------------------------------------------------------------------------------------
-ver os privates e protecteds
 alterar o javadoc já criado pelo intellij
---------------------------------------------------------------------------------------------------
-criar um arrayProdutos para armazenar os produtos vindos do ficheiro texto?
 --------------------------------------------------------------------------------------------------
 ver valor faturacomiva
 nas protecoes, nao meter sempre os erros
-generalizar o tratamento dos produtos para ter em funcao
 --------------------------------------------------------------------------------------------------
-erros: -ver como obter o tipo correto de produtos a partir do arrayProdutos para listar os produtos
-       -ver folha mesa
-       -meter a apresentação de erros mais reduzida
---------------------------------------------------------------------------------------------------
-se o array de produtos estiver vazio perguntar se quer criar um produto novo/se estiver com coisas, listar produtos e perguntar se quer associar algum produto ou se quer criar um novo -> verificar
---------------------------------------------------------------------------------------------------
-fazer funcao para ler as informações dos produtos do ficheiro texto e meter no array
+erros: -meter a apresentação de erros mais reduzida
 --------------------------------------------------------------------------------------------------
 fazer funcao para ficheiro objetos
 --------------------------------------------------------------------------------------------------
-importar e exportar apenas informacoes da fatura num ficheiro diferente
+função 6 e 7 abordam outro ficheiro texto que tem que ter apenas informações sobre as faturas e o seu cliente e produtos
 --------------------------------------------------------------------------------------------------
-protecao para a fatura no ficheiro tem que ter produtos, feito
+Falta fazer ficheiros de objetos e funcoes 6 e 7

@@ -1,7 +1,7 @@
 C#Amaro/123456789/Continente
-C#Afonso/987654321/Açores
-C#Ric/000000000/Continente
-N#901/Banana/Boa/2/2.3/Nao/Normal
-P#902/Strepfen/Este produto não tem descrição/5/5.42/Sim/Mario
-F#123456789;123456789;11/11/1111;;0.0;0.0
-F#987654321;123456789;11/11/1111;901/902;31.69;34.36
+R#001/Banana/Este produto não tem descrição/3/1.2/Nao/ISO22000,FSSC22000,GMP
+I#002/Maca/Este produto não tem descrição/12/4.5/Nao/Vinho
+N#003/Laranja/Boa/5/4.53/Nao
+P#004/Strepfen/Maca/4/3.5/Sim/Mario
+S#005/Benuron/Mau/1/2.3/Nao/Medicina
+F#123456789;123456789;11/11/1111;001/002/003/004/005

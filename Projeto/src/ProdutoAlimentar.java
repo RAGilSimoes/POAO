@@ -22,12 +22,12 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
      * @param nome        the nome
      * @param descricao   the descricao
      * @param quantidade  the quantidade
-     * @param valorSemIVA the valor sem iva
+     * @param valorUnidade the valor sem iva
      * @param biologico   the biologico
      * @param tipoTaxa    the tipo taxa
      */
-    public ProdutoAlimentar(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String biologico, String tipoTaxa){
-        super(codigo, nome, descricao, quantidade, valorSemIVA);
+    public ProdutoAlimentar(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String tipoTaxa){
+        super(codigo, nome, descricao, quantidade, valorUnidade);
         this.biologico = biologico;
         this.tipoTaxa = tipoTaxa;
     }

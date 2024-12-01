@@ -134,10 +134,10 @@ public class FuncoesUteis {
     protected boolean verificaCategoria(String stringRecebida) {
         boolean verificacao;
         if(stringRecebida.length() <= 2 || (verificaCaracteres(stringRecebida.substring(0,1),'A', 'Z') || verificaCaracteres(stringRecebida.substring(1),'a', 'z'))) {
-            verificacao = true;
-        } else {
             System.out.println("Categoria inválida!");
             verificacao = false;
+        } else {
+            verificacao = true;
         }
         return verificacao;
     }

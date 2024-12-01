@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,14 +23,14 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
      * @param nome                    the nome
      * @param descricao               the descricao
      * @param quantidade              the quantidade
-     * @param valorSemIVA             the valor sem iva
+     * @param valorUnidade             the valor sem iva
      * @param biologico               the biologico
      * @param taxa                    the taxa
      * @param quantidadeCertificacoes the quantidade certificacoes
      * @param certificacoes           the certificacoes
      */
-    public ProdutoAlimentarTaxaReduzida(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String biologico, String taxa, int quantidadeCertificacoes, ArrayList<String> certificacoes){
-        super(codigo, nome, descricao, quantidade, valorSemIVA, biologico, taxa);
+    public ProdutoAlimentarTaxaReduzida(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa, int quantidadeCertificacoes, ArrayList<String> certificacoes){
+        super(codigo, nome, descricao, quantidade, valorUnidade, biologico, taxa);
         this.quantidadeCertificacoes = quantidadeCertificacoes;
         this.certificacoes = certificacoes;
     }
@@ -74,6 +75,25 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
         if(certificacoes != null){
             this.certificacoes = certificacoes;
         }
+    }
+
+    protected boolean verificaCertificacoes(ArrayList<String> certificacoes) {
+        boolean verificacao = false;
+        try{
+            for(String string: certificacoes){
+                switch (string) {
+                    case "ISO22000", "FSSC22000", "HACCP", "GMP":
+                        verificacao = true;
+                        break;
+
+                    default:
+                        throw new IOException();
+                }
+            }
+        } catch (IOException exception) {
+            verificacao = false;
+        }
+        return verificacao;
     }
 
     private ArrayList<String> obtemCertificacoes(){

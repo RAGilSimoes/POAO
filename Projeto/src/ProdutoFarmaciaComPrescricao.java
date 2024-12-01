@@ -18,12 +18,12 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
      * @param nome        the nome
      * @param descricao   the descricao
      * @param quantidade  the quantidade
-     * @param valorSemIVA the valor sem iva
+     * @param valorUnidade the valor sem iva
      * @param prescricao  the prescricao
      * @param medico      the medico
      */
-    public ProdutoFarmaciaComPrescricao(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String prescricao, String medico){
-        super(codigo, nome, descricao, quantidade, valorSemIVA, prescricao);
+    public ProdutoFarmaciaComPrescricao(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao, String medico){
+        super(codigo, nome, descricao, quantidade, valorUnidade, prescricao);
         this.medico = medico;
     }
 
@@ -33,6 +33,10 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
 
     public String toString(){
         return (super.toString() + "; Médico -> " + this.getMedico());
+    }
+
+    public void setMedico(String medico) {
+        this.medico = medico;
     }
 
     protected double obtemValorComIVA(Cliente clienteRecebido){

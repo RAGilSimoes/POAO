@@ -12,12 +12,12 @@ public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar implements Seri
      * @param nome        the nome
      * @param descricao   the descricao
      * @param quantidade  the quantidade
-     * @param valorSemIVA the valor sem iva
+     * @param valorUnidade the valor sem iva
      * @param biologico   the biologico
      * @param taxa        the taxa
      */
-    public ProdutoAlimentarTaxaNormal(String codigo, String nome, String descricao, String quantidade, String valorSemIVA, String biologico, String taxa){
-        super(codigo, nome, descricao, quantidade, valorSemIVA, biologico, taxa);
+    public ProdutoAlimentarTaxaNormal(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa){
+        super(codigo, nome, descricao, quantidade, valorUnidade, biologico, taxa);
     }
 
     protected double obtemValorComIVA(Cliente clienteRecebido){
