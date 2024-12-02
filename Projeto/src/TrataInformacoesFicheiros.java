@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 public class TrataInformacoesFicheiros {
     final String nomeFicheiroObjetos = "projeto.obj";
-    final String nomeFicheiroTextoInformacoes = "informacoes.txt";
 
     //--------------------------------------------------------------------------------------------------
     protected boolean verificaExistenciaFicheiroObjeto() {
@@ -15,7 +14,7 @@ public class TrataInformacoesFicheiros {
     //--------------------------------------------------------------------------------------------------
 
     //--------------------------------------------------------------------------------------------------
-    protected void trataInformacoesClientes(ArrayList<Cliente> arrayClientes, String linha) throws IOException{
+    protected Cliente trataInformacoesClientes(ArrayList<Cliente> arrayClientes, String linha) throws IOException{
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         Cliente cliente = new Cliente(null, null, null);
         String[] informacoesLinha = linha.split("/");
@@ -37,7 +36,7 @@ public class TrataInformacoesFicheiros {
         } else {
             throw new IOException();
         }
-        arrayClientes.add(cliente);
+        return cliente;
     }
 
     protected Produto trataInformacoesProduto(String[] linha, Produto produto, ArrayList<Produto> arrayProdutos) throws IOException{
@@ -101,7 +100,7 @@ public class TrataInformacoesFicheiros {
         return produto;
     }
 
-    protected void trataInformacoesTaxaReduzida(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
+    protected ProdutoAlimentarTaxaReduzida trataInformacoesTaxaReduzida(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
         ProdutoAlimentarTaxaReduzida produtoAlimentarTaxaReduzida = new ProdutoAlimentarTaxaReduzida(null, null, null, null, null, null, null, 0, null);
         String[] informacoesLinha = linha.split("/");
         if(informacoesLinha.length != 7){
@@ -119,12 +118,11 @@ public class TrataInformacoesFicheiros {
             } else {
                 throw new IOException();
             }
-
-            arrayProdutos.add(produtoAlimentarTaxaReduzida);
         }
+        return produtoAlimentarTaxaReduzida;
     }
 
-    protected void trataInformacoesTaxaIntermedia(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
+    protected ProdutoAlimentarTaxaIntermedia trataInformacoesTaxaIntermedia(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         ProdutoAlimentarTaxaIntermedia produtoAlimentarTaxaIntermedia = new ProdutoAlimentarTaxaIntermedia(null, null, null, null, null, null, null, null);
         String[] informacoesLinha = linha.split("/");
@@ -139,22 +137,22 @@ public class TrataInformacoesFicheiros {
             } else {
                 throw new IOException();
             }
-            arrayProdutos.add(produtoAlimentarTaxaIntermedia);
         }
+        return produtoAlimentarTaxaIntermedia;
     }
 
-    protected void trataInformacoesTaxaNormal(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
+    protected ProdutoAlimentarTaxaNormal trataInformacoesTaxaNormal(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
         ProdutoAlimentarTaxaNormal produtoAlimentarTaxaNormal = new ProdutoAlimentarTaxaNormal(null, null, null, null, null, null, null);
         String[] informacoesLinha = linha.split("/");
         if(informacoesLinha.length != 6){
             throw new IOException();
         } else {
             produtoAlimentarTaxaNormal = (ProdutoAlimentarTaxaNormal) trataInformacoesProdutoAlimentar(informacoesLinha, produtoAlimentarTaxaNormal, arrayProdutos, taxa);
-            arrayProdutos.add(produtoAlimentarTaxaNormal);
         }
+        return produtoAlimentarTaxaNormal;
     }
 
-    protected void trataInformacoesComPrescricao(ArrayList<Produto> arrayProdutos, String linha) throws IOException{
+    protected ProdutoFarmaciaComPrescricao trataInformacoesComPrescricao(ArrayList<Produto> arrayProdutos, String linha) throws IOException{
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         ProdutoFarmaciaComPrescricao produtoFarmaciaComPrescricao = new ProdutoFarmaciaComPrescricao(null, null, null, null, null, null, null);
         String[] informacoesLinha = linha.split("/");
@@ -169,11 +167,11 @@ public class TrataInformacoesFicheiros {
             } else {
                 throw new IOException();
             }
-            arrayProdutos.add(produtoFarmaciaComPrescricao);
         }
+        return produtoFarmaciaComPrescricao;
     }
 
-    protected void trataInformacoesSemPrescricao(ArrayList<Produto> arrayProdutos, String linha) throws IOException{
+    protected ProdutoFarmaciaSemPrescricao trataInformacoesSemPrescricao(ArrayList<Produto> arrayProdutos, String linha) throws IOException{
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         ProdutoFarmaciaSemPrescricao produtoFarmaciaSemPrescricao = new ProdutoFarmaciaSemPrescricao(null, null, null, null, null, null, null);
         String[] informacoesLinha = linha.split("/");
@@ -188,18 +186,18 @@ public class TrataInformacoesFicheiros {
             } else {
                 throw new IOException();
             }
-            arrayProdutos.add(produtoFarmaciaSemPrescricao);
         }
+        return produtoFarmaciaSemPrescricao;
     }
 
-    protected void trataInformacoesFaturas(ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, String linha){
+    protected Fatura trataInformacoesFaturas(ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, String linha){
+        Fatura fatura = new Fatura(null, null, null, null, 0, 0);
         try {
             String[] informacoesLinha = linha.split(";");
             if(informacoesLinha.length != 4) {
                 throw new IOException();
             } else {
                 FuncoesUteis funcoesUteis = new FuncoesUteis();
-                Fatura fatura = new Fatura(null, null, null, null, 0, 0);
                 boolean verificaNumeroFatura = fatura.verificaNumeroFatura(informacoesLinha[0], arrayFaturas);
                 if(verificaNumeroFatura) {
                     fatura.setnFatura(informacoesLinha[0]);
@@ -249,12 +247,11 @@ public class TrataInformacoesFicheiros {
 
                 double valorComIVA = fatura.calcularValorTotalComIVA(arrayProdutosFatura, clienteFatura);
                 fatura.setValorTotalComIVA(valorComIVA);
-
-                arrayFaturas.add(fatura);
             }
         } catch (IOException exception) {
             System.out.println("Erro ao ler fatura");
         }
+        return fatura;
     }
     //--------------------------------------------------------------------------------------------------
 
@@ -290,13 +287,12 @@ public class TrataInformacoesFicheiros {
         ArrayList<String> certificacoes = produtoAlimentarTaxaReduzida.getCertificacoes();
         String stringCertificacoes = "";
         for(String string: certificacoes) {
-            if(certificacoes.indexOf(string) == (certificacoes.size() - 1)){
+            if (certificacoes.indexOf(string) == (certificacoes.size() - 1)) {
                 stringCertificacoes += (string);
             } else {
                 stringCertificacoes += (string + ",");
             }
         }
-        System.out.println(stringCertificacoes);
         String resultado = ("R#" + informacaoProduto + "/" + stringCertificacoes);
         return resultado;
     }
@@ -373,8 +369,8 @@ public class TrataInformacoesFicheiros {
     //--------------------------------------------------------------------------------------------------
 
     //--------------------------------------------------------------------------------------------------
-    protected void leFicheiroTexto(ArrayList<Cliente> arrayClientes, ArrayList<Fatura> arrayFaturas, ArrayList<Produto> arrayProdutos){
-        File ficheiroTexto = new File(nomeFicheiroTextoInformacoes);
+    protected void leFicheiroTexto(ArrayList<Cliente> arrayClientes, ArrayList<Fatura> arrayFaturas, ArrayList<Produto> arrayProdutos, String nomeFicheiro){
+        File ficheiroTexto = new File(nomeFicheiro);
         if(ficheiroTexto.exists() && ficheiroTexto.isFile()){
             try {
                 FileReader fr = new FileReader(ficheiroTexto);
@@ -385,31 +381,38 @@ public class TrataInformacoesFicheiros {
                     String caracterControlo = informacoesLinha[0];
                     switch (caracterControlo) {
                         case "C":
-                            trataInformacoesClientes(arrayClientes, informacoesLinha[1]);
+                            Cliente cliente = trataInformacoesClientes(arrayClientes, informacoesLinha[1]);
+                            arrayClientes.add(cliente);
                             break;
 
                         case "N":
-                            trataInformacoesTaxaNormal(arrayProdutos, informacoesLinha[1], "Normal");
+                            ProdutoAlimentarTaxaNormal produtoAlimentarTaxaNormal = trataInformacoesTaxaNormal(arrayProdutos, informacoesLinha[1], "Normal");
+                            arrayProdutos.add(produtoAlimentarTaxaNormal);
                             break;
 
                         case "I":
-                            trataInformacoesTaxaIntermedia(arrayProdutos, informacoesLinha[1], "Intermedia");
+                            ProdutoAlimentarTaxaIntermedia produtoAlimentarTaxaIntermedia = trataInformacoesTaxaIntermedia(arrayProdutos, informacoesLinha[1], "Intermedia");
+                            arrayProdutos.add(produtoAlimentarTaxaIntermedia);
                             break;
 
                         case "R":
-                            trataInformacoesTaxaReduzida(arrayProdutos, informacoesLinha[1], "Reduzida");
+                            ProdutoAlimentarTaxaReduzida produtoAlimentarTaxaReduzida = trataInformacoesTaxaReduzida(arrayProdutos, informacoesLinha[1], "Reduzida");
+                            arrayProdutos.add(produtoAlimentarTaxaReduzida);
                             break;
 
                         case "P":
-                            trataInformacoesComPrescricao(arrayProdutos, informacoesLinha[1]);
+                            ProdutoFarmaciaComPrescricao produtoFarmaciaComPrescricao = trataInformacoesComPrescricao(arrayProdutos, informacoesLinha[1]);
+                            arrayProdutos.add(produtoFarmaciaComPrescricao);
                             break;
 
                         case "S":
-                            trataInformacoesSemPrescricao(arrayProdutos, informacoesLinha[1]);
+                            ProdutoFarmaciaSemPrescricao produtoFarmaciaSemPrescricao = trataInformacoesSemPrescricao(arrayProdutos, informacoesLinha[1]);
+                            arrayProdutos.add(produtoFarmaciaSemPrescricao);
                             break;
 
                         case "F":
-                            trataInformacoesFaturas(arrayFaturas, arrayClientes, arrayProdutos, informacoesLinha[1]);
+                            Fatura fatura = trataInformacoesFaturas(arrayFaturas, arrayClientes, arrayProdutos, informacoesLinha[1]);
+                            arrayFaturas.add(fatura);
                             break;
 
                         default:
@@ -430,8 +433,8 @@ public class TrataInformacoesFicheiros {
     //--------------------------------------------------------------------------------------------------
 
     //--------------------------------------------------------------------------------------------------
-    protected void escreveFicheiroTextoInformacoes(ArrayList<Cliente> arrayClientes, ArrayList<Fatura> arrayFaturas, ArrayList<Produto> arrayProdutos) {
-        File ficheiroTexto = new File(nomeFicheiroTextoInformacoes);
+    protected void escreveFicheiroTextoInformacoes(ArrayList<Cliente> arrayClientes, ArrayList<Fatura> arrayFaturas, ArrayList<Produto> arrayProdutos, String nomeFicheiro) {
+        File ficheiroTexto = new File(nomeFicheiro);
         try {
             FileWriter fileWriter = new FileWriter(ficheiroTexto);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);

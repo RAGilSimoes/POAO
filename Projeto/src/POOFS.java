@@ -1,3 +1,5 @@
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -71,7 +73,9 @@ public class POOFS {
         ListarFaturas listarFaturas = new ListarFaturas();
         ListarClientes listarClientes = new ListarClientes();
         TrataInformacoesFicheiros trataInformacoesFicheiros = new TrataInformacoesFicheiros();
-        importaInformacoesAutomaticamente(arrayFaturas, arrayClientes, arrayProdutos);
+        final String nomeFicheiroTextoInformacoes = "informacoes.txt";
+        final String nomeFicheiroFaturas = "faturas.txt";
+        importaInformacoesAutomaticamente(arrayFaturas, arrayClientes, arrayProdutos, nomeFicheiroTextoInformacoes);
 
         do {
             menus("Menu Principal");
@@ -100,11 +104,11 @@ public class POOFS {
                     break;
 
                 case "6":
-                    trataInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos);
+                    importaFatura(arrayClientes, arrayProdutos, arrayFaturas, nomeFicheiroFaturas);
                     break;
 
                 case "7":
-                    trataInformacoesFicheiros.escreveFicheiroTextoInformacoes(arrayClientes, arrayFaturas, arrayProdutos);
+                    exportaFatura(arrayFaturas, nomeFicheiroFaturas);
                     break;
 
                 case "8":
@@ -338,13 +342,84 @@ public class POOFS {
         System.out.println("\nValor total com IVA -> " + valorComIVA);
     }
 
-    private void importaInformacoesAutomaticamente(ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos) {
+    private void importaInformacoesAutomaticamente(ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, String nomeFicheiro) {
         TrataInformacoesFicheiros tratamentoInformacoesFicheiros = new TrataInformacoesFicheiros();
         boolean existeFicheiroObjeto = tratamentoInformacoesFicheiros.verificaExistenciaFicheiroObjeto();
         if(existeFicheiroObjeto){
             System.out.println("Se estás a ver isto é porque existe ficheiro objeto");
         } else {
-            tratamentoInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos);
+            tratamentoInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos, nomeFicheiro);
+        }
+    }
+
+    private void importaFatura(ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, ArrayList<Fatura> arrayFaturas, String nomeFicheiro) {
+
+    }
+
+    private void exportaFatura(ArrayList<Fatura> arrayFaturas, String nomeFicheiro) {
+        TrataInformacoesFicheiros trataInformacoesFicheiros = new TrataInformacoesFicheiros();
+        File ficheiroTexto = new File(nomeFicheiro);
+        try {
+            FileWriter fileWriter = new FileWriter(ficheiroTexto);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for(Fatura fatura: arrayFaturas) {
+                Cliente cliente = fatura.getCliente();
+                String stringCliente = trataInformacoesFicheiros.criaInformacaoCliente(cliente);
+                bufferedWriter.write(stringCliente);
+                bufferedWriter.newLine();
+
+                ArrayList<Produto> arrayProdutosFatura = fatura.getListaProdutos();
+                for(Produto produto: arrayProdutosFatura) {
+                    String tipoProduto = produto.getTipo();
+                    switch (tipoProduto) {
+                        case "Produto Alimentar Taxa Reduzida":
+                            String stringTaxaReduzida = trataInformacoesFicheiros.criaInformacaoProdutoAlimentarTaxaReduzida((ProdutoAlimentarTaxaReduzida) produto);
+                            bufferedWriter.write(stringTaxaReduzida);
+                            bufferedWriter.newLine();
+                            break;
+
+                        case "Produto Alimentar Taxa Intermedia":
+                            String stringTaxaIntermedia = trataInformacoesFicheiros.criaInformacaoProdutoAlimentarTaxaIntermedia((ProdutoAlimentarTaxaIntermedia) produto);
+                            bufferedWriter.write(stringTaxaIntermedia);
+                            bufferedWriter.newLine();
+                            break;
+
+                        case "Produto Alimentar Taxa Normal":
+                            String stringTaxaNormal = trataInformacoesFicheiros.criaInformacaoProdutoAlimentarTaxaNormal((ProdutoAlimentarTaxaNormal) produto);
+                            bufferedWriter.write(stringTaxaNormal);
+                            bufferedWriter.newLine();
+                            break;
+
+                        case "Produto Farmacia Com Prescricao":
+                            String stringComPrescricao = trataInformacoesFicheiros.criaInformacaoProdutoFarmaciaComPrescricao((ProdutoFarmaciaComPrescricao) produto);
+                            bufferedWriter.write(stringComPrescricao);
+                            bufferedWriter.newLine();
+                            break;
+
+                        case "Produto Farmacia Sem Prescricao":
+                            String stringSemPrescricao = trataInformacoesFicheiros.criaInformacaoProdutoFarmaciaSemPrescricao((ProdutoFarmaciaSemPrescricao) produto);
+                            bufferedWriter.write(stringSemPrescricao);
+                            bufferedWriter.newLine();
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+
+                String stringFatura = trataInformacoesFicheiros.criaInformacaoFatura(fatura);
+                if(arrayFaturas.indexOf(fatura) == (arrayFaturas.size() - 1)){
+                    bufferedWriter.write(stringFatura);
+                } else {
+                    bufferedWriter.write(stringFatura);
+                    bufferedWriter.newLine();
+                }
+            }
+            bufferedWriter.close();
+        } catch (IOException exception) {
+            System.out.println("Erro ao escrever no ficheiro texto");
+        } catch (NullPointerException exception) {
+            System.out.println("Erro ao abrir o ficheiro");
         }
     }
 }
