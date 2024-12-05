@@ -513,7 +513,7 @@ public class TrataInformacoesFicheiros {
         }
     }
 
-    protected void leFicheiroObjeto(){
+    protected void leFicheiroObjeto(String nomeFicheiroObjetos){
         File ficheiroObjetos = new File(nomeFicheiroObjetos);
         try {
             FileInputStream fis = new FileInputStream(ficheiroObjetos);

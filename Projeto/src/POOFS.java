@@ -75,7 +75,8 @@ public class POOFS {
         TrataInformacoesFicheiros trataInformacoesFicheiros = new TrataInformacoesFicheiros();
         final String nomeFicheiroTextoInformacoes = "informacoes.txt";
         final String nomeFicheiroFaturas = "faturas.txt";
-        importaInformacoesAutomaticamente(arrayFaturas, arrayClientes, arrayProdutos, nomeFicheiroTextoInformacoes);
+        final String nomeFicheiroObjetos = "projeto.obj";
+        importaInformacoesAutomaticamente(arrayFaturas, arrayClientes, arrayProdutos, nomeFicheiroTextoInformacoes, nomeFicheiroObjetos);
 
         do {
             menus("Menu Principal");
@@ -342,13 +343,14 @@ public class POOFS {
         System.out.println("\nValor total com IVA -> " + valorComIVA);
     }
 
-    private void importaInformacoesAutomaticamente(ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, String nomeFicheiro) {
+    private void importaInformacoesAutomaticamente(ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, String nomeFicheiroTexto, String nomeFicheiroObjetos) {
         TrataInformacoesFicheiros tratamentoInformacoesFicheiros = new TrataInformacoesFicheiros();
         boolean existeFicheiroObjeto = tratamentoInformacoesFicheiros.verificaExistenciaFicheiroObjeto();
         if(existeFicheiroObjeto){
+            tratamentoInformacoesFicheiros.leFicheiroObjeto(nomeFicheiroObjetos);
             System.out.println("Se estás a ver isto é porque existe ficheiro objeto");
         } else {
-            tratamentoInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos, nomeFicheiro);
+            tratamentoInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos, nomeFicheiroTexto);
         }
     }
 
