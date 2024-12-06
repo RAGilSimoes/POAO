@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  * The type Data.
  */
-public class Data {
+public class Data implements Serializable {
     /**
      * The Dia.
      */

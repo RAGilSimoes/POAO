@@ -242,10 +242,11 @@ public class Cliente implements Serializable {
         Scanner scannerEscolha = new Scanner(System.in);
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificacao = false;
+        String escolha = null;
 
         System.out.println("\nPretende alterar o nome do cliente? (S/N)");
-        String escolha = scannerEscolha.nextLine();
         while(!verificacao) {
+            escolha = scannerEscolha.nextLine();
             switch (escolha) {
                 case "S" , "s":
                     alteraInformacaoCliente("Nome", clienteRecebido, arrayClientes);
@@ -263,8 +264,8 @@ public class Cliente implements Serializable {
 
         verificacao = false;
         System.out.println("\nPretende alterar o NIF do cliente? (S/N)");
-        escolha = scannerEscolha.nextLine();
         while(!verificacao) {
+            escolha = scannerEscolha.nextLine();
             switch (escolha) {
                 case "S":
                     alteraInformacaoCliente("NIF", clienteRecebido, arrayClientes);
@@ -282,8 +283,8 @@ public class Cliente implements Serializable {
 
         verificacao = false;
         System.out.println("\nPretende alterar a Localização do cliente? (S/N)");
-        escolha = scannerEscolha.nextLine();
         while(!verificacao) {
+            escolha = scannerEscolha.nextLine();
             switch (escolha) {
                 case "S":
                     alteraInformacaoCliente("Localizacao", clienteRecebido, arrayClientes);

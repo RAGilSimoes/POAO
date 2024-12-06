@@ -498,33 +498,58 @@ public class TrataInformacoesFicheiros {
     }
     //--------------------------------------------------------------------------------------------------
 
-    protected void escreveParaFicheiroObjeto(){
+    protected void escreveParaFicheiroObjeto(String nomeFicheiroObjetos, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, ArrayList<Fatura> arrayFaturas){
         File ficheiroObjetos = new File(nomeFicheiroObjetos);
-        ProdutoAlimentarTaxaNormal produto = new ProdutoAlimentarTaxaNormal("1", "Banana", "Banana boa", "2", "0.1", "Nao", "Normal");
         try {
             FileOutputStream fos = new FileOutputStream(ficheiroObjetos);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(produto);
+
+            oos.reset();
+
+            oos.writeObject(arrayClientes);
+            oos.writeObject(arrayProdutos);
+            oos.writeObject(arrayFaturas);
+
             oos.close();
         } catch (FileNotFoundException exception) {
-            System.out.println("Erro ao criar ficheiro");
+            System.out.println("Erro ao criar ficheiro objeto");
         } catch (IOException exception) {
-            System.out.println("Erro ao escrever para o ficheiro");
+            System.out.println("Erro ao escrever para o ficheiro objeto");
         }
     }
 
-    protected void leFicheiroObjeto(String nomeFicheiroObjetos){
+    protected void leFicheiroObjeto(String nomeFicheiroObjetos, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, ArrayList<Fatura> arrayFaturas){
         File ficheiroObjetos = new File(nomeFicheiroObjetos);
         try {
             FileInputStream fis = new FileInputStream(ficheiroObjetos);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            ProdutoAlimentarTaxaNormal produto = (ProdutoAlimentarTaxaNormal) ois.readObject();
-            System.out.println(produto);
+
+            Object objeto = ois.readObject();
+            ArrayList<Cliente> arrayClientesObtido = (ArrayList<Cliente>) objeto;
+            for (Cliente clienteObtido: arrayClientesObtido) {
+                arrayClientes.add(clienteObtido);
+            }
+            System.out.println(arrayClientesObtido);
+
+            objeto = ois.readObject();
+            ArrayList<Produto> arrayProdutosObtido = (ArrayList<Produto>) objeto;
+            for(Produto produto: arrayProdutosObtido) {
+                arrayProdutos.add(produto);
+            }
+            System.out.println(arrayProdutosObtido);
+
+            objeto = ois.readObject();
+            ArrayList<Fatura> arrayFaturasObtido = (ArrayList<Fatura>) objeto;
+            for(Fatura fatura: arrayFaturasObtido) {
+                arrayFaturas.add(fatura);
+            }
+            System.out.println(arrayFaturasObtido);
+
             ois.close();
         } catch (FileNotFoundException exception) {
-            System.out.println("Erro ao abrir ficheiro");
+            System.out.println("Erro ao abrir ficheiro objeto");
         } catch (IOException exception) {
-            System.out.println("Erro ao ler ficheiro");
+            System.out.println("Erro ao ler ficheiro objeto");
         } catch (ClassNotFoundException exception) {
             System.out.println("Erro ao converter objeto");
         }

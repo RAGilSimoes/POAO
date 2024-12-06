@@ -122,6 +122,7 @@ public class POOFS {
 
                 case "0":
                     System.out.println("\nAdeus 😢");
+                    trataInformacoesFicheiros.escreveParaFicheiroObjeto(nomeFicheiroObjetos, arrayClientes, arrayProdutos, arrayFaturas);
                     sair = true;
                     break;
 
@@ -192,12 +193,12 @@ public class POOFS {
 
                         boolean temFaturas = false;
                         if(!arrayFaturas.isEmpty()){
-                            for(Fatura fatura: arrayFaturas){
-                                if(fatura.getCliente() == clienteEliminar){
-                                    arrayFaturas.remove(fatura);
-                                    System.out.println("\nFatura Nº " + fatura.getnFatura() + " removida com sucesso!");
+                            for(int i = arrayFaturas.size(); i > 0; i--){
+                                Fatura faturaObtida = arrayFaturas.get(i -1);
+                                if(faturaObtida.getCliente() == clienteEliminar) {
+                                    arrayFaturas.remove(faturaObtida);
+                                    System.out.println("\nFatura Nº " + faturaObtida.getnFatura() + " removida com sucesso!");
                                     temFaturas = true;
-                                    break;
                                 }
                             }
                         }
@@ -277,7 +278,7 @@ public class POOFS {
 
                         System.out.println("\nIntroduza o número da fatura que pretende eliminar: ");
 
-                        int numeroFaturaEliminar = funcoesUteis.protecaoEscolha(1, arrayClientes.size());
+                        int numeroFaturaEliminar = funcoesUteis.protecaoEscolha(1, arrayFaturas.size());
 
                         Fatura faturaEliminar = arrayFaturas.get(numeroFaturaEliminar - 1);
 
@@ -307,17 +308,10 @@ public class POOFS {
             System.out.print("\nEscolha uma fatura: ");
             int escolha = funcoesUteis.protecaoEscolha(1, arrayFaturas.size());
             Fatura faturaEscolhida = arrayFaturas.get(escolha - 1);
-            System.out.println("\n" + faturaEscolhida);
-            ArrayList<Produto> arrayProdutos = faturaEscolhida.getListaProdutos();
-            for (Produto produto : arrayProdutos) {
-                System.out.println(produto);
-            }
             double valorSemIVA = faturaEscolhida.getValorTotalSemIVA();
             double valorComIVA = faturaEscolhida.getValorTotalComIVA();
             double valorIVA = (valorComIVA - valorSemIVA);
-            System.out.printf("Valor total sem IVA da fatura -> %.2f€", valorSemIVA);
-            System.out.printf("; Valor total do IVA da fatura -> %.2f€", valorIVA);
-            System.out.printf("; Valor total com IVA da fatura -> %.2f€\n", valorComIVA);
+            System.out.printf("\n" + faturaEscolhida + "; Valor total do IVA da fatura -> %.2f€", valorIVA + "\n");
         }
     }
 
@@ -347,7 +341,7 @@ public class POOFS {
         TrataInformacoesFicheiros tratamentoInformacoesFicheiros = new TrataInformacoesFicheiros();
         boolean existeFicheiroObjeto = tratamentoInformacoesFicheiros.verificaExistenciaFicheiroObjeto();
         if(existeFicheiroObjeto){
-            tratamentoInformacoesFicheiros.leFicheiroObjeto(nomeFicheiroObjetos);
+            tratamentoInformacoesFicheiros.leFicheiroObjeto(nomeFicheiroObjetos, arrayClientes, arrayProdutos, arrayFaturas);
             System.out.println("Se estás a ver isto é porque existe ficheiro objeto");
         } else {
             tratamentoInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos, nomeFicheiroTexto);

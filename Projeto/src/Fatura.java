@@ -161,8 +161,12 @@ public class Fatura implements Serializable {
         this.valorTotalSemIVA = valorTotalSemIVA;
     }
 
+//    public String toString(){
+//        return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente().getNome() + "; Localização do Cliente -> " + this.getCliente().getLocalizacao() + "; Número de produtos -> " + this.getListaProdutos().size() + "; Produtos -> " + this.getListaProdutos() + "; Valor Sem IVA -> " + this.getValorTotalSemIVA() + "; Valor Com IVA -> " + this.getValorTotalComIVA());
+//    }
+
     public String toString(){
-        return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente().getNome() + "; Localização do Cliente -> " + this.getCliente().getLocalizacao() + "; Número de produtos -> " + this.getListaProdutos().size());
+        return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente() + "; Data Fatura -> " + this.getDataFatura() + "; Produtos -> " + this.getListaProdutos() + "; Valor Sem IVA -> " + this.getValorTotalSemIVA() + "; Valor Com IVA -> " + this.getValorTotalComIVA());
     }
 
     protected boolean existeNumeroFatura(String nFaturaProcurar, ArrayList<Fatura> arrayFaturas){
