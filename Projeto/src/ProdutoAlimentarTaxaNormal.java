@@ -16,7 +16,7 @@ public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar implements Seri
      * @param biologico    the biologico
      * @param taxa         the taxa
      */
-    public ProdutoAlimentarTaxaNormal(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa){
+    protected ProdutoAlimentarTaxaNormal(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa){
         super(codigo, nome, descricao, quantidade, valorUnidade, biologico, taxa);
     }
 

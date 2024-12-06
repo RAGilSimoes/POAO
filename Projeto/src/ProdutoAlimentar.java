@@ -26,7 +26,7 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
      * @param biologico    the biologico
      * @param tipoTaxa     the tipo taxa
      */
-    public ProdutoAlimentar(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String tipoTaxa){
+    protected ProdutoAlimentar(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String tipoTaxa){
         super(codigo, nome, descricao, quantidade, valorUnidade);
         this.biologico = biologico;
         this.tipoTaxa = tipoTaxa;
@@ -41,7 +41,7 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
      *
      * @return the biologico
      */
-    public String getBiologico() {
+    protected String getBiologico() {
         return biologico;
     }
 
@@ -50,7 +50,7 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
      *
      * @return the tipo taxa
      */
-    public String getTipoTaxa() {
+    protected String getTipoTaxa() {
         return tipoTaxa;
     }
 
@@ -59,7 +59,7 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
      *
      * @param biologico the biologico
      */
-    public void setBiologico(String biologico) {
+    protected void setBiologico(String biologico) {
         this.biologico = biologico;
     }
 
@@ -68,7 +68,7 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
      *
      * @param tipoTaxa the tipo taxa
      */
-    public void setTipoTaxa(String tipoTaxa) {
+    protected void setTipoTaxa(String tipoTaxa) {
         this.tipoTaxa = tipoTaxa;
     }
 

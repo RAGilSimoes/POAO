@@ -22,7 +22,7 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
      * @param prescricao   the prescricao
      * @param medico       the medico
      */
-    public ProdutoFarmaciaComPrescricao(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao, String medico){
+    protected ProdutoFarmaciaComPrescricao(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao, String medico){
         super(codigo, nome, descricao, quantidade, valorUnidade, prescricao);
         this.medico = medico;
     }
@@ -32,7 +32,7 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
      *
      * @return the medico
      */
-    public String getMedico() {
+    protected String getMedico() {
         return medico;
     }
 
@@ -45,7 +45,7 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
      *
      * @param medico the medico
      */
-    public void setMedico(String medico) {
+    protected void setMedico(String medico) {
         this.medico = medico;
     }
 

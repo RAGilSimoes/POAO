@@ -22,7 +22,7 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia implements Ser
      * @param prescricao   the prescricao
      * @param categoria    the categoria
      */
-    public ProdutoFarmaciaSemPrescricao(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao, String categoria){
+    protected ProdutoFarmaciaSemPrescricao(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao, String categoria){
         super(codigo, nome, descricao, quantidade, valorUnidade, prescricao);
         this.categoria  = categoria;
     }
@@ -36,7 +36,7 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia implements Ser
      *
      * @return the categoria
      */
-    public String getCategoria() {
+    protected String getCategoria() {
         return categoria;
     }
 
@@ -45,7 +45,7 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia implements Ser
      *
      * @param categoria the categoria
      */
-    public void setCategoria(String categoria) {
+    protected void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 

@@ -36,7 +36,7 @@ abstract class Produto implements Serializable {
      * @param quantidade   the quantidade
      * @param valorUnidade the valor sem iva
      */
-    public Produto(String codigo, String nome, String descricao, String quantidade, String valorUnidade){
+    protected Produto(String codigo, String nome, String descricao, String quantidade, String valorUnidade){
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
@@ -53,7 +53,7 @@ abstract class Produto implements Serializable {
      *
      * @return the nome
      */
-    public String getNome() {
+    protected String getNome() {
         return nome;
     }
 
@@ -62,7 +62,7 @@ abstract class Produto implements Serializable {
      *
      * @return the codigo
      */
-    public String getCodigo() {
+    protected String getCodigo() {
         return codigo;
     }
 
@@ -71,7 +71,7 @@ abstract class Produto implements Serializable {
      *
      * @return the descricao
      */
-    public String getDescricao() {
+    protected String getDescricao() {
         return descricao;
     }
 
@@ -80,7 +80,7 @@ abstract class Produto implements Serializable {
      *
      * @return the quantidade
      */
-    public String getQuantidade() {
+    protected String getQuantidade() {
         return quantidade;
     }
 
@@ -89,7 +89,7 @@ abstract class Produto implements Serializable {
      *
      * @return the valor sem iva
      */
-    public String getValorUnidade() {
+    protected String getValorUnidade() {
         return valorUnidade;
     }
 
@@ -98,7 +98,7 @@ abstract class Produto implements Serializable {
      *
      * @param nome the nome
      */
-    public void setNome(String nome) {
+    protected void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -107,7 +107,7 @@ abstract class Produto implements Serializable {
      *
      * @param codigo the codigo
      */
-    public void setCodigo(String codigo) {
+    protected void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
@@ -116,7 +116,7 @@ abstract class Produto implements Serializable {
      *
      * @param descricao the descricao
      */
-    public void setDescricao(String descricao) {
+    protected void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
@@ -125,7 +125,7 @@ abstract class Produto implements Serializable {
      *
      * @param quantidade the quantidade
      */
-    public void setQuantidade(String quantidade) {
+    protected void setQuantidade(String quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -134,7 +134,7 @@ abstract class Produto implements Serializable {
      *
      * @param valorUnidade the valor sem iva
      */
-    public void setValorUnidade(String valorUnidade) {
+    protected void setValorUnidade(String valorUnidade) {
         this.valorUnidade = valorUnidade;
     }
 

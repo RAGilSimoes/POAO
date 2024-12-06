@@ -42,7 +42,7 @@ public class Fatura implements Serializable {
      * @param valorTotalSemIVA the valor total sem iva
      * @param valorTotalComIVA the valor total com iva
      */
-    public Fatura(String nFatura, Cliente cliente, Data dataFatura, ArrayList<Produto> listaProdutos, double valorTotalSemIVA, double valorTotalComIVA) {
+    protected Fatura(String nFatura, Cliente cliente, Data dataFatura, ArrayList<Produto> listaProdutos, double valorTotalSemIVA, double valorTotalComIVA) {
         this.nFatura = nFatura;
         this.cliente = cliente;
         this.dataFatura = dataFatura;
@@ -56,7 +56,7 @@ public class Fatura implements Serializable {
      *
      * @return the lista produtos
      */
-    public ArrayList<Produto> getListaProdutos() {
+    protected ArrayList<Produto> getListaProdutos() {
         return this.listaProdutos;
     }
 
@@ -65,7 +65,7 @@ public class Fatura implements Serializable {
      *
      * @return the cliente
      */
-    public Cliente getCliente() {
+    protected Cliente getCliente() {
         return this.cliente;
     }
 
@@ -74,7 +74,7 @@ public class Fatura implements Serializable {
      *
      * @return the data fatura
      */
-    public Data getDataFatura() {
+    protected Data getDataFatura() {
         return this.dataFatura;
     }
 
@@ -83,7 +83,7 @@ public class Fatura implements Serializable {
      *
      * @return the fatura
      */
-    public String getnFatura() {
+    protected String getnFatura() {
         return this.nFatura;
     }
 
@@ -92,7 +92,7 @@ public class Fatura implements Serializable {
      *
      * @return the valor total com iva
      */
-    public double getValorTotalComIVA() {
+    protected double getValorTotalComIVA() {
         return this.valorTotalComIVA;
     }
 
@@ -101,7 +101,7 @@ public class Fatura implements Serializable {
      *
      * @return the valor total sem iva
      */
-    public double getValorTotalSemIVA() {
+    protected double getValorTotalSemIVA() {
         return this.valorTotalSemIVA;
     }
 
@@ -110,7 +110,7 @@ public class Fatura implements Serializable {
      *
      * @param cliente the cliente
      */
-    public void setCliente(Cliente cliente) {
+    protected void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
@@ -119,7 +119,7 @@ public class Fatura implements Serializable {
      *
      * @param dataFatura the data fatura
      */
-    public void setDataFatura(Data dataFatura) {
+    protected void setDataFatura(Data dataFatura) {
         this.dataFatura = dataFatura;
     }
 
@@ -128,7 +128,7 @@ public class Fatura implements Serializable {
      *
      * @param listaProdutos the lista produtos
      */
-    public void setListaProdutos(ArrayList<Produto> listaProdutos) {
+    protected void setListaProdutos(ArrayList<Produto> listaProdutos) {
         if(listaProdutos != null){
             this.listaProdutos = listaProdutos;
         }
@@ -139,7 +139,7 @@ public class Fatura implements Serializable {
      *
      * @param nFatura the n fatura
      */
-    public void setnFatura(String nFatura) {
+    protected void setnFatura(String nFatura) {
         this.nFatura = nFatura;
     }
 
@@ -148,7 +148,7 @@ public class Fatura implements Serializable {
      *
      * @param valorTotalComIVA the valor total com iva
      */
-    public void setValorTotalComIVA(double valorTotalComIVA) {
+    protected void setValorTotalComIVA(double valorTotalComIVA) {
         this.valorTotalComIVA = valorTotalComIVA;
     }
 
@@ -157,7 +157,7 @@ public class Fatura implements Serializable {
      *
      * @param valorTotalSemIVA the valor total sem iva
      */
-    public void setValorTotalSemIVA(double valorTotalSemIVA) {
+    protected void setValorTotalSemIVA(double valorTotalSemIVA) {
         this.valorTotalSemIVA = valorTotalSemIVA;
     }
 
@@ -172,7 +172,7 @@ public class Fatura implements Serializable {
      * @param arrayFaturas    the array faturas
      * @return the boolean
      */
-    protected boolean existeNumeroFatura(String nFaturaProcurar, ArrayList<Fatura> arrayFaturas){
+    private boolean existeNumeroFatura(String nFaturaProcurar, ArrayList<Fatura> arrayFaturas){
         boolean nFaturaValido = true;
         for (Fatura fatura: arrayFaturas){
             String nFaturaExistente = fatura.getnFatura();

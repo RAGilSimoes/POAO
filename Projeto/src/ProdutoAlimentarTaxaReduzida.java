@@ -29,7 +29,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
      * @param quantidadeCertificacoes the quantidade certificacoes
      * @param certificacoes           the certificacoes
      */
-    public ProdutoAlimentarTaxaReduzida(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa, int quantidadeCertificacoes, ArrayList<String> certificacoes){
+    protected ProdutoAlimentarTaxaReduzida(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa, int quantidadeCertificacoes, ArrayList<String> certificacoes){
         super(codigo, nome, descricao, quantidade, valorUnidade, biologico, taxa);
         this.quantidadeCertificacoes = quantidadeCertificacoes;
         this.certificacoes = certificacoes;
@@ -44,7 +44,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
      *
      * @return the quantidade certificacoes
      */
-    public int getQuantidadeCertificacoes() {
+    protected int getQuantidadeCertificacoes() {
         return quantidadeCertificacoes;
     }
 
@@ -53,7 +53,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
      *
      * @return the string [ ]
      */
-    public ArrayList<String> getCertificacoes() {
+    protected ArrayList<String> getCertificacoes() {
         return certificacoes;
     }
 
@@ -62,7 +62,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
      *
      * @param quantidadeCertificacoes the quantidade certificacoes
      */
-    public void setQuantidadeCertificacoes(int quantidadeCertificacoes) {
+    protected void setQuantidadeCertificacoes(int quantidadeCertificacoes) {
         this.quantidadeCertificacoes = quantidadeCertificacoes;
     }
 
@@ -71,7 +71,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
      *
      * @param certificacoes the certificacoes
      */
-    public void setCertificacoes(ArrayList<String> certificacoes) {
+    protected void setCertificacoes(ArrayList<String> certificacoes) {
         if(certificacoes != null){
             this.certificacoes = certificacoes;
         }

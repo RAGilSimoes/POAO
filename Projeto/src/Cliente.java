@@ -26,7 +26,7 @@ public class Cliente implements Serializable {
      * @param nif         the nif
      * @param localizacao the localizacao
      */
-    public Cliente(String nome, String nif, String localizacao) {
+    protected Cliente(String nome, String nif, String localizacao) {
         this.nome = nome;
         this.nif = nif;
         this.localizacao = localizacao;
@@ -98,7 +98,7 @@ public class Cliente implements Serializable {
      * @param arrayClientes the array clientes
      * @return the boolean
      */
-    protected boolean existeNif(String nifProcurar, ArrayList<Cliente> arrayClientes){
+    private boolean existeNif(String nifProcurar, ArrayList<Cliente> arrayClientes){
         boolean nifValido = true;
         for (Cliente cliente: arrayClientes){
             String nifExistente = cliente.getNif();

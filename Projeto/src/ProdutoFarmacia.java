@@ -20,7 +20,7 @@ abstract class ProdutoFarmacia extends Produto implements Serializable {
      * @param valorUnidade the valor sem iva
      * @param prescricao   the prescricao
      */
-    public ProdutoFarmacia(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao){
+    protected ProdutoFarmacia(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao){
         super(codigo, nome, descricao, quantidade, valorUnidade);
         this.prescricao = prescricao;
     }
@@ -44,7 +44,7 @@ abstract class ProdutoFarmacia extends Produto implements Serializable {
      *
      * @return the prescricao
      */
-    public String getPrescricao() {
+    protected String getPrescricao() {
         return prescricao;
     }
 
@@ -53,7 +53,7 @@ abstract class ProdutoFarmacia extends Produto implements Serializable {
      *
      * @param prescricao the prescricao
      */
-    public void setPrescricao(String prescricao) {
+    protected void setPrescricao(String prescricao) {
         this.prescricao = prescricao;
     }
 

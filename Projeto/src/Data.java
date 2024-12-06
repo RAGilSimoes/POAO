@@ -23,7 +23,7 @@ public class Data implements Serializable {
      * @param mes the mes
      * @param ano the ano
      */
-    public Data(int dia, int mes, int ano){
+    protected Data(int dia, int mes, int ano){
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
@@ -34,7 +34,7 @@ public class Data implements Serializable {
      *
      * @param ano the ano
      */
-    public void setAno(int ano) {
+    private void setAno(int ano) {
         this.ano = ano;
     }
 
@@ -43,7 +43,7 @@ public class Data implements Serializable {
      *
      * @param dia the dia
      */
-    public void setDia(int dia) {
+    private void setDia(int dia) {
         this.dia = dia;
     }
 
@@ -52,7 +52,7 @@ public class Data implements Serializable {
      *
      * @param mes the mes
      */
-    public void setMes(int mes) {
+    private void setMes(int mes) {
         this.mes = mes;
     }
 

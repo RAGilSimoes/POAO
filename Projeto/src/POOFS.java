@@ -70,7 +70,7 @@ public class POOFS {
     /**
      * Menu.
      */
-    public void menu() {
+    protected void menu() {
         String escolha;
         boolean sair = false;
         ListarFaturas listarFaturas = new ListarFaturas();

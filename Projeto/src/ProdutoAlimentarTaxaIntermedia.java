@@ -24,7 +24,7 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
      * @param taxa         the taxa
      * @param categoria    the categoria
      */
-    public ProdutoAlimentarTaxaIntermedia(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa, String categoria){
+    protected ProdutoAlimentarTaxaIntermedia(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa, String categoria){
         super(codigo, nome, descricao, quantidade, valorUnidade, biologico, taxa);
         this.categoria = categoria;
     }
@@ -38,7 +38,7 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
      *
      * @return the categoria
      */
-    public String getCategoria() {
+    protected String getCategoria() {
         return categoria;
     }
 
@@ -47,7 +47,7 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
      *
      * @param categoria the categoria
      */
-    public void setCategoria(String categoria) {
+    protected void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
