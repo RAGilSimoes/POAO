@@ -18,13 +18,13 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
     /**
      * Instantiates a new Produto alimentar.
      *
-     * @param codigo      the codigo
-     * @param nome        the nome
-     * @param descricao   the descricao
-     * @param quantidade  the quantidade
+     * @param codigo       the codigo
+     * @param nome         the nome
+     * @param descricao    the descricao
+     * @param quantidade   the quantidade
      * @param valorUnidade the valor sem iva
-     * @param biologico   the biologico
-     * @param tipoTaxa    the tipo taxa
+     * @param biologico    the biologico
+     * @param tipoTaxa     the tipo taxa
      */
     public ProdutoAlimentar(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String tipoTaxa){
         super(codigo, nome, descricao, quantidade, valorUnidade);
@@ -75,6 +75,7 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
     /**
      * Obter informacao produto alimentar string [ ].
      *
+     * @param arrayProdutos the array produtos
      * @return the string [ ]
      */
     protected String[] obterInformacaoProdutoAlimentar(ArrayList<Produto> arrayProdutos) {

@@ -14,13 +14,13 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia implements Ser
     /**
      * Instantiates a new Produto farmacia sem prescricao.
      *
-     * @param codigo      the codigo
-     * @param nome        the nome
-     * @param descricao   the descricao
-     * @param quantidade  the quantidade
+     * @param codigo       the codigo
+     * @param nome         the nome
+     * @param descricao    the descricao
+     * @param quantidade   the quantidade
      * @param valorUnidade the valor sem iva
-     * @param prescricao  the prescricao
-     * @param categoria   the categoria
+     * @param prescricao   the prescricao
+     * @param categoria    the categoria
      */
     public ProdutoFarmaciaSemPrescricao(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao, String categoria){
         super(codigo, nome, descricao, quantidade, valorUnidade, prescricao);
@@ -66,6 +66,7 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia implements Ser
     /**
      * Cria produto sem prescricao produto farmacia sem prescricao.
      *
+     * @param arrayProdutos the array produtos
      * @return the produto farmacia sem prescricao
      */
     protected ProdutoFarmaciaSemPrescricao criaProdutoSemPrescricao(ArrayList<Produto> arrayProdutos){

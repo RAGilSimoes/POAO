@@ -15,16 +15,7 @@ ver valor faturacomiva
 nas protecoes, nao meter sempre os erros
 --------------------------------------------------------------------------------------------------
 erros: -meter a apresentação de erros mais reduzida
+       -meter os erros das verificacoes apos a verificacao, não dentro
 --------------------------------------------------------------------------------------------------
-função 6 e 7 abordam outro ficheiro texto que tem que ter apenas informações sobre as faturas e o seu cliente e produtos
---------------------------------------------------------------------------------------------------
-Falta fazer ficheiros de objetos e funcoes 6 e 7
-funcao 6 está sempre a escrever nos arrays
-tirar funcao escreve ficheiro textos no tratainformacoesficheiros
-no importar, se encontrar cenas iguais deixar
-fazer uma funcao no tratainformacaoficheiros para verificar as cenas, apenas verificar se estão bem escritas e se encontrar um igual, deixar entrar
-ver a fatura na totalidade, se ela for igual a uma existente continua o código, senão vai adicionar -> verificar sempre os dados
-FAZER FUNCAO 6 E FICHEIROS OBJETOS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-obter nif e verificar, ir pelo array de clientes e se encontrar o nif mas o nome e a localizacao for diferente não deixa e dá erro, se não encontrar adiciona
-obter o codigo e verificar, ir pelo array de produtos e se encontrar o codigo mas o resto for diferente não deixa, se não encontrar adiciona
-obter o numero de fatura e verificar, ir pelo array de faturas e se encontrar o codigo mas o resto for diferente não deixa, se não econtrar adiciona
+
+

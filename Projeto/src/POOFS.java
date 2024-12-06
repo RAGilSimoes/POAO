@@ -16,6 +16,9 @@ public class POOFS {
      */
     ArrayList<Fatura> arrayFaturas = new ArrayList<Fatura>();
 
+    /**
+     * The Array produtos.
+     */
     ArrayList<Produto> arrayProdutos = new ArrayList<Produto>();
 
 
@@ -311,7 +314,8 @@ public class POOFS {
             double valorSemIVA = faturaEscolhida.getValorTotalSemIVA();
             double valorComIVA = faturaEscolhida.getValorTotalComIVA();
             double valorIVA = (valorComIVA - valorSemIVA);
-            System.out.printf("\n" + faturaEscolhida + "; Valor total do IVA da fatura -> %.2f€", valorIVA + "\n");
+            System.out.print("\n" + faturaEscolhida);
+            System.out.printf("; Valor total do IVA da fatura -> %.2f€\n", valorIVA);
         }
     }
 
@@ -339,17 +343,67 @@ public class POOFS {
 
     private void importaInformacoesAutomaticamente(ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, String nomeFicheiroTexto, String nomeFicheiroObjetos) {
         TrataInformacoesFicheiros tratamentoInformacoesFicheiros = new TrataInformacoesFicheiros();
-        boolean existeFicheiroObjeto = tratamentoInformacoesFicheiros.verificaExistenciaFicheiroObjeto();
+        boolean existeFicheiroObjeto = tratamentoInformacoesFicheiros.verificaExistenciaFicheiroObjeto(nomeFicheiroObjetos);
         if(existeFicheiroObjeto){
             tratamentoInformacoesFicheiros.leFicheiroObjeto(nomeFicheiroObjetos, arrayClientes, arrayProdutos, arrayFaturas);
-            System.out.println("Se estás a ver isto é porque existe ficheiro objeto");
         } else {
             tratamentoInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos, nomeFicheiroTexto);
         }
     }
 
     private void importaFatura(ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, ArrayList<Fatura> arrayFaturas, String nomeFicheiro) {
+        try {
+            TrataInformacoesFicheiros trataInformacoesFicheiros = new TrataInformacoesFicheiros();
+            File ficheiro = new File(nomeFicheiro);
+            if(ficheiro.exists() && ficheiro.isFile()) {
+                FileReader fileReader = new FileReader(ficheiro);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                String linha;
+                while((linha = bufferedReader.readLine()) != null) {
+                    String[] informacoesLinha = linha.split("#");
+                    String caracterControlo = informacoesLinha[0];
+                    String informacoes = informacoesLinha[1];
+                    switch (caracterControlo) {
+                        case "C":
+                            trataInformacoesFicheiros.trataInformacoesClientes(arrayClientes, informacoes);
+                            break;
 
+                        case "N":
+                            trataInformacoesFicheiros.trataInformacoesTaxaNormal(arrayProdutos, informacoes, "Normal");
+                            break;
+
+                        case "I":
+                            trataInformacoesFicheiros.trataInformacoesTaxaIntermedia(arrayProdutos, informacoes, "Intermedia");
+                            break;
+
+                        case "R":
+                            trataInformacoesFicheiros.trataInformacoesTaxaReduzida(arrayProdutos, informacoes, "Reduzida");
+                            break;
+
+                        case "P":
+                            trataInformacoesFicheiros.trataInformacoesComPrescricao(arrayProdutos, informacoes);
+                            break;
+
+                        case "S":
+                            trataInformacoesFicheiros.trataInformacoesSemPrescricao(arrayProdutos, informacoes);
+                            break;
+
+                        case "F":
+                            trataInformacoesFicheiros.trataInformacoesFaturas(arrayFaturas, arrayClientes, arrayProdutos, informacoes);
+                            break;
+
+                        default:
+                            System.out.println("Tipo de objeto não existe");
+                            break;
+                    }
+                }
+                bufferedReader.close();
+            }
+        } catch (FileNotFoundException exception) {
+            System.out.println("Erro ao abrir ficheiro de texto");
+        } catch (IOException exception) {
+            System.out.println("Erro ao ler ficheiro de texto");
+        }
     }
 
     private void exportaFatura(ArrayList<Fatura> arrayFaturas, String nomeFicheiro) {

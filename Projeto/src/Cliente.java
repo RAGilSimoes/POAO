@@ -91,6 +91,13 @@ public class Cliente implements Serializable {
     }
 
 
+    /**
+     * Existe nif boolean.
+     *
+     * @param nifProcurar   the nif procurar
+     * @param arrayClientes the array clientes
+     * @return the boolean
+     */
     protected boolean existeNif(String nifProcurar, ArrayList<Cliente> arrayClientes){
         boolean nifValido = true;
         for (Cliente cliente: arrayClientes){
@@ -103,6 +110,13 @@ public class Cliente implements Serializable {
         return nifValido;
     }
 
+    /**
+     * Verifica nif boolean.
+     *
+     * @param nif           the nif
+     * @param arrayClientes the array clientes
+     * @return the boolean
+     */
     protected boolean verificaNif(String nif, ArrayList<Cliente> arrayClientes){
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificacao;
@@ -116,6 +130,12 @@ public class Cliente implements Serializable {
     }
 
 
+    /**
+     * Escolher localizao boolean.
+     *
+     * @param escolha the escolha
+     * @return the boolean
+     */
     protected boolean escolherLocalizao(String escolha){
         boolean verificacao = true;
 
@@ -198,7 +218,7 @@ public class Cliente implements Serializable {
                 break;
 
             case "NIF":
-                String nif = null;
+                String nif;
                 boolean verificacaoNif = false;
                 while (!verificacaoNif) {
                     System.out.print("\nIntroduza o novo nif do cliente: ");
@@ -213,7 +233,7 @@ public class Cliente implements Serializable {
                 break;
 
             case "Localizacao":
-                String escolhaLocalizacao = null;
+                String escolhaLocalizacao;
                 boolean verificacaoLocalizacao = false;
                 while(!verificacaoLocalizacao){
                     System.out.print("\nEscolha a localização do cliente: \nContinente | Madeira | Açores\n");
@@ -240,9 +260,8 @@ public class Cliente implements Serializable {
      */
     protected void alteraInformacoesCliente(Cliente clienteRecebido, ArrayList<Cliente> arrayClientes) {
         Scanner scannerEscolha = new Scanner(System.in);
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificacao = false;
-        String escolha = null;
+        String escolha;
 
         System.out.println("\nPretende alterar o nome do cliente? (S/N)");
         while(!verificacao) {

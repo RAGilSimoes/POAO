@@ -13,7 +13,7 @@ public class FuncoesUteis {
      * @return the int
      */
     protected int protecaoEscolha(int menor, int maior){
-        String escolha = null;
+        String escolha;
         boolean sairVerificacao = false;
         int escolhaFinal = 0;
         do {

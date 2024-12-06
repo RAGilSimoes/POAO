@@ -15,14 +15,14 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
     /**
      * Instantiates a new Produto alimentar taxa intermedia.
      *
-     * @param codigo      the codigo
-     * @param nome        the nome
-     * @param descricao   the descricao
-     * @param quantidade  the quantidade
+     * @param codigo       the codigo
+     * @param nome         the nome
+     * @param descricao    the descricao
+     * @param quantidade   the quantidade
      * @param valorUnidade the valor sem iva
-     * @param biologico   the biologico
-     * @param taxa        the taxa
-     * @param categoria   the categoria
+     * @param biologico    the biologico
+     * @param taxa         the taxa
+     * @param categoria    the categoria
      */
     public ProdutoAlimentarTaxaIntermedia(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa, String categoria){
         super(codigo, nome, descricao, quantidade, valorUnidade, biologico, taxa);
@@ -42,6 +42,11 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
         return categoria;
     }
 
+    /**
+     * Sets categoria.
+     *
+     * @param categoria the categoria
+     */
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
@@ -64,6 +69,7 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
     /**
      * Cria produto taxa intermedia produto alimentar taxa intermedia.
      *
+     * @param arrayProdutos the array produtos
      * @return the produto alimentar taxa intermedia
      */
     protected ProdutoAlimentarTaxaIntermedia criaProdutoTaxaIntermedia(ArrayList<Produto> arrayProdutos){

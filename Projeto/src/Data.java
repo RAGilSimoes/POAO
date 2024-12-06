@@ -29,26 +29,56 @@ public class Data implements Serializable {
         this.ano = ano;
     }
 
+    /**
+     * Sets ano.
+     *
+     * @param ano the ano
+     */
     public void setAno(int ano) {
         this.ano = ano;
     }
 
+    /**
+     * Sets dia.
+     *
+     * @param dia the dia
+     */
     public void setDia(int dia) {
         this.dia = dia;
     }
 
+    /**
+     * Sets mes.
+     *
+     * @param mes the mes
+     */
     public void setMes(int mes) {
         this.mes = mes;
     }
 
+    /**
+     * Gets ano.
+     *
+     * @return the ano
+     */
     public int getAno() {
         return ano;
     }
 
+    /**
+     * Gets dia.
+     *
+     * @return the dia
+     */
     public int getDia() {
         return dia;
     }
 
+    /**
+     * Gets mes.
+     *
+     * @return the mes
+     */
     public int getMes() {
         return mes;
     }
@@ -56,6 +86,7 @@ public class Data implements Serializable {
     /**
      * Verifica data data.
      *
+     * @param dataIntroduzida the data introduzida
      * @return the data
      */
     protected boolean verificaData(String dataIntroduzida){
@@ -91,6 +122,12 @@ public class Data implements Serializable {
         return verificaDataIntroduzida;
     }
 
+    /**
+     * Passa para objeto data data.
+     *
+     * @param dataIntroduzida the data introduzida
+     * @return the data
+     */
     protected Data passaParaObjetoData(String dataIntroduzida) {
         Data dataFatura = new Data(0,0,0);
         String[] dataSeparada = dataIntroduzida.split("/");

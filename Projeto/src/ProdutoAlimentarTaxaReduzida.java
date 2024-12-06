@@ -23,7 +23,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
      * @param nome                    the nome
      * @param descricao               the descricao
      * @param quantidade              the quantidade
-     * @param valorUnidade             the valor sem iva
+     * @param valorUnidade            the valor sem iva
      * @param biologico               the biologico
      * @param taxa                    the taxa
      * @param quantidadeCertificacoes the quantidade certificacoes
@@ -77,6 +77,12 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
         }
     }
 
+    /**
+     * Verifica certificacoes boolean.
+     *
+     * @param certificacoes the certificacoes
+     * @return the boolean
+     */
     protected boolean verificaCertificacoes(ArrayList<String> certificacoes) {
         boolean verificacao = false;
         try{
@@ -101,7 +107,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
         String[] arrayCertificacoesDisponiveis = {"ISO22000", "FSSC22000", "HACCP", "GMP"};
         int controloCertificacoes = 0;
 
-        String escolha = null;
+        String escolha;
 
         ArrayList<String> arrayCertificacoes = new ArrayList<String>();
 
@@ -143,6 +149,7 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
     /**
      * Cria produto taxa reduzida produto alimentar taxa reduzida.
      *
+     * @param arrayProdutos the array produtos
      * @return the produto alimentar taxa reduzida
      */
     protected ProdutoAlimentarTaxaReduzida criaProdutoTaxaReduzida(ArrayList<Produto> arrayProdutos){

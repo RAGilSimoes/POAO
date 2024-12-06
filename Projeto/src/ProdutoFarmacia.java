@@ -13,12 +13,12 @@ abstract class ProdutoFarmacia extends Produto implements Serializable {
     /**
      * Instantiates a new Produto farmacia.
      *
-     * @param codigo      the codigo
-     * @param nome        the nome
-     * @param descricao   the descricao
-     * @param quantidade  the quantidade
+     * @param codigo       the codigo
+     * @param nome         the nome
+     * @param descricao    the descricao
+     * @param quantidade   the quantidade
      * @param valorUnidade the valor sem iva
-     * @param prescricao  the prescricao
+     * @param prescricao   the prescricao
      */
     public ProdutoFarmacia(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao){
         super(codigo, nome, descricao, quantidade, valorUnidade);
@@ -28,6 +28,7 @@ abstract class ProdutoFarmacia extends Produto implements Serializable {
     /**
      * Obter informacao produto farmacia string [ ].
      *
+     * @param arrayProdutos the array produtos
      * @return the string [ ]
      */
     protected String[] obterInformacaoProdutoFarmacia(ArrayList<Produto> arrayProdutos) {
@@ -38,10 +39,20 @@ abstract class ProdutoFarmacia extends Produto implements Serializable {
         return "Produto Farmacia";
     }
 
+    /**
+     * Gets prescricao.
+     *
+     * @return the prescricao
+     */
     public String getPrescricao() {
         return prescricao;
     }
 
+    /**
+     * Sets prescricao.
+     *
+     * @param prescricao the prescricao
+     */
     public void setPrescricao(String prescricao) {
         this.prescricao = prescricao;
     }

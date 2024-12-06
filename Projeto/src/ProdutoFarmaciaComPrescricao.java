@@ -14,19 +14,24 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
     /**
      * Instantiates a new Produto farmacia com prescricao.
      *
-     * @param codigo      the codigo
-     * @param nome        the nome
-     * @param descricao   the descricao
-     * @param quantidade  the quantidade
+     * @param codigo       the codigo
+     * @param nome         the nome
+     * @param descricao    the descricao
+     * @param quantidade   the quantidade
      * @param valorUnidade the valor sem iva
-     * @param prescricao  the prescricao
-     * @param medico      the medico
+     * @param prescricao   the prescricao
+     * @param medico       the medico
      */
     public ProdutoFarmaciaComPrescricao(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao, String medico){
         super(codigo, nome, descricao, quantidade, valorUnidade, prescricao);
         this.medico = medico;
     }
 
+    /**
+     * Gets medico.
+     *
+     * @return the medico
+     */
     public String getMedico() {
         return medico;
     }
@@ -35,6 +40,11 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
         return (super.toString() + "; Médico -> " + this.getMedico());
     }
 
+    /**
+     * Sets medico.
+     *
+     * @param medico the medico
+     */
     public void setMedico(String medico) {
         this.medico = medico;
     }
@@ -51,13 +61,14 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
     /**
      * Cria produto com prescricao produto farmacia com prescricao.
      *
+     * @param arrayProdutos the array produtos
      * @return the produto farmacia com prescricao
      */
     protected ProdutoFarmaciaComPrescricao criaProdutoComPrescricao(ArrayList<Produto> arrayProdutos){
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         String prescricao = "Sim";
-        boolean verificacaoNome = false;
-        String medicoPrescritor = null;
+        boolean verificacaoNome;
+        String medicoPrescritor;
 
         Scanner scannerObterResposta = new Scanner(System.in);
 

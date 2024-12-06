@@ -161,14 +161,17 @@ public class Fatura implements Serializable {
         this.valorTotalSemIVA = valorTotalSemIVA;
     }
 
-//    public String toString(){
-//        return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente().getNome() + "; Localização do Cliente -> " + this.getCliente().getLocalizacao() + "; Número de produtos -> " + this.getListaProdutos().size() + "; Produtos -> " + this.getListaProdutos() + "; Valor Sem IVA -> " + this.getValorTotalSemIVA() + "; Valor Com IVA -> " + this.getValorTotalComIVA());
-//    }
-
     public String toString(){
-        return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente() + "; Data Fatura -> " + this.getDataFatura() + "; Produtos -> " + this.getListaProdutos() + "; Valor Sem IVA -> " + this.getValorTotalSemIVA() + "; Valor Com IVA -> " + this.getValorTotalComIVA());
+        return ("Número de Fatura -> " + this.getnFatura() + "; Cliente -> " + this.getCliente() + "; Data Fatura -> " + this.getDataFatura().getDia() + "/" + this.getDataFatura().getMes() + "/" + this.getDataFatura().getAno() + "; Produtos -> " + this.getListaProdutos() + "; Valor Sem IVA -> " + this.getValorTotalSemIVA() + "; Valor Com IVA -> " + this.getValorTotalComIVA());
     }
 
+    /**
+     * Existe numero fatura boolean.
+     *
+     * @param nFaturaProcurar the n fatura procurar
+     * @param arrayFaturas    the array faturas
+     * @return the boolean
+     */
     protected boolean existeNumeroFatura(String nFaturaProcurar, ArrayList<Fatura> arrayFaturas){
         boolean nFaturaValido = true;
         for (Fatura fatura: arrayFaturas){
@@ -182,6 +185,13 @@ public class Fatura implements Serializable {
         return nFaturaValido;
     }
 
+    /**
+     * Verifica numero fatura boolean.
+     *
+     * @param numeroFatura the numero fatura
+     * @param arrayFaturas the array faturas
+     * @return the boolean
+     */
     protected boolean verificaNumeroFatura(String numeroFatura, ArrayList<Fatura> arrayFaturas){
         boolean verificacao = true;
         FuncoesUteis funcoesUteis = new FuncoesUteis();
@@ -326,6 +336,7 @@ public class Fatura implements Serializable {
      *
      * @param arrayClientes the array clientes
      * @param arrayFaturas  the array faturas
+     * @param arrayProdutos the array produtos
      * @return the fatura
      */
     protected Fatura criaFatura(ArrayList<Cliente> arrayClientes, ArrayList<Fatura> arrayFaturas, ArrayList<Produto> arrayProdutos){
@@ -437,7 +448,7 @@ public class Fatura implements Serializable {
                 ListarClientes listarClientes = new ListarClientes();
                 while (!verificacaoCliente) {
                     listarClientes.listarClientes(arrayClientes);
-                    System.out.print("\nIntroduza o novo cliente que pretende associar a esta fatura: ");
+                    System.out.print("\nIntroduza o número do novo cliente que pretende associar a esta fatura: ");
                     int numeroEscolhaCliente = funcoesUteis.protecaoEscolha(0, arrayClientes.size());
 
                     Cliente cliente = arrayClientes.get(numeroEscolhaCliente - 1);
@@ -529,6 +540,7 @@ public class Fatura implements Serializable {
      * @param faturaRecebida the fatura recebida
      * @param arrayFaturas   the array faturas
      * @param arrayClientes  the array clientes
+     * @param arrayProdutos  the array produtos
      */
     protected void alteraInformacoesFatura(Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos) {
         Scanner scannerEscolha = new Scanner(System.in);
@@ -538,25 +550,6 @@ public class Fatura implements Serializable {
         boolean verificacao = false;
         String escolha;
 
-        System.out.println("\nPretende alterar o Número da Fatura? (S/N)");
-        while(!verificacao) {
-            escolha = scannerEscolha.nextLine();
-            switch (escolha) {
-                case "S", "s":
-                    alteraInformacaoFatura("Numero Fatura", faturaRecebida, arrayFaturas, arrayClientes, arrayProdutos, arrayProdutosFatura);
-                    verificacao = true;
-                    break;
-                case "N", "n":
-                    System.out.println("Número de fatura não alterado");
-                    verificacao = true;
-                    break;
-                default:
-                    System.out.println("Opção inválida.");
-                    break;
-            }
-        }
-
-        verificacao = false;
         System.out.println("\nPretende alterar o Cliente associado à fatura? (S/N)");
         while(!verificacao) {
             escolha = scannerEscolha.nextLine();

@@ -30,10 +30,10 @@ abstract class Produto implements Serializable {
     /**
      * Instantiates a new Produto.
      *
-     * @param codigo      the codigo
-     * @param nome        the nome
-     * @param descricao   the descricao
-     * @param quantidade  the quantidade
+     * @param codigo       the codigo
+     * @param nome         the nome
+     * @param descricao    the descricao
+     * @param quantidade   the quantidade
      * @param valorUnidade the valor sem iva
      */
     public Produto(String codigo, String nome, String descricao, String quantidade, String valorUnidade){
@@ -150,6 +150,13 @@ abstract class Produto implements Serializable {
         return codigoValido;
     }
 
+    /**
+     * Verifica codigo boolean.
+     *
+     * @param stringRecebida the string recebida
+     * @param arrayProdutos  the array produtos
+     * @return the boolean
+     */
     protected boolean verificaCodigo(String stringRecebida, ArrayList<Produto> arrayProdutos){
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificacao = true;
@@ -207,6 +214,7 @@ abstract class Produto implements Serializable {
     /**
      * Obter informacoes produto string [ ].
      *
+     * @param arrayProdutos the array produtos
      * @return the string [ ]
      */
     protected String[] obterInformacoesProduto(ArrayList<Produto> arrayProdutos) {

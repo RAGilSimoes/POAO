@@ -8,13 +8,13 @@ public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar implements Seri
     /**
      * Instantiates a new Produto alimentar taxa normal.
      *
-     * @param codigo      the codigo
-     * @param nome        the nome
-     * @param descricao   the descricao
-     * @param quantidade  the quantidade
+     * @param codigo       the codigo
+     * @param nome         the nome
+     * @param descricao    the descricao
+     * @param quantidade   the quantidade
      * @param valorUnidade the valor sem iva
-     * @param biologico   the biologico
-     * @param taxa        the taxa
+     * @param biologico    the biologico
+     * @param taxa         the taxa
      */
     public ProdutoAlimentarTaxaNormal(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa){
         super(codigo, nome, descricao, quantidade, valorUnidade, biologico, taxa);
@@ -33,6 +33,7 @@ public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar implements Seri
     /**
      * Cria produto taxa normal produto alimentar taxa normal.
      *
+     * @param arrayProdutos the array produtos
      * @return the produto alimentar taxa normal
      */
     protected ProdutoAlimentarTaxaNormal criaProdutoTaxaNormal(ArrayList<Produto> arrayProdutos){
