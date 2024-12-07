@@ -9,27 +9,27 @@ public class Fatura implements Serializable {
     /**
      * The N fatura.
      */
-    protected String nFatura;
+    private String nFatura;
     /**
      * The Cliente.
      */
-    protected Cliente cliente;
+    private Cliente cliente;
     /**
      * The Data fatura.
      */
-    protected Data dataFatura;
+    private Data dataFatura;
     /**
      * The Lista produtos.
      */
-    ArrayList<Produto> listaProdutos;
+    private ArrayList<Produto> listaProdutos;
     /**
      * The Valor total sem iva.
      */
-    protected double valorTotalSemIVA = 0;
+    private double valorTotalSemIVA;
     /**
      * The Valor total com iva.
      */
-    protected double valorTotalComIVA = 0;
+    private double valorTotalComIVA;
 
 
     /**

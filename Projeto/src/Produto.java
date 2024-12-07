@@ -9,23 +9,23 @@ abstract class Produto implements Serializable {
     /**
      * The Codigo.
      */
-    protected String codigo;
+    private String codigo;
     /**
      * The Nome.
      */
-    protected String nome;
+    private String nome;
     /**
      * The Descricao.
      */
-    protected String descricao;
+    private String descricao;
     /**
      * The Quantidade.
      */
-    protected String quantidade;
+    private String quantidade;
     /**
      * The Valor sem iva.
      */
-    protected String valorUnidade;
+    private String valorUnidade;
 
     /**
      * Instantiates a new Produto.

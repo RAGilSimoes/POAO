@@ -8,7 +8,7 @@ public class Data implements Serializable {
     /**
      * The Dia.
      */
-    protected int dia, /**
+    private int dia, /**
      * The Mes.
      */
     mes, /**
@@ -61,7 +61,7 @@ public class Data implements Serializable {
      *
      * @return the ano
      */
-    public int getAno() {
+    protected int getAno() {
         return ano;
     }
 
@@ -70,7 +70,7 @@ public class Data implements Serializable {
      *
      * @return the dia
      */
-    public int getDia() {
+    protected int getDia() {
         return dia;
     }
 
@@ -79,7 +79,7 @@ public class Data implements Serializable {
      *
      * @return the mes
      */
-    public int getMes() {
+    protected int getMes() {
         return mes;
     }
 

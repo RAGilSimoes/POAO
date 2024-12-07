@@ -9,7 +9,7 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
     /**
      * The Categoria.
      */
-    protected String categoria;
+    private String categoria;
 
 
     /**

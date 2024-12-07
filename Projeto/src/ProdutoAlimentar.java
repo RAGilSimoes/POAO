@@ -9,11 +9,11 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
     /**
      * The Biologico.
      */
-    protected String biologico;
+    private String biologico;
     /**
      * The Tipo taxa.
      */
-    protected String tipoTaxa;
+    private String tipoTaxa;
 
     /**
      * Instantiates a new Produto alimentar.

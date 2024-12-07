@@ -2,16 +2,15 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- * The type Trata informacoes ficheiros.
+ * Tratar informações relativas aos ficheiros
  */
 public class TrataInformacoesFicheiros {
     /**
-     * Verifica existencia ficheiro objeto boolean.
+     * Verificar existência de ficheiro de objeto
      *
-     * @param nomeFicheiroObjetos the nome ficheiro objetos
-     * @return the boolean
+     * @param nomeFicheiroObjetos nome do ficheiro objetos
+     * @return devolve boleano consoante a existência do ficheiro
      */
-//--------------------------------------------------------------------------------------------------
     protected boolean verificaExistenciaFicheiroObjeto(String nomeFicheiroObjetos) {
         File ficheiroObjetos = new File(nomeFicheiroObjetos);
         boolean existe = (ficheiroObjetos.exists() && ficheiroObjetos.isFile());
@@ -21,16 +20,18 @@ public class TrataInformacoesFicheiros {
     //--------------------------------------------------------------------------------------------------
 
     /**
-     * Trata informacoes clientes.
+     * Tratar informações relativas aos clientes
      *
-     * @param arrayClientes the array clientes
-     * @param linha         the linha
-     * @throws IOException the io exception
+     * @param arrayClientes array de clientes
+     * @param linha         linha
+     * @throws IOException devolve um erro
      */
     protected void trataInformacoesClientes(ArrayList<Cliente> arrayClientes, String linha) throws IOException{
         FuncoesUteis funcoesUteis = new FuncoesUteis();
         Cliente cliente = new Cliente(null, null, null);
         String[] informacoesLinha = linha.split("/");
+
+        boolean existeNIF = false;
 
         String nome = informacoesLinha[0];
         String NIF = informacoesLinha[1];
@@ -45,10 +46,10 @@ public class TrataInformacoesFicheiros {
                 String localizacaoClienteObtido = cliente.getLocalizacao();
                 if(nomeClienteObtido.equalsIgnoreCase(nome) && nifClienteObtido.equalsIgnoreCase(NIF) && localizacaoClienteObtido.equalsIgnoreCase(localizacao)) {
                     System.out.println("\nCliente já se encontra no sistema");
-                    cliente = clienteObtido;
+                    existeNIF = true;
                 }
             }
-            if(cliente.getNif().isEmpty()) {
+            if(!existeNIF) {
                 throw new IOException();
             }
         } else {
@@ -72,13 +73,13 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Trata informacoes produto boolean.
+     * Tratar informações relativas ao produto
      *
-     * @param linha         the linha
-     * @param produto       the produto
-     * @param arrayProdutos the array produtos
-     * @return the boolean
-     * @throws IOException the io exception
+     * @param linha         linha
+     * @param produto       produto
+     * @param arrayProdutos array de produtos
+     * @return devolve boleano consoante a existência do produto
+     * @throws IOException devolve um erro
      */
     private boolean trataInformacoesProduto(String[] linha, Produto produto, ArrayList<Produto> arrayProdutos) throws IOException{
         FuncoesUteis funcoesUteis = new FuncoesUteis();
@@ -141,14 +142,14 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Trata informacoes produto alimentar boolean.
+     * Tratar informações relativas ao produto alimentar
      *
-     * @param linha            the linha
-     * @param produtoAlimentar the produto alimentar
-     * @param arrayProdutos    the array produtos
-     * @param taxa             the taxa
-     * @return the boolean
-     * @throws IOException the io exception
+     * @param linha            linha
+     * @param produtoAlimentar produto alimentar
+     * @param arrayProdutos    array de produtos
+     * @param taxa             taxa
+     * @return devolve boleano consoante a existência do produto
+     * @throws IOException devolve um erro
      */
     private boolean trataInformacoesProdutoAlimentar(String[] linha, ProdutoAlimentar produtoAlimentar, ArrayList<Produto> arrayProdutos, String taxa) throws IOException{
         boolean existeProduto = trataInformacoesProduto(linha, produtoAlimentar,arrayProdutos);
@@ -165,13 +166,13 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Trata informacoes produto farmacia boolean.
+     * Tratar informações relativas ao produto de farmácia
      *
-     * @param linha           the linha
-     * @param produtoFarmacia the produto farmacia
-     * @param arrayProdutos   the array produtos
-     * @return the boolean
-     * @throws IOException the io exception
+     * @param linha           linha
+     * @param produtoFarmacia produto farmácia
+     * @param arrayProdutos   array de produtos
+     * @return devolve boleano consoante a existência de produto de farmácia
+     * @throws IOException devolve um erro
      */
     private boolean trataInformacoesProdutoFarmacia(String[] linha, ProdutoFarmacia produtoFarmacia,ArrayList<Produto> arrayProdutos) throws IOException{
         boolean existeProduto = trataInformacoesProduto(linha, produtoFarmacia,arrayProdutos);
@@ -187,12 +188,12 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Trata informacoes taxa reduzida.
+     * Tratar informações relativas a produtos alimentares com taxa reduzida
      *
-     * @param arrayProdutos the array produtos
-     * @param linha         the linha
-     * @param taxa          the taxa
-     * @throws IOException the io exception
+     * @param arrayProdutos array de produtos
+     * @param linha         linha
+     * @param taxa          taxa
+     * @throws IOException devolve um erro
      */
     protected void trataInformacoesTaxaReduzida(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
         ProdutoAlimentarTaxaReduzida produtoAlimentarTaxaReduzida = new ProdutoAlimentarTaxaReduzida(null, null, null, null, null, null, null, 0, null);
@@ -219,12 +220,12 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Trata informacoes taxa intermedia.
+     * Tratar informações relativos a produtos alimentares com taxa intermedia
      *
-     * @param arrayProdutos the array produtos
-     * @param linha         the linha
-     * @param taxa          the taxa
-     * @throws IOException the io exception
+     * @param arrayProdutos array de produtos
+     * @param linha         linha
+     * @param taxa          taxa
+     * @throws IOException devolve um erro
      */
     protected void trataInformacoesTaxaIntermedia(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
         FuncoesUteis funcoesUteis = new FuncoesUteis();
@@ -248,12 +249,12 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Trata informacoes taxa normal.
+     * Tratar informações relativas a produtos alimentares com taxa normal
      *
-     * @param arrayProdutos the array produtos
-     * @param linha         the linha
-     * @param taxa          the taxa
-     * @throws IOException the io exception
+     * @param arrayProdutos array de produtos
+     * @param linha         linha
+     * @param taxa          taxa
+     * @throws IOException devolve um erro
      */
     protected void trataInformacoesTaxaNormal(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
         ProdutoAlimentarTaxaNormal produtoAlimentarTaxaNormal = new ProdutoAlimentarTaxaNormal(null, null, null, null, null, null, null);
@@ -269,11 +270,11 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Trata informacoes com prescricao.
+     * Tratar informações relativas a produtos de farmácia com prescrição
      *
-     * @param arrayProdutos the array produtos
-     * @param linha         the linha
-     * @throws IOException the io exception
+     * @param arrayProdutos array produtos
+     * @param linha         linha
+     * @throws IOException devolve um erro
      */
     protected void trataInformacoesComPrescricao(ArrayList<Produto> arrayProdutos, String linha) throws IOException{
         FuncoesUteis funcoesUteis = new FuncoesUteis();
@@ -297,11 +298,11 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Trata informacoes sem prescricao.
+     * Tratar informações relativas a produtos de farmácia sem prescrição
      *
-     * @param arrayProdutos the array produtos
-     * @param linha         the linha
-     * @throws IOException the io exception
+     * @param arrayProdutos array de produtos
+     * @param linha         linha
+     * @throws IOException devolve um erro
      */
     protected void trataInformacoesSemPrescricao(ArrayList<Produto> arrayProdutos, String linha) throws IOException{
         FuncoesUteis funcoesUteis = new FuncoesUteis();
@@ -325,12 +326,12 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Trata informacoes faturas.
+     * Tratar informações relativas às faturas
      *
-     * @param arrayFaturas  the array faturas
-     * @param arrayClientes the array clientes
-     * @param arrayProdutos the array produtos
-     * @param linha         the linha
+     * @param arrayFaturas  array de faturas
+     * @param arrayClientes array de clientes
+     * @param arrayProdutos array de produtos
+     * @param linha         linha
      */
     protected void trataInformacoesFaturas(ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, String linha){
         Fatura fatura = new Fatura(null, null, null, null, 0, 0);
@@ -414,10 +415,10 @@ public class TrataInformacoesFicheiros {
     //--------------------------------------------------------------------------------------------------
 
     /**
-     * Cria informacao cliente string.
+     * Criar informação do cliente
      *
-     * @param cliente the cliente
-     * @return the string
+     * @param cliente cliente
+     * @return cliente no formato do ficheiro
      */
     protected String criaInformacaoCliente(Cliente cliente){
         String nome = cliente.getNome();
@@ -428,7 +429,7 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Cria informacao produto string.
+     * Criar informação produto
      *
      * @param produto the produto
      * @return the string

@@ -1,5 +1,4 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,19 +9,19 @@ public class POOFS {
     /**
      * The Array clientes.
      */
-    ArrayList<Cliente> arrayClientes = new ArrayList<Cliente>();
+    private ArrayList<Cliente> arrayClientes = new ArrayList<Cliente>();
     /**
      * The Array faturas.
      */
-    ArrayList<Fatura> arrayFaturas = new ArrayList<Fatura>();
+    private ArrayList<Fatura> arrayFaturas = new ArrayList<Fatura>();
 
     /**
      * The Array produtos.
      */
-    ArrayList<Produto> arrayProdutos = new ArrayList<Produto>();
+    private ArrayList<Produto> arrayProdutos = new ArrayList<Produto>();
 
 
-    private void menus(String tipoMenu){
+    private void apresentaMenu(String tipoMenu){
         switch (tipoMenu) {
             case "Menu Principal":
                 System.out.println("\nIntroduz a ação que pretende efetuar: ");
@@ -82,7 +81,7 @@ public class POOFS {
         importaInformacoesAutomaticamente(arrayFaturas, arrayClientes, arrayProdutos, nomeFicheiroTextoInformacoes, nomeFicheiroObjetos);
 
         do {
-            menus("Menu Principal");
+            apresentaMenu("Menu Principal");
             Scanner scannerEscolha = new Scanner(System.in);
             escolha = scannerEscolha.nextLine();
 
@@ -120,7 +119,7 @@ public class POOFS {
                     break;
 
                 case "9":
-                    menus("Help");
+                    apresentaMenu("Help");
                     break;
 
                 case "0":
@@ -144,7 +143,7 @@ public class POOFS {
         do {
             String escolha;
 
-            menus("Menu Clientes");
+            apresentaMenu("Menu Clientes");
 
             Scanner scannerEscolha = new Scanner(System.in);
             escolha = scannerEscolha.nextLine();
@@ -235,7 +234,7 @@ public class POOFS {
         do {
             String escolha;
 
-            menus("Menu Faturas");
+            apresentaMenu("Menu Faturas");
 
             escolha = scannerEscolha.nextLine();
 

@@ -10,11 +10,11 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
     /**
      * The Quantidade certificacoes.
      */
-    protected int quantidadeCertificacoes;
+    private int quantidadeCertificacoes;
     /**
      * The Certificacoes.
      */
-    protected ArrayList<String> certificacoes;
+    private ArrayList<String> certificacoes;
 
     /**
      * Instantiates a new Produto alimentar taxa reduzida.

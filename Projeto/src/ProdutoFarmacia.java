@@ -8,7 +8,7 @@ abstract class ProdutoFarmacia extends Produto implements Serializable {
     /**
      * The Prescricao.
      */
-    protected String prescricao;
+    private String prescricao;
 
     /**
      * Instantiates a new Produto farmacia.

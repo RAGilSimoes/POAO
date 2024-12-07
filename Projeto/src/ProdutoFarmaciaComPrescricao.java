@@ -9,7 +9,7 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
     /**
      * The Medico.
      */
-    protected String medico;
+    private String medico;
 
     /**
      * Instantiates a new Produto farmacia com prescricao.

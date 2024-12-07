@@ -9,15 +9,15 @@ public class Cliente implements Serializable {
     /**
      * The Nome.
      */
-    protected String nome;
+    private String nome;
     /**
      * The Nif.
      */
-    protected String nif;
+    private String nif;
     /**
      * The Localizacao.
      */
-    protected String localizacao;
+    private String localizacao;
 
     /**
      * Instantiates a new Cliente.
@@ -41,7 +41,7 @@ public class Cliente implements Serializable {
      *
      * @return the localizacao
      */
-    public String getLocalizacao() {
+    protected String getLocalizacao() {
         return localizacao;
     }
 
@@ -50,7 +50,7 @@ public class Cliente implements Serializable {
      *
      * @return the nif
      */
-    public String getNif() {
+    protected String getNif() {
         return nif;
     }
 
@@ -59,7 +59,7 @@ public class Cliente implements Serializable {
      *
      * @return the nome
      */
-    public String getNome() {
+    protected String getNome() {
         return nome;
     }
 
@@ -68,7 +68,7 @@ public class Cliente implements Serializable {
      *
      * @param localizacao the localizacao
      */
-    public void setLocalizacao(String localizacao) {
+    protected void setLocalizacao(String localizacao) {
         this.localizacao = localizacao;
     }
 
@@ -77,7 +77,7 @@ public class Cliente implements Serializable {
      *
      * @param nif the nif
      */
-    public void setNif(String nif) {
+    protected void setNif(String nif) {
         this.nif = nif;
     }
 
@@ -86,7 +86,7 @@ public class Cliente implements Serializable {
      *
      * @param nome the nome
      */
-    public void setNome(String nome) {
+    protected void setNome(String nome) {
         this.nome = nome;
     }
 
