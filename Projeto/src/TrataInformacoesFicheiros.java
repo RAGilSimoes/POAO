@@ -434,10 +434,10 @@ public class TrataInformacoesFicheiros {
     //--------------------------------------------------------------------------------------------------
 
     /**
-     * Criar informação do cliente
+     * Criar informações do cliente para inserir no ficheiro de texto
      *
      * @param cliente cliente
-     * @return cliente no formato do ficheiro
+     * @return informações do cliente para inserir no ficheiro de texto
      */
     protected String criaInformacaoCliente(Cliente cliente){
         String nome = cliente.getNome();
@@ -448,10 +448,10 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Criar informação produto
+     * Criar informações do produto para inserir no ficheiro de texto
      *
-     * @param produto the produto
-     * @return the string
+     * @param produto produto
+     * @return informações do produto para inserir no ficheiro texto
      */
     private String criaInformacaoProduto(Produto produto){
         String codigo = produto.getCodigo();
@@ -464,10 +464,10 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Cria informacao produto alimentar string.
+     * Criar informações do produto alimentar para inserir no ficheiro de texto
      *
      * @param produtoAlimentar the produto alimentar
-     * @return the string
+     * @return informações do produto alimentar para inserir no ficheiro texto
      */
     private String criaInformacaoProdutoAlimentar(ProdutoAlimentar produtoAlimentar) {
         String informacaoProduto = criaInformacaoProduto(produtoAlimentar);
@@ -477,10 +477,10 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Cria informacao produto alimentar taxa reduzida string.
+     * Cria informações do produto alimentar com taxa reduzida para inserir no ficheiro de texto
      *
-     * @param produtoAlimentarTaxaReduzida the produto alimentar taxa reduzida
-     * @return the string
+     * @param produtoAlimentarTaxaReduzida produto alimentar com taxa reduzida
+     * @return informações do produto alimentar com taxa reduzida para inserir no ficheiro de texto
      */
     protected String criaInformacaoProdutoAlimentarTaxaReduzida(ProdutoAlimentarTaxaReduzida produtoAlimentarTaxaReduzida) {
         String informacaoProduto = criaInformacaoProdutoAlimentar(produtoAlimentarTaxaReduzida);
@@ -498,10 +498,10 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Cria informacao produto alimentar taxa intermedia string.
+     * Cria informações do produto alimentar com taxa intermédia para inserir no ficheiro de texto
      *
-     * @param produtoAlimentarTaxaIntermedia the produto alimentar taxa intermedia
-     * @return the string
+     * @param produtoAlimentarTaxaIntermedia produto alimentar com taxa intermedia
+     * @return informações do produto alimentar com taxa intermédia para inserir no ficheiro de texto
      */
     protected String criaInformacaoProdutoAlimentarTaxaIntermedia(ProdutoAlimentarTaxaIntermedia produtoAlimentarTaxaIntermedia) {
         String informacaoProduto = criaInformacaoProdutoAlimentar(produtoAlimentarTaxaIntermedia);
@@ -511,10 +511,10 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Cria informacao produto alimentar taxa normal string.
+     * Cria informações do produto alimentar com taxa normal para inserir no ficheiro de texto
      *
-     * @param produtoAlimentarTaxaNormal the produto alimentar taxa normal
-     * @return the string
+     * @param produtoAlimentarTaxaNormal produto alimentar com taxa normal
+     * @return informações do produto alimentar com taxa normal para inserir no ficheiro de texto
      */
     protected String criaInformacaoProdutoAlimentarTaxaNormal(ProdutoAlimentarTaxaNormal produtoAlimentarTaxaNormal) {
         String informacaoProduto = criaInformacaoProdutoAlimentar(produtoAlimentarTaxaNormal);
@@ -523,10 +523,10 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Cria informacao produto farmacia string.
+     * Cria informações do produto de farmácia para inserir no ficheiro de texto
      *
-     * @param produtoFarmacia the produto farmacia
-     * @return the string
+     * @param produtoFarmacia produto de farmácia
+     * @return informações do produto de farmácia para inserir no ficheiro de texto
      */
     private String criaInformacaoProdutoFarmacia(ProdutoFarmacia produtoFarmacia) {
         String informacaoProduto = criaInformacaoProduto(produtoFarmacia);
@@ -536,10 +536,10 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Cria informacao produto farmacia com prescricao string.
+     * Cria informações do produto de farmácia com prescrição para inserir no ficheiro de texto
      *
-     * @param produtoFarmaciaComPrescricao the produto farmacia com prescricao
-     * @return the string
+     * @param produtoFarmaciaComPrescricao produto de farmácia com prescrição
+     * @return informações do produto de farmácia com prescrição para inserir no ficheiro de texto
      */
     protected String criaInformacaoProdutoFarmaciaComPrescricao(ProdutoFarmaciaComPrescricao produtoFarmaciaComPrescricao) {
         String informacaoProduto = criaInformacaoProdutoFarmacia(produtoFarmaciaComPrescricao);
@@ -549,10 +549,10 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Cria informacao produto farmacia sem prescricao string.
+     * Cria informações do produto de farmácia sem prescrição para inserir no ficheiro de texto
      *
-     * @param produtoFarmaciaSemPrescricao the produto farmacia sem prescricao
-     * @return the string
+     * @param produtoFarmaciaSemPrescricao produto farmácia sem prescrição
+     * @return informações do produto de farmácia sem prescrição para inserir no ficheiro de texto
      */
     protected String criaInformacaoProdutoFarmaciaSemPrescricao(ProdutoFarmaciaSemPrescricao produtoFarmaciaSemPrescricao) {
         String informacaoProduto = criaInformacaoProdutoFarmacia(produtoFarmaciaSemPrescricao);
@@ -562,10 +562,10 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Cria informacao fatura string.
+     * Cria informações da fatura para inserir no ficheiro de texto
      *
-     * @param fatura the fatura
-     * @return the string
+     * @param fatura fatura
+     * @return Cria informações da fatura para inserir no ficheiro de texto
      */
     protected String criaInformacaoFatura(Fatura fatura){
         String numeroFatura = fatura.getnFatura();
@@ -586,11 +586,11 @@ public class TrataInformacoesFicheiros {
     //--------------------------------------------------------------------------------------------------
 
     /**
-     * Verifica nif ficheiros cliente.
+     * Verifica o nif no ficheiro de clientes
      *
-     * @param nif           the nif
-     * @param arrayClientes the array clientes
-     * @return the cliente
+     * @param nif nif
+     * @param arrayClientes array de clientes
+     * @return cliente com o nif verificado
      */
     private Cliente verificaNIFFicheiros(String nif, ArrayList<Cliente> arrayClientes){
         Cliente clienteFinal = new Cliente(null, null, null);
@@ -610,12 +610,12 @@ public class TrataInformacoesFicheiros {
     //--------------------------------------------------------------------------------------------------
 
     /**
-     * Le ficheiro texto.
+     * Lê ficheiro texto
      *
-     * @param arrayClientes the array clientes
-     * @param arrayFaturas  the array faturas
-     * @param arrayProdutos the array produtos
-     * @param nomeFicheiro  the nome ficheiro
+     * @param arrayClientes array de clientes
+     * @param arrayFaturas  array de faturas
+     * @param arrayProdutos array de produtos
+     * @param nomeFicheiro  nome do ficheiro
      */
     protected void leFicheiroTexto(ArrayList<Cliente> arrayClientes, ArrayList<Fatura> arrayFaturas, ArrayList<Produto> arrayProdutos, String nomeFicheiro){
         File ficheiroTexto = new File(nomeFicheiro);
@@ -674,12 +674,12 @@ public class TrataInformacoesFicheiros {
     //--------------------------------------------------------------------------------------------------
 
     /**
-     * Escreve para ficheiro objeto.
+     * Escreve para ficheiro de objetos
      *
-     * @param nomeFicheiroObjetos the nome ficheiro objetos
-     * @param arrayClientes       the array clientes
-     * @param arrayProdutos       the array produtos
-     * @param arrayFaturas        the array faturas
+     * @param nomeFicheiroObjetos nome do ficheiro de objetos
+     * @param arrayClientes       array de clientes
+     * @param arrayProdutos       array de produtos
+     * @param arrayFaturas        array de faturas
      */
     protected void escreveParaFicheiroObjeto(String nomeFicheiroObjetos, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, ArrayList<Fatura> arrayFaturas){
         File ficheiroObjetos = new File(nomeFicheiroObjetos);
@@ -706,12 +706,12 @@ public class TrataInformacoesFicheiros {
     }
 
     /**
-     * Le ficheiro objeto.
+     * Lê ficheiro de objetos
      *
-     * @param nomeFicheiroObjetos the nome ficheiro objetos
-     * @param arrayClientes       the array clientes
-     * @param arrayProdutos       the array produtos
-     * @param arrayFaturas        the array faturas
+     * @param nomeFicheiroObjetos nome do ficheiro de objetos
+     * @param arrayClientes       array de clientes
+     * @param arrayProdutos       array de produtos
+     * @param arrayFaturas        array de faturas
      */
     protected void leFicheiroObjeto(String nomeFicheiroObjetos, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, ArrayList<Fatura> arrayFaturas){
         File ficheiroObjetos = new File(nomeFicheiroObjetos);
