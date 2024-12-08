@@ -1,9 +1,17 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.Serializable;
 
 /**
  * Classe que representa o objeto Data
  */
 public class Data implements Serializable {
+    /**
+     * Objeto Funcoes Uteis
+     */
     FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
      * Dia

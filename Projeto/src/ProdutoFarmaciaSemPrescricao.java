@@ -1,26 +1,35 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The type Produto farmacia sem prescricao.
+ * Classe que representa o objeto Produto de Farmacia Sem Prescricao
  */
 public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia implements Serializable {
     /**
-     * The Categoria.
+     * Objeto Funcoes Uteis
+     */
+    FuncoesUteis funcoesUteis = new FuncoesUteis();
+    /**
+     * Categoria
      */
     private String categoria;
 
     /**
-     * Instantiates a new Produto farmacia sem prescricao.
+     * Construtor do Produto de Farmacia Sem Prescricao
      *
-     * @param codigo       the codigo
-     * @param nome         the nome
-     * @param descricao    the descricao
-     * @param quantidade   the quantidade
-     * @param valorUnidade the valor sem iva
-     * @param prescricao   the prescricao
-     * @param categoria    the categoria
+     * @param codigo       codigo
+     * @param nome         nome
+     * @param descricao    descricao
+     * @param quantidade   quantidade
+     * @param valorUnidade valor sem iva
+     * @param prescricao   prescricao
+     * @param categoria    categoria
      */
     protected ProdutoFarmaciaSemPrescricao(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao, String categoria){
         super(codigo, nome, descricao, quantidade, valorUnidade, prescricao);
@@ -32,18 +41,18 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia implements Ser
     }
 
     /**
-     * Gets categoria.
+     * Getter da categoria
      *
-     * @return the categoria
+     * @return categoria
      */
     protected String getCategoria() {
         return categoria;
     }
 
     /**
-     * Sets categoria.
+     * Setter categoria
      *
-     * @param categoria the categoria
+     * @param categoria categoria
      */
     protected void setCategoria(String categoria) {
         this.categoria = categoria;
@@ -64,19 +73,25 @@ public class ProdutoFarmaciaSemPrescricao extends ProdutoFarmacia implements Ser
     }
 
     /**
-     * Cria produto sem prescricao produto farmacia sem prescricao.
+     * Cria um produto de farmacia sem prescricao
      *
-     * @param arrayProdutos the array produtos
-     * @return the produto farmacia sem prescricao
+     * @param arrayProdutos array de produtos
+     * @return produto de farmacia sem prescricao
      */
     protected ProdutoFarmaciaSemPrescricao criaProdutoSemPrescricao(ArrayList<Produto> arrayProdutos){
         String prescricao = "Nao";
+        String categoriaProduto = null;
         Scanner scannerObterResposta = new Scanner(System.in);
+
+        boolean verificacaoCategoria = false;
 
         String[] arrayInformacoesProdutoFarmacia = obterInformacaoProdutoFarmacia(arrayProdutos);
 
-        System.out.print("Introduza a categoria do produto: ");
-        String categoriaProduto = scannerObterResposta.nextLine();
+        while(!verificacaoCategoria){
+            System.out.print("Introduza a categoria do produto: ");
+            categoriaProduto = scannerObterResposta.nextLine();
+            verificacaoCategoria = funcoesUteis.verificaCategoria(categoriaProduto);
+        }
 
         return new ProdutoFarmaciaSemPrescricao(arrayInformacoesProdutoFarmacia[0], arrayInformacoesProdutoFarmacia[1], arrayInformacoesProdutoFarmacia[2], arrayInformacoesProdutoFarmacia[3], arrayInformacoesProdutoFarmacia[4], prescricao, categoriaProduto);
     }

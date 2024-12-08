@@ -1,3 +1,8 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,6 +11,9 @@ import java.util.Scanner;
  * Classe que representa o objeto cliente
  */
 public class Cliente implements Serializable {
+    /**
+     * Objeto Funcoes Uteis
+     */
     FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
      * Nome

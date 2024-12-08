@@ -1,8 +1,13 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Classe que representa o objeto FuncoesUteis
+ * Classe que representa o objeto Funcoes Uteis
  */
 public class FuncoesUteis {
     /**

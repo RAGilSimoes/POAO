@@ -1,20 +1,25 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * The type Produto alimentar taxa normal.
+ * Classe que representa o objeto Produto Alimentar com Taxa Normal
  */
 public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar implements Serializable {
     /**
-     * Instantiates a new Produto alimentar taxa normal.
+     * Construtor do Produto Alimentar com Taxa Normal
      *
-     * @param codigo       the codigo
-     * @param nome         the nome
-     * @param descricao    the descricao
-     * @param quantidade   the quantidade
-     * @param valorUnidade the valor sem iva
-     * @param biologico    the biologico
-     * @param taxa         the taxa
+     * @param codigo       codigo
+     * @param nome         nome
+     * @param descricao    descricao
+     * @param quantidade   quantidade
+     * @param valorUnidade valor sem iva
+     * @param biologico    biologico
+     * @param taxa         taxa
      */
     protected ProdutoAlimentarTaxaNormal(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa){
         super(codigo, nome, descricao, quantidade, valorUnidade, biologico, taxa);
@@ -31,10 +36,10 @@ public class ProdutoAlimentarTaxaNormal extends ProdutoAlimentar implements Seri
     }
 
     /**
-     * Cria produto taxa normal produto alimentar taxa normal.
+     * Cria Produto Alimentar com Taxa Normal
      *
-     * @param arrayProdutos the array produtos
-     * @return the produto alimentar taxa normal
+     * @param arrayProdutos array de produtos
+     * @return produto alimentar com taxa normal
      */
     protected ProdutoAlimentarTaxaNormal criaProdutoTaxaNormal(ArrayList<Produto> arrayProdutos){
         String tipoTaxa = "Normal";

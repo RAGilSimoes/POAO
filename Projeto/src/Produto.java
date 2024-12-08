@@ -1,41 +1,49 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The type Produto.
+ * Classe que representa o objeto Produto
  */
 abstract class Produto implements Serializable {
+    /**
+     * Objeto Funcoes Uteis
+     */
     FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
-     * The Codigo.
+     * Codigo
      */
     private String codigo;
     /**
-     * The Nome.
+     * Nome
      */
     private String nome;
     /**
-     * The Descricao.
+     * Descricao
      */
     private String descricao;
     /**
-     * The Quantidade.
+     * Quantidade
      */
     private String quantidade;
     /**
-     * The Valor sem iva.
+     * Valor sem iva
      */
     private String valorUnidade;
 
     /**
-     * Instantiates a new Produto.
+     * Instantiates a new Produto
      *
-     * @param codigo       the codigo
-     * @param nome         the nome
-     * @param descricao    the descricao
-     * @param quantidade   the quantidade
-     * @param valorUnidade the valor sem iva
+     * @param codigo       codigo
+     * @param nome         nome
+     * @param descricao    descricao
+     * @param quantidade   quantidade
+     * @param valorUnidade valor sem iva
      */
     protected Produto(String codigo, String nome, String descricao, String quantidade, String valorUnidade){
         this.codigo = codigo;
@@ -50,90 +58,90 @@ abstract class Produto implements Serializable {
     }
 
     /**
-     * Gets nome.
+     * Getter do nome
      *
-     * @return the nome
+     * @return nome
      */
     protected String getNome() {
         return nome;
     }
 
     /**
-     * Gets codigo.
+     * Getter do codigo
      *
-     * @return the codigo
+     * @return codigo
      */
     protected String getCodigo() {
         return codigo;
     }
 
     /**
-     * Gets descricao.
+     * Getter da descricao
      *
-     * @return the descricao
+     * @return descricao
      */
     protected String getDescricao() {
         return descricao;
     }
 
     /**
-     * Gets quantidade.
+     * Getter da quantidade
      *
-     * @return the quantidade
+     * @return quantidade
      */
     protected String getQuantidade() {
         return quantidade;
     }
 
     /**
-     * Gets valor sem iva.
+     * Getter do valor sem iva
      *
-     * @return the valor sem iva
+     * @return valor sem iva
      */
     protected String getValorUnidade() {
         return valorUnidade;
     }
 
     /**
-     * Sets nome.
+     * Setter do nome
      *
-     * @param nome the nome
+     * @param nome nome
      */
     protected void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
-     * Sets codigo.
+     * Setter do codigo
      *
-     * @param codigo the codigo
+     * @param codigo codigo
      */
     protected void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
     /**
-     * Sets descricao.
+     * Setter da descricao
      *
-     * @param descricao the descricao
+     * @param descricao descricao
      */
     protected void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
     /**
-     * Sets quantidade.
+     * Setter da quantidade
      *
-     * @param quantidade the quantidade
+     * @param quantidade quantidade
      */
     protected void setQuantidade(String quantidade) {
         this.quantidade = quantidade;
     }
 
     /**
-     * Sets valor sem iva.
+     * Setter do valor sem iva
      *
-     * @param valorUnidade the valor sem iva
+     * @param valorUnidade valor sem iva
      */
     protected void setValorUnidade(String valorUnidade) {
         this.valorUnidade = valorUnidade;
@@ -152,11 +160,11 @@ abstract class Produto implements Serializable {
     }
 
     /**
-     * Verifica codigo boolean.
+     * Verifica a validade do codigo
      *
-     * @param stringRecebida the string recebida
-     * @param arrayProdutos  the array produtos
-     * @return the boolean
+     * @param stringRecebida string recebida
+     * @param arrayProdutos  array de produtos
+     * @return devolve booleano consoante a validade do codigo
      */
     protected boolean verificaCodigo(String stringRecebida, ArrayList<Produto> arrayProdutos){
         boolean verificacao = true;
@@ -191,9 +199,9 @@ abstract class Produto implements Serializable {
 
 
     /**
-     * Obtem valor sem iva double.
+     * Obtem valor sem iva
      *
-     * @return the double
+     * @return valor sem iva
      */
     protected double obtemValorSemIVA(){
         int quantidade = Integer.parseInt(this.getQuantidade());
@@ -204,18 +212,18 @@ abstract class Produto implements Serializable {
     }
 
     /**
-     * Obtem valor com iva double.
+     * Obtem valor com iva
      *
-     * @param clienteRecebido the cliente recebido
-     * @return the double
+     * @param clienteRecebido cliente recebido
+     * @return valor com iva
      */
     protected abstract double obtemValorComIVA(Cliente clienteRecebido);
 
     /**
-     * Obter informacoes produto string [ ].
+     * Obter informacoes do produto
      *
-     * @param arrayProdutos the array produtos
-     * @return the string [ ]
+     * @param arrayProdutos array de produtos
+     * @return informacoes do produto
      */
     protected String[] obterInformacoesProduto(ArrayList<Produto> arrayProdutos) {
         Scanner scannerObterResposta = new Scanner(System.in);
@@ -270,18 +278,18 @@ abstract class Produto implements Serializable {
     }
 
     /**
-     * Gets tipo.
+     * Getter do tipo.
      *
-     * @return the tipo
+     * @return tipo
      */
     protected abstract String getTipo();
 
     /**
-     * Get taxa aplicada int.
+     * Verifica qual a taxa aplicada
      *
-     * @param clienteRecebido the cliente recebido
-     * @param arrayTaxas      the array taxas
-     * @return the int
+     * @param clienteRecebido cliente recebido
+     * @param arrayTaxas      array de taxas
+     * @return taxa aplicada
      */
     protected int getTaxaAplicada(Cliente clienteRecebido, int[] arrayTaxas){
         int taxaAplicada = 0;

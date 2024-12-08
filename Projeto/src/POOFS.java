@@ -1,25 +1,43 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The type Poofs.
+ * Classe que representa o objeto POOFS
  */
 public class POOFS {
+    /**
+     * Objeto Funcoes Uteis
+     */
     FuncoesUteis funcoesUteis = new FuncoesUteis();
+    /**
+     * Objeto Listar Faturas
+     */
     ListarFaturas listarFaturas = new ListarFaturas();
+    /**
+     * Objeto Listar Clientes
+     */
     ListarClientes listarClientes = new ListarClientes();
     /**
-     * The Array clientes.
+     * Objeto Trata Informacoes Ficheiros
+     */
+    TrataInformacoesFicheiros trataInformacoesFicheiros = new TrataInformacoesFicheiros();
+    /**
+     * Array de clientes
      */
     private ArrayList<Cliente> arrayClientes = new ArrayList<Cliente>();
     /**
-     * The Array faturas.
+     * Array de faturas
      */
     private ArrayList<Fatura> arrayFaturas = new ArrayList<Fatura>();
 
     /**
-     * The Array produtos.
+     * Array produtos
      */
     private ArrayList<Produto> arrayProdutos = new ArrayList<Produto>();
 
@@ -70,12 +88,11 @@ public class POOFS {
 
 
     /**
-     * Menu.
+     * Menu
      */
     protected void menu() {
         String escolha;
         boolean sair = false;
-        TrataInformacoesFicheiros trataInformacoesFicheiros = new TrataInformacoesFicheiros();
         final String nomeFicheiroTextoInformacoes = "informacoes.txt";
         final String nomeFicheiroFaturas = "faturas.txt";
         final String nomeFicheiroObjetos = "projeto.obj";
@@ -336,20 +353,18 @@ public class POOFS {
     }
 
     private void importaInformacoesAutomaticamente(ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, String nomeFicheiroTexto, String nomeFicheiroObjetos) {
-        TrataInformacoesFicheiros tratamentoInformacoesFicheiros = new TrataInformacoesFicheiros();
-        boolean existeFicheiroObjeto = tratamentoInformacoesFicheiros.verificaExistenciaFicheiroObjeto(nomeFicheiroObjetos);
+        boolean existeFicheiroObjeto = trataInformacoesFicheiros.verificaExistenciaFicheiroObjeto(nomeFicheiroObjetos);
         if(existeFicheiroObjeto){
-            tratamentoInformacoesFicheiros.leFicheiroObjeto(nomeFicheiroObjetos, arrayClientes, arrayProdutos, arrayFaturas);
+            trataInformacoesFicheiros.leFicheiroObjeto(nomeFicheiroObjetos, arrayClientes, arrayProdutos, arrayFaturas);
         } else {
-            tratamentoInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos, nomeFicheiroTexto);
+            trataInformacoesFicheiros.leFicheiroTexto(arrayClientes, arrayFaturas, arrayProdutos, nomeFicheiroTexto);
         }
     }
 
     private void importaFatura(ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, ArrayList<Fatura> arrayFaturas, String nomeFicheiro) {
-        try {
-            TrataInformacoesFicheiros trataInformacoesFicheiros = new TrataInformacoesFicheiros();
-            File ficheiro = new File(nomeFicheiro);
-            if(ficheiro.exists() && ficheiro.isFile()) {
+        File ficheiro = new File(nomeFicheiro);
+        if(ficheiro.exists() && ficheiro.isFile()) {
+            try {
                 FileReader fileReader = new FileReader(ficheiro);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 String linha;
@@ -392,16 +407,17 @@ public class POOFS {
                     }
                 }
                 bufferedReader.close();
+            } catch (FileNotFoundException exception) {
+                System.out.println("Erro ao abrir ficheiro de texto");
+            } catch (IOException exception) {
+                System.out.println("Erro ao ler ficheiro de texto");
             }
-        } catch (FileNotFoundException exception) {
-            System.out.println("Erro ao abrir ficheiro de texto");
-        } catch (IOException exception) {
-            System.out.println("Erro ao ler ficheiro de texto");
+        } else {
+            System.out.println("Ficheiro texto não existe");
         }
     }
 
     private void exportaFatura(ArrayList<Fatura> arrayFaturas, String nomeFicheiro) {
-        TrataInformacoesFicheiros trataInformacoesFicheiros = new TrataInformacoesFicheiros();
         File ficheiroTexto = new File(nomeFicheiro);
         if(ficheiroTexto.exists() && ficheiroTexto.isFile()) {
             try {

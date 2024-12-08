@@ -1,27 +1,35 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The type Produto farmacia com prescricao.
+ * Classe que representa o objeto Produto de Farmacia Com Prescricao
  */
 public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Serializable {
+    /**
+     * Objeto Funcoes Uteis
+     */
     FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
-     * The Medico.
+     * Medico
      */
     private String medico;
 
     /**
-     * Instantiates a new Produto farmacia com prescricao.
+     * Construtor do Produto de Farmacia Com Prescricao
      *
-     * @param codigo       the codigo
-     * @param nome         the nome
-     * @param descricao    the descricao
-     * @param quantidade   the quantidade
-     * @param valorUnidade the valor sem iva
-     * @param prescricao   the prescricao
-     * @param medico       the medico
+     * @param codigo       codigo
+     * @param nome         nome
+     * @param descricao    descricao
+     * @param quantidade   quantidade
+     * @param valorUnidade valor sem iva
+     * @param prescricao   prescricao
+     * @param medico       medico
      */
     protected ProdutoFarmaciaComPrescricao(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String prescricao, String medico){
         super(codigo, nome, descricao, quantidade, valorUnidade, prescricao);
@@ -29,9 +37,9 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
     }
 
     /**
-     * Gets medico.
+     * Getter do medico
      *
-     * @return the medico
+     * @return medico
      */
     protected String getMedico() {
         return medico;
@@ -42,9 +50,9 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
     }
 
     /**
-     * Sets medico.
+     * Setter do medico
      *
-     * @param medico the medico
+     * @param medico medico
      */
     protected void setMedico(String medico) {
         this.medico = medico;
@@ -60,10 +68,10 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
     }
 
     /**
-     * Cria produto com prescricao produto farmacia com prescricao.
+     * Cria um produto de farmacia com prescricao
      *
-     * @param arrayProdutos the array produtos
-     * @return the produto farmacia com prescricao
+     * @param arrayProdutos array de produtos
+     * @return produto de farmacia com prescricao
      */
     protected ProdutoFarmaciaComPrescricao criaProdutoComPrescricao(ArrayList<Produto> arrayProdutos){
         String prescricao = "Sim";

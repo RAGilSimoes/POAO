@@ -1,30 +1,35 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The type Produto alimentar.
+ * Classe que representa o objeto Produto Alimentar
  */
 abstract class ProdutoAlimentar extends Produto implements Serializable {
     /**
-     * The Biologico.
+     * Biologico
      */
     private String biologico;
     /**
-     * The Tipo taxa.
+     * Tipo taxa
      */
     private String tipoTaxa;
 
     /**
-     * Instantiates a new Produto alimentar.
+     * Construtor do produto alimentar
      *
-     * @param codigo       the codigo
-     * @param nome         the nome
-     * @param descricao    the descricao
-     * @param quantidade   the quantidade
-     * @param valorUnidade the valor sem iva
-     * @param biologico    the biologico
-     * @param tipoTaxa     the tipo taxa
+     * @param codigo       codigo
+     * @param nome         nome
+     * @param descricao    descricao
+     * @param quantidade   quantidade
+     * @param valorUnidade valor sem iva
+     * @param biologico    caracteristica biologica
+     * @param tipoTaxa     tipo da taxa
      */
     protected ProdutoAlimentar(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String tipoTaxa){
         super(codigo, nome, descricao, quantidade, valorUnidade);
@@ -37,46 +42,46 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
     }
 
     /**
-     * Gets biologico.
+     * Getter da caracteriscica biologica
      *
-     * @return the biologico
+     * @return caracteristica biologica
      */
     protected String getBiologico() {
         return biologico;
     }
 
     /**
-     * Gets tipo taxa.
+     * Getter do tipo de taxa
      *
-     * @return the tipo taxa
+     * @return tipo de taxa
      */
     protected String getTipoTaxa() {
         return tipoTaxa;
     }
 
     /**
-     * Sets biologico.
+     * Setter caracteristica biologica
      *
-     * @param biologico the biologico
+     * @param biologico caracteristica biologica
      */
     protected void setBiologico(String biologico) {
         this.biologico = biologico;
     }
 
     /**
-     * Sets tipo taxa.
+     * Setter tipo de taxa
      *
-     * @param tipoTaxa the tipo taxa
+     * @param tipoTaxa tipo de taxa
      */
     protected void setTipoTaxa(String tipoTaxa) {
         this.tipoTaxa = tipoTaxa;
     }
 
     /**
-     * Obter informacao produto alimentar string [ ].
+     * Obter informacao do produto alimentar
      *
-     * @param arrayProdutos the array produtos
-     * @return the string [ ]
+     * @param arrayProdutos array de produtos
+     * @return informacao do produto alimentar
      */
     protected String[] obterInformacaoProdutoAlimentar(ArrayList<Produto> arrayProdutos) {
         Scanner scannerObterResposta = new Scanner(System.in);
@@ -121,11 +126,11 @@ abstract class ProdutoAlimentar extends Produto implements Serializable {
     }
 
     /**
-     * Calcula preco final com iva double.
+     * Calcula preco final com iva
      *
-     * @param taxaAplicada             the taxa aplicada
-     * @param produtoAlimentarRecebido the produto alimentar recebido
-     * @return the double
+     * @param taxaAplicada             taxa aplicada
+     * @param produtoAlimentarRecebido produto alimentar recebido
+     * @return preco final com iva
      */
     protected double calculaPrecoFinalComIVA(int taxaAplicada, ProdutoAlimentar produtoAlimentarRecebido){
         int quantidadeProduto = Integer.parseInt(produtoAlimentarRecebido.getQuantidade());

@@ -1,13 +1,18 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.util.ArrayList;
 
 /**
- * The type Listar clientes.
+ * Classe que representa o objeto Listar Clientes
  */
 public class ListarClientes {
     /**
-     * Listar clientes.
+     * Listar clientes
      *
-     * @param arrayClientes the array clientes
+     * @param arrayClientes array de clientes
      */
     protected void listarClientes(ArrayList<Cliente> arrayClientes) {
         if (arrayClientes.isEmpty()) {

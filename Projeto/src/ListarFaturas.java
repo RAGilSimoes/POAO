@@ -1,13 +1,18 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.util.ArrayList;
 
 /**
- * The type Listar faturas.
+ * Classe que representa o objeto Listar faturas
  */
 public class ListarFaturas {
     /**
-     * Listar faturas.
+     * Listar faturas
      *
-     * @param arrayFaturas the array faturas
+     * @param arrayFaturas array de faturas
      */
     protected void listarFaturas(ArrayList<Fatura> arrayFaturas) {
         if (arrayFaturas.isEmpty()) {

@@ -1,3 +1,8 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,7 +11,13 @@ import java.util.Scanner;
  * Classe que representa o objeto Data
  */
 public class Fatura implements Serializable {
+    /**
+     * Objeto Listar Clientes
+     */
     ListarClientes listarClientes = new ListarClientes();
+    /**
+     * Objeto Funcoes Uteis
+     */
     FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
      * Numero da fatura

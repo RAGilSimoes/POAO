@@ -1,10 +1,19 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.*;
 import java.util.ArrayList;
 
+
 /**
- * Tratar informacoes relativas aos ficheiros
+ * Classe que representa o objeto Trata Informacoes Relativas aos Ficheiros
  */
 public class TrataInformacoesFicheiros {
+    /**
+     * Objeto Funcoes Uteis
+     */
     FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
      * Verificar existencia de ficheiro de objeto

@@ -1,33 +1,38 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The type Produto alimentar taxa reduzida.
+ * Classe que representa o objeto Produto Alimentar com Taxa Reduzida
  */
 public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Serializable {
     /**
-     * The Quantidade certificacoes.
+     * Quantidade de certificacoes
      */
     private int quantidadeCertificacoes;
     /**
-     * The Certificacoes.
+     * Certificacoes
      */
     private ArrayList<String> certificacoes;
 
     /**
-     * Instantiates a new Produto alimentar taxa reduzida.
+     * Construtor do Produto Alimentar com Taxa Reduzida
      *
-     * @param codigo                  the codigo
-     * @param nome                    the nome
-     * @param descricao               the descricao
-     * @param quantidade              the quantidade
-     * @param valorUnidade            the valor sem iva
-     * @param biologico               the biologico
-     * @param taxa                    the taxa
-     * @param quantidadeCertificacoes the quantidade certificacoes
-     * @param certificacoes           the certificacoes
+     * @param codigo                  codigo
+     * @param nome                    nome
+     * @param descricao               descricao
+     * @param quantidade              quantidade
+     * @param valorUnidade            valor sem iva
+     * @param biologico               caracteristica biologica
+     * @param taxa                    taxa
+     * @param quantidadeCertificacoes quantidade de certificacoes
+     * @param certificacoes           certificacoes
      */
     protected ProdutoAlimentarTaxaReduzida(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa, int quantidadeCertificacoes, ArrayList<String> certificacoes){
         super(codigo, nome, descricao, quantidade, valorUnidade, biologico, taxa);
@@ -40,36 +45,36 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
     }
 
     /**
-     * Gets quantidade certificacoes.
+     * Getter da quantidade de certificacoes
      *
-     * @return the quantidade certificacoes
+     * @return quantidade de certificacoes
      */
     protected int getQuantidadeCertificacoes() {
         return quantidadeCertificacoes;
     }
 
     /**
-     * Get certificacoes string [ ].
+     * Getter certificacoes
      *
-     * @return the string [ ]
+     * @return certificacoes
      */
     protected ArrayList<String> getCertificacoes() {
         return certificacoes;
     }
 
     /**
-     * Sets quantidade certificacoes.
+     * Setter da quantidade de certificacoes
      *
-     * @param quantidadeCertificacoes the quantidade certificacoes
+     * @param quantidadeCertificacoes quantidade de certificacoes
      */
     protected void setQuantidadeCertificacoes(int quantidadeCertificacoes) {
         this.quantidadeCertificacoes = quantidadeCertificacoes;
     }
 
     /**
-     * Sets certificacoes.
+     * Setter das certificacoes
      *
-     * @param certificacoes the certificacoes
+     * @param certificacoes certificacoes
      */
     protected void setCertificacoes(ArrayList<String> certificacoes) {
         if(certificacoes != null){
@@ -78,10 +83,10 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
     }
 
     /**
-     * Verifica certificacoes boolean.
+     * Verifica a validade da escolha da certificacao
      *
-     * @param certificacoes the certificacoes
-     * @return the boolean
+     * @param certificacoes certificacoes
+     * @return devolve booleano consoante a validade da escolha da certificacao
      */
     protected boolean verificaCertificacoes(ArrayList<String> certificacoes) {
         boolean verificacao = false;
@@ -147,10 +152,10 @@ public class ProdutoAlimentarTaxaReduzida extends ProdutoAlimentar implements Se
 
 
     /**
-     * Cria produto taxa reduzida produto alimentar taxa reduzida.
+     * Cria um produto alimentar com taxa reduzida
      *
-     * @param arrayProdutos the array produtos
-     * @return the produto alimentar taxa reduzida
+     * @param arrayProdutos array de produtos
+     * @return produto alimentar com taxa reduzida
      */
     protected ProdutoAlimentarTaxaReduzida criaProdutoTaxaReduzida(ArrayList<Produto> arrayProdutos){
         String tipoTaxa = "Reduzida";

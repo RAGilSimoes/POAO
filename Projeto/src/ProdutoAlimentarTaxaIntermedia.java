@@ -1,29 +1,37 @@
+/**
+ * @author Guilherme Carvalho e Ricardo Simoes
+ * @version 1.0
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The type Produto alimentar taxa intermedia.
+ * Classe que representa o objeto Produto Alimentar com Taxa Intermedia
  */
 public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements Serializable {
+    /**
+     * Objeto Funcoes Uteis
+     */
     FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
-     * The Categoria.
+     * Categoria
      */
     private String categoria;
 
 
     /**
-     * Instantiates a new Produto alimentar taxa intermedia.
+     * Construtor do Produto Alimentar com Taxa Intermedia 
      *
-     * @param codigo       the codigo
-     * @param nome         the nome
-     * @param descricao    the descricao
-     * @param quantidade   the quantidade
-     * @param valorUnidade the valor sem iva
-     * @param biologico    the biologico
-     * @param taxa         the taxa
-     * @param categoria    the categoria
+     * @param codigo       codigo
+     * @param nome         nome
+     * @param descricao    descricao
+     * @param quantidade   quantidade
+     * @param valorUnidade valor sem iva
+     * @param biologico    caracteristica biologica
+     * @param taxa         taxa
+     * @param categoria    categoria
      */
     protected ProdutoAlimentarTaxaIntermedia(String codigo, String nome, String descricao, String quantidade, String valorUnidade, String biologico, String taxa, String categoria){
         super(codigo, nome, descricao, quantidade, valorUnidade, biologico, taxa);
@@ -35,18 +43,18 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
     }
 
     /**
-     * Gets categoria.
+     * Getter da categoria
      *
-     * @return the categoria
+     * @return categoria
      */
     protected String getCategoria() {
         return categoria;
     }
 
     /**
-     * Sets categoria.
+     * Setter da categoria
      *
-     * @param categoria the categoria
+     * @param categoria categoria
      */
     protected void setCategoria(String categoria) {
         this.categoria = categoria;
@@ -68,10 +76,10 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
     }
 
     /**
-     * Cria produto taxa intermedia produto alimentar taxa intermedia.
+     * Cria Produto Alimentar com Taxa Intermedia
      *
-     * @param arrayProdutos the array produtos
-     * @return the produto alimentar taxa intermedia
+     * @param arrayProdutos array de produtos
+     * @return produto alimentar com taxa intermedia
      */
     protected ProdutoAlimentarTaxaIntermedia criaProdutoTaxaIntermedia(ArrayList<Produto> arrayProdutos){
         String tipoTaxa = "Intermedia";
