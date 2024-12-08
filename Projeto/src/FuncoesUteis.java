@@ -2,15 +2,15 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * The type Funcoes uteis.
+ * Classe que representa o objeto FuncoesUteis
  */
 public class FuncoesUteis {
     /**
-     * Protecao escolha int.
+     * Protecao para a escolha de numeros entre intervalos
      *
-     * @param menor the menor
-     * @param maior the maior
-     * @return the int
+     * @param menor menor
+     * @param maior maior
+     * @return numero verificado
      */
     protected int protecaoEscolha(int menor, int maior){
         String escolha;
@@ -40,12 +40,12 @@ public class FuncoesUteis {
     }
 
     /**
-     * Verifica caracteres boolean.
+     * Protecao para a escolha de caracteres entre intervalos
      *
-     * @param stringRecebida the string recebida
-     * @param min            the min
-     * @param max            the max
-     * @return the boolean
+     * @param stringRecebida string recebida
+     * @param min            min
+     * @param max            max
+     * @return boolean
      */
     protected boolean verificaCaracteres(String stringRecebida, char min, char max) {
         int tamanho = stringRecebida.length();
@@ -61,10 +61,10 @@ public class FuncoesUteis {
     }
 
     /**
-     * Verifica int boolean.
+     * Verifica se e possivel passar a string para inteiro
      *
-     * @param stringRecebida the string recebida
-     * @return the boolean
+     * @param stringRecebida string recebida
+     * @return devolve booleano consoante a possibilidade de passar a string para inteiro
      */
     protected boolean verificaInt(String stringRecebida){
         boolean verificacao = true;
@@ -83,10 +83,10 @@ public class FuncoesUteis {
     }
 
     /**
-     * Verifica double boolean.
+     * Verifica se e possivel passar a string para double
      *
-     * @param stringRecebida the string recebida
-     * @return the boolean
+     * @param stringRecebida string recebida
+     * @return devolve booleano consoante a possibilidade de passar a string para double
      */
     protected boolean verificaDouble(String stringRecebida){
         boolean verificacao = true;
@@ -105,10 +105,10 @@ public class FuncoesUteis {
     }
 
     /**
-     * Verifica nome boolean.
+     * Protecao para a validade do nome escolhido
      *
-     * @param nomeRecebido the nome recebido
-     * @return the boolean
+     * @param nomeRecebido nome recebido
+     * @return devolve booleano consoante a validade do nome escolhido
      */
     protected boolean verificaNome(String nomeRecebido){
         boolean verificacao = false;
@@ -126,10 +126,10 @@ public class FuncoesUteis {
     }
 
     /**
-     * Verifica categoria boolean.
+     * Protecao para a validade da categoria escolhida
      *
-     * @param stringRecebida the string recebida
-     * @return the boolean
+     * @param stringRecebida string recebida
+     * @return devolve booleano consoante a validade da categoria escolhida
      */
     protected boolean verificaCategoria(String stringRecebida) {
         boolean verificacao;

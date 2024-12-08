@@ -3,29 +3,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The type Cliente.
+ * Classe que representa o objeto cliente
  */
 public class Cliente implements Serializable {
     FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
-     * The Nome.
+     * Nome
      */
     private String nome;
     /**
-     * The Nif.
+     * Nif
      */
     private String nif;
     /**
-     * The Localizacao.
+     * Localizacao
      */
     private String localizacao;
 
     /**
-     * Instantiates a new Cliente.
+     * Construtor do Cliente
      *
-     * @param nome        the nome
-     * @param nif         the nif
-     * @param localizacao the localizacao
+     * @param nome        nome
+     * @param nif         nif
+     * @param localizacao localizacao
      */
     protected Cliente(String nome, String nif, String localizacao) {
         this.nome = nome;
@@ -38,54 +38,54 @@ public class Cliente implements Serializable {
     }
 
     /**
-     * Gets localizacao.
+     * Getter da localizacao.
      *
-     * @return the localizacao
+     * @return localizacao
      */
     protected String getLocalizacao() {
         return localizacao;
     }
 
     /**
-     * Gets nif.
+     * Getter do nif.
      *
-     * @return the nif
+     * @return nif
      */
     protected String getNif() {
         return nif;
     }
 
     /**
-     * Gets nome.
+     * Getter do nome.
      *
-     * @return the nome
+     * @return nome
      */
     protected String getNome() {
         return nome;
     }
 
     /**
-     * Sets localizacao.
+     * Setter da localizacao.
      *
-     * @param localizacao the localizacao
+     * @param localizacao localizacao
      */
     protected void setLocalizacao(String localizacao) {
         this.localizacao = localizacao;
     }
 
     /**
-     * Sets nif.
+     * Setter do nif.
      *
-     * @param nif the nif
+     * @param nif  nif
      */
     protected void setNif(String nif) {
         this.nif = nif;
     }
 
     /**
-     * Sets nome.
+     * Setter do nome.
      *
-     * @param nome the nome
+     * @param nome  nome
      */
     protected void setNome(String nome) {
         this.nome = nome;
@@ -93,11 +93,11 @@ public class Cliente implements Serializable {
 
 
     /**
-     * Existe nif boolean.
+     * Verifica a existencia do nif
      *
-     * @param nifProcurar   the nif procurar
-     * @param arrayClientes the array clientes
-     * @return the boolean
+     * @param nifProcurar    nif procurar
+     * @param arrayClientes  array clientes
+     * @return  devolve booleano consoante a existencia do nif
      */
     private boolean existeNif(String nifProcurar, ArrayList<Cliente> arrayClientes){
         boolean nifValido = true;
@@ -112,11 +112,11 @@ public class Cliente implements Serializable {
     }
 
     /**
-     * Verifica nif boolean.
+     * Verifica a validade do nif
      *
-     * @param nif           the nif
-     * @param arrayClientes the array clientes
-     * @return the boolean
+     * @param nif            nif
+     * @param arrayClientes  array clientes
+     * @return  devolve booleano consoante a validade do nif
      */
     protected boolean verificaNif(String nif, ArrayList<Cliente> arrayClientes){
         boolean verificacao;
@@ -131,10 +131,10 @@ public class Cliente implements Serializable {
 
 
     /**
-     * Escolher localizao boolean.
+     * Escolher localizao
      *
-     * @param escolha the escolha
-     * @return the boolean
+     * @param escolha  escolha
+     * @return  devolve booleano consoante a validade da escolha da localizacao
      */
     protected boolean escolherLocalizao(String escolha){
         boolean verificacao = true;
@@ -159,10 +159,10 @@ public class Cliente implements Serializable {
     }
 
     /**
-     * Cria cliente cliente.
+     * Cria cliente
      *
-     * @param arrayClientes the array clientes
-     * @return the cliente
+     * @param arrayClientes  array de clientes
+     * @return  cliente
      */
     protected Cliente criaCliente(ArrayList<Cliente> arrayClientes) {
         Scanner scannerCliente = new Scanner(System.in);
@@ -251,10 +251,10 @@ public class Cliente implements Serializable {
 
 
     /**
-     * Altera informacoes cliente.
+     * Altera as informacoes do cliente.
      *
-     * @param clienteRecebido the cliente recebido
-     * @param arrayClientes   the array clientes
+     * @param clienteRecebido  cliente recebido
+     * @param arrayClientes    array de clientes
      */
     protected void alteraInformacoesCliente(Cliente clienteRecebido, ArrayList<Cliente> arrayClientes) {
         Scanner scannerEscolha = new Scanner(System.in);

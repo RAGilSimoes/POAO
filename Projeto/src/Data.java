@@ -1,27 +1,29 @@
 import java.io.Serializable;
 
 /**
- * The type Data.
+ * Classe que representa o objeto Data
  */
 public class Data implements Serializable {
     FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
-     * The Dia.
+     * Dia
      */
-    private int dia, /**
-     * The Mes.
+    private int dia; 
+    /**
+     * Mes
      */
-    mes, /**
-     * The Ano.
+    private int mes; 
+    /**
+     * Ano
      */
-    ano;
+    private int ano;
 
     /**
-     * Instantiates a new Data.
+     * Contrutor da Data
      *
-     * @param dia the dia
-     * @param mes the mes
-     * @param ano the ano
+     * @param dia dia
+     * @param mes mes
+     * @param ano ano
      */
     protected Data(int dia, int mes, int ano){
         this.dia = dia;
@@ -30,64 +32,64 @@ public class Data implements Serializable {
     }
 
     /**
-     * Sets ano.
+     * Setter do ano
      *
-     * @param ano the ano
+     * @param ano  ano
      */
     private void setAno(int ano) {
         this.ano = ano;
     }
 
     /**
-     * Sets dia.
+     * Setter do dia
      *
-     * @param dia the dia
+     * @param dia  dia
      */
     private void setDia(int dia) {
         this.dia = dia;
     }
 
     /**
-     * Sets mes.
+     * Setter do mes
      *
-     * @param mes the mes
+     * @param mes  mes
      */
     private void setMes(int mes) {
         this.mes = mes;
     }
 
     /**
-     * Gets ano.
+     * Getter do ano
      *
-     * @return the ano
+     * @return  ano
      */
     protected int getAno() {
         return ano;
     }
 
     /**
-     * Gets dia.
+     * Getter do dia
      *
-     * @return the dia
+     * @return  dia
      */
     protected int getDia() {
         return dia;
     }
 
     /**
-     * Gets mes.
+     * Getter do mes
      *
-     * @return the mes
+     * @return  mes
      */
     protected int getMes() {
         return mes;
     }
 
     /**
-     * Verifica data data.
+     * Verifica se o formato da data esta correto
      *
-     * @param dataIntroduzida the data introduzida
-     * @return the data
+     * @param dataIntroduzida  data introduzida
+     * @return  data
      */
     protected boolean verificaData(String dataIntroduzida){
         boolean verificaDataIntroduzida = true;
@@ -122,10 +124,10 @@ public class Data implements Serializable {
     }
 
     /**
-     * Passa para objeto data data.
+     * Passa a string escolhida para um objeto da classe Data
      *
-     * @param dataIntroduzida the data introduzida
-     * @return the data
+     * @param dataIntroduzida  data introduzida
+     * @return  data
      */
     protected Data passaParaObjetoData(String dataIntroduzida) {
         Data dataFatura = new Data(0,0,0);

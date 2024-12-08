@@ -3,46 +3,46 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The type Fatura.
+ * Classe que representa o objeto Data
  */
 public class Fatura implements Serializable {
     ListarClientes listarClientes = new ListarClientes();
     FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
-     * The N fatura.
+     * Numero da fatura
      */
     private String nFatura;
     /**
-     * The Cliente.
+     * Cliente
      */
     private Cliente cliente;
     /**
-     * The Data fatura.
+     * Data da fatura
      */
     private Data dataFatura;
     /**
-     * The Lista produtos.
+     * Lista de produtos
      */
     private ArrayList<Produto> listaProdutos;
     /**
-     * The Valor total sem iva.
+     * Valor total sem iva
      */
     private double valorTotalSemIVA;
     /**
-     * The Valor total com iva.
+     * Valor total com iva
      */
     private double valorTotalComIVA;
 
 
     /**
-     * Instantiates a new Fatura.
+     * Contrutor da fatura
      *
-     * @param nFatura          the n fatura
-     * @param cliente          the cliente
-     * @param dataFatura       the data fatura
-     * @param listaProdutos    the lista produtos
-     * @param valorTotalSemIVA the valor total sem iva
-     * @param valorTotalComIVA the valor total com iva
+     * @param nFatura          numero da fatura
+     * @param cliente          cliente
+     * @param dataFatura       data da fatura
+     * @param listaProdutos    lista de produtos
+     * @param valorTotalSemIVA valor total sem iva
+     * @param valorTotalComIVA valor total com iva
      */
     protected Fatura(String nFatura, Cliente cliente, Data dataFatura, ArrayList<Produto> listaProdutos, double valorTotalSemIVA, double valorTotalComIVA) {
         this.nFatura = nFatura;
@@ -54,81 +54,81 @@ public class Fatura implements Serializable {
     }
 
     /**
-     * Gets lista produtos.
+     * Getter da lista produtos
      *
-     * @return the lista produtos
+     * @return lista produtos
      */
     protected ArrayList<Produto> getListaProdutos() {
         return this.listaProdutos;
     }
 
     /**
-     * Gets cliente.
+     * Getter do cliente
      *
-     * @return the cliente
+     * @return cliente
      */
     protected Cliente getCliente() {
         return this.cliente;
     }
 
     /**
-     * Gets data fatura.
+     * Getter da data fatura
      *
-     * @return the data fatura
+     * @return data fatura
      */
     protected Data getDataFatura() {
         return this.dataFatura;
     }
 
     /**
-     * Gets fatura.
+     * Getter da fatura
      *
-     * @return the fatura
+     * @return fatura
      */
     protected String getnFatura() {
         return this.nFatura;
     }
 
     /**
-     * Gets valor total com iva.
+     * Getter do valor total com iva
      *
-     * @return the valor total com iva
+     * @return valor total com iva
      */
     protected double getValorTotalComIVA() {
         return this.valorTotalComIVA;
     }
 
     /**
-     * Gets valor total sem iva.
+     * Getter do valor total sem iva
      *
-     * @return the valor total sem iva
+     * @return valor total sem iva
      */
     protected double getValorTotalSemIVA() {
         return this.valorTotalSemIVA;
     }
 
     /**
-     * Sets cliente.
+     * Setter do cliente
      *
-     * @param cliente the cliente
+     * @param cliente cliente
      */
     protected void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
     /**
-     * Sets data fatura.
+     * Setter da data fatura
      *
-     * @param dataFatura the data fatura
+     * @param dataFatura data fatura
      */
     protected void setDataFatura(Data dataFatura) {
         this.dataFatura = dataFatura;
     }
 
     /**
-     * Sets lista produtos.
+     * Setter da lista produtos
      *
-     * @param listaProdutos the lista produtos
+     * @param listaProdutos lista produtos
      */
     protected void setListaProdutos(ArrayList<Produto> listaProdutos) {
         if(listaProdutos != null){
@@ -137,27 +137,27 @@ public class Fatura implements Serializable {
     }
 
     /**
-     * Sets fatura.
+     * Setter da fatura
      *
-     * @param nFatura the n fatura
+     * @param nFatura n fatura
      */
     protected void setnFatura(String nFatura) {
         this.nFatura = nFatura;
     }
 
     /**
-     * Sets valor total com iva.
+     * Setter do valor total com iva
      *
-     * @param valorTotalComIVA the valor total com iva
+     * @param valorTotalComIVA valor total com iva
      */
     protected void setValorTotalComIVA(double valorTotalComIVA) {
         this.valorTotalComIVA = valorTotalComIVA;
     }
 
     /**
-     * Sets valor total sem iva.
+     * Setter do valor total sem iva
      *
-     * @param valorTotalSemIVA the valor total sem iva
+     * @param valorTotalSemIVA valor total sem iva
      */
     protected void setValorTotalSemIVA(double valorTotalSemIVA) {
         this.valorTotalSemIVA = valorTotalSemIVA;
@@ -168,11 +168,11 @@ public class Fatura implements Serializable {
     }
 
     /**
-     * Existe numero fatura boolean.
+     * Verificad a existencia do numero da fatura
      *
-     * @param nFaturaProcurar the n fatura procurar
-     * @param arrayFaturas    the array faturas
-     * @return the boolean
+     * @param nFaturaProcurar numero da fatura que se pretende procurar
+     * @param arrayFaturas    array de faturas
+     * @return devolve booleano consoante a existencia do numero da fatura
      */
     private boolean existeNumeroFatura(String nFaturaProcurar, ArrayList<Fatura> arrayFaturas){
         boolean nFaturaValido = true;
@@ -188,11 +188,11 @@ public class Fatura implements Serializable {
     }
 
     /**
-     * Verifica numero fatura boolean.
+     * Verifica a validade do numero da fatura
      *
-     * @param numeroFatura the numero fatura
-     * @param arrayFaturas the array faturas
-     * @return the boolean
+     * @param numeroFatura numero da fatura
+     * @param arrayFaturas array de faturas
+     * @return devolve booleano consoante a validade do nif
      */
     protected boolean verificaNumeroFatura(String numeroFatura, ArrayList<Fatura> arrayFaturas){
         boolean verificacao = true;
@@ -206,10 +206,10 @@ public class Fatura implements Serializable {
     }
 
     /**
-     * Calcular valor total sem iva double.
+     * Calcular valor total sem iva
      *
-     * @param arrayProdutos the array produtos
-     * @return the double
+     * @param arrayProdutos array de produtos
+     * @return valor total sem iva
      */
     protected double calcularValorTotalSemIVA(ArrayList<Produto> arrayProdutos){
         double valorTotalSemIVA = 0;
@@ -222,11 +222,11 @@ public class Fatura implements Serializable {
     }
 
     /**
-     * Calcular valor total com iva double.
+     * Calcular valor total com iva
      *
-     * @param arrayProdutos   the array produtos
-     * @param clienteRecebido the cliente recebido
-     * @return the double
+     * @param arrayProdutos   array de produtos
+     * @param clienteRecebido cliente recebido
+     * @return valor total com iva
      */
     protected double calcularValorTotalComIVA(ArrayList<Produto> arrayProdutos, Cliente clienteRecebido){
         double valorTotalComIVA = 0;
@@ -333,12 +333,12 @@ public class Fatura implements Serializable {
     }
 
     /**
-     * Cria fatura fatura.
+     * Cria fatura
      *
-     * @param arrayClientes the array clientes
-     * @param arrayFaturas  the array faturas
-     * @param arrayProdutos the array produtos
-     * @return the fatura
+     * @param arrayClientes array de clientes
+     * @param arrayFaturas  array de faturas
+     * @param arrayProdutos array de produtos
+     * @return fatura
      */
     protected Fatura criaFatura(ArrayList<Cliente> arrayClientes, ArrayList<Fatura> arrayFaturas, ArrayList<Produto> arrayProdutos){
         Scanner scannerObterResposta = new Scanner(System.in);
@@ -532,12 +532,12 @@ public class Fatura implements Serializable {
     }
 
     /**
-     * Altera informacoes fatura.
+     * Altera as informacoes da fatura
      *
-     * @param faturaRecebida the fatura recebida
-     * @param arrayFaturas   the array faturas
-     * @param arrayClientes  the array clientes
-     * @param arrayProdutos  the array produtos
+     * @param faturaRecebida fatura recebida
+     * @param arrayFaturas   array de faturas
+     * @param arrayClientes  array de clientes
+     * @param arrayProdutos  array de produtos
      */
     protected void alteraInformacoesFatura(Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos) {
         Scanner scannerEscolha = new Scanner(System.in);
