@@ -3,12 +3,13 @@
  * @version 1.0
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Classe que representa o objeto Listar Clientes
  */
-public class ListarClientes {
+public class ListarClientes implements Serializable {
     /**
      * Listar clientes
      *

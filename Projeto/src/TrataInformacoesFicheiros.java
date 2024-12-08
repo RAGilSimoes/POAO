@@ -692,25 +692,21 @@ public class TrataInformacoesFicheiros {
      */
     protected void escreveParaFicheiroObjeto(String nomeFicheiroObjetos, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, ArrayList<Fatura> arrayFaturas){
         File ficheiroObjetos = new File(nomeFicheiroObjetos);
-        if(ficheiroObjetos.exists() && ficheiroObjetos.isFile()) {
-            try {
-                FileOutputStream fos = new FileOutputStream(ficheiroObjetos);
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
+        try {
+            FileOutputStream fos = new FileOutputStream(ficheiroObjetos);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-                oos.reset();
+            oos.reset();
 
-                oos.writeObject(arrayClientes);
-                oos.writeObject(arrayProdutos);
-                oos.writeObject(arrayFaturas);
+            oos.writeObject(arrayClientes);
+            oos.writeObject(arrayProdutos);
+            oos.writeObject(arrayFaturas);
 
-                oos.close();
-            } catch (FileNotFoundException exception) {
-                System.out.println("Erro ao criar ficheiro objeto");
-            } catch (IOException exception) {
-                System.out.println("Erro ao escrever para o ficheiro objeto");
-            }
-        } else {
-            System.out.println("Ficheiro de objetos não existe");
+            oos.close();
+        } catch (FileNotFoundException exception) {
+            System.out.println("Erro ao criar ficheiro objeto");
+        } catch (IOException exception) {
+            System.out.println("Erro ao escrever para o ficheiro objeto");
         }
     }
 

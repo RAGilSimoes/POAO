@@ -3,13 +3,14 @@
  * @version 1.0
  */
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  * Classe que representa o objeto Funcoes Uteis
  */
-public class FuncoesUteis {
+public class FuncoesUteis implements Serializable {
     /**
      * Protecao para a escolha de numeros entre intervalos
      *
