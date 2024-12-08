@@ -5,6 +5,7 @@
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -636,6 +637,7 @@ public class TrataInformacoesFicheiros {
                 while((line = br.readLine()) != null){
                     String[] informacoesLinha = line.split("#");
                     String caracterControlo = informacoesLinha[0];
+                    System.out.println(Arrays.toString(informacoesLinha));
                     switch (caracterControlo) {
                         case "C":
                             trataInformacoesClientes(arrayClientes, informacoesLinha[1]);
@@ -663,6 +665,9 @@ public class TrataInformacoesFicheiros {
 
                         case "F":
                             trataInformacoesFaturas(arrayFaturas, arrayClientes, arrayProdutos, informacoesLinha[1]);
+                            break;
+
+                        case "":
                             break;
 
                         default:
