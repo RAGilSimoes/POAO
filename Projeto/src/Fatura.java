@@ -6,6 +6,8 @@ import java.util.Scanner;
  * The type Fatura.
  */
 public class Fatura implements Serializable {
+    ListarClientes listarClientes = new ListarClientes();
+    FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
      * The N fatura.
      */
@@ -194,7 +196,6 @@ public class Fatura implements Serializable {
      */
     protected boolean verificaNumeroFatura(String numeroFatura, ArrayList<Fatura> arrayFaturas){
         boolean verificacao = true;
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         if (numeroFatura.length() != 9 || funcoesUteis.verificaCaracteres(numeroFatura,'0', '9') || numeroFatura.equalsIgnoreCase("000000000")){
             System.out.println("\nO número de fatura introduzido não é válido");
             verificacao = false;
@@ -341,7 +342,6 @@ public class Fatura implements Serializable {
      */
     protected Fatura criaFatura(ArrayList<Cliente> arrayClientes, ArrayList<Fatura> arrayFaturas, ArrayList<Produto> arrayProdutos){
         Scanner scannerObterResposta = new Scanner(System.in);
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
 
         String numeroFatura = null;
         String quantidadeProdutosInserir = null;
@@ -361,7 +361,6 @@ public class Fatura implements Serializable {
         }
 
         while(!verificacaoCliente) {
-            ListarClientes listarClientes = new ListarClientes();
             listarClientes.listarClientes(arrayClientes);
             System.out.print("\nIntroduza o número do cliente que pretende associar a esta fatura: ");
             int numeroEscolhaCliente = funcoesUteis.protecaoEscolha(1, arrayClientes.size());
@@ -440,12 +439,10 @@ public class Fatura implements Serializable {
 
     private void alteraInformacaoFatura(String tipo, Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutosPOOFS, ArrayList<Produto> arrayProdutosFatura){
         Scanner scannerObterResposta = new Scanner(System.in);
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
 
         switch (tipo){
             case "Cliente":
                 boolean verificacaoCliente = false;
-                ListarClientes listarClientes = new ListarClientes();
                 while (!verificacaoCliente) {
                     listarClientes.listarClientes(arrayClientes);
                     System.out.print("\nIntroduza o número do novo cliente que pretende associar a esta fatura: ");
@@ -544,7 +541,6 @@ public class Fatura implements Serializable {
      */
     protected void alteraInformacoesFatura(Fatura faturaRecebida, ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos) {
         Scanner scannerEscolha = new Scanner(System.in);
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         ArrayList<Produto> arrayProdutosFatura = faturaRecebida.getListaProdutos();
 
         boolean verificacao = false;

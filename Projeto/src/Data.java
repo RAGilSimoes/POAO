@@ -1,10 +1,10 @@
 import java.io.Serializable;
-import java.util.Scanner;
 
 /**
  * The type Data.
  */
 public class Data implements Serializable {
+    FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
      * The Dia.
      */
@@ -90,7 +90,6 @@ public class Data implements Serializable {
      * @return the data
      */
     protected boolean verificaData(String dataIntroduzida){
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificaDataIntroduzida = true;
         if((dataIntroduzida.length() != 10) || (dataIntroduzida.charAt(2) != '/' || dataIntroduzida.charAt(5) != '/')) {
             System.out.println("\nData introduzida no formato inválido.");

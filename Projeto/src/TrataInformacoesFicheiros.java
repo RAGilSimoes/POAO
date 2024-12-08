@@ -5,6 +5,7 @@ import java.util.ArrayList;
  * Tratar informações relativas aos ficheiros
  */
 public class TrataInformacoesFicheiros {
+    FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
      * Verificar existência de ficheiro de objeto
      *
@@ -27,48 +28,51 @@ public class TrataInformacoesFicheiros {
      * @throws IOException devolve um erro
      */
     protected void trataInformacoesClientes(ArrayList<Cliente> arrayClientes, String linha) throws IOException{
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
-        Cliente cliente = new Cliente(null, null, null);
-        String[] informacoesLinha = linha.split("/");
+        try {
+            Cliente cliente = new Cliente(null, null, null);
+            String[] informacoesLinha = linha.split("/");
 
-        boolean existeNIF = false;
+            boolean existeNIF = false;
 
-        String nome = informacoesLinha[0];
-        String NIF = informacoesLinha[1];
-        String localizacao = informacoesLinha[2];
+            String nome = informacoesLinha[0];
+            String NIF = informacoesLinha[1];
+            String localizacao = informacoesLinha[2];
 
-        boolean verificaNIF = cliente.verificaNif(NIF, arrayClientes);
+            boolean verificaNIF = cliente.verificaNif(NIF, arrayClientes);
 
-        if(!verificaNIF) {
-            for(Cliente clienteObtido: arrayClientes) {
-                String nomeClienteObtido = cliente.getNome();
-                String nifClienteObtido = cliente.getNif();
-                String localizacaoClienteObtido = cliente.getLocalizacao();
-                if(nomeClienteObtido.equalsIgnoreCase(nome) && nifClienteObtido.equalsIgnoreCase(NIF) && localizacaoClienteObtido.equalsIgnoreCase(localizacao)) {
-                    System.out.println("\nCliente já se encontra no sistema");
-                    existeNIF = true;
+            if(!verificaNIF) {
+                for(Cliente clienteObtido: arrayClientes) {
+                    String nomeClienteObtido = clienteObtido.getNome();
+                    String nifClienteObtido = clienteObtido.getNif();
+                    String localizacaoClienteObtido = clienteObtido.getLocalizacao();
+                    if(nomeClienteObtido.equalsIgnoreCase(nome) && nifClienteObtido.equalsIgnoreCase(NIF) && localizacaoClienteObtido.equalsIgnoreCase(localizacao)) {
+                        System.out.println("\nCliente já se encontra no sistema");
+                        existeNIF = true;
+                    }
                 }
-            }
-            if(!existeNIF) {
-                throw new IOException();
-            }
-        } else {
-            boolean verificaNome = funcoesUteis.verificaNome(nome);
-            if(verificaNome) {
-                cliente.setNome(nome);
+                if(!existeNIF) {
+                    throw new IOException();
+                }
             } else {
-                throw new IOException();
-            }
+                boolean verificaNome = funcoesUteis.verificaNome(nome);
+                if(verificaNome) {
+                    cliente.setNome(nome);
+                } else {
+                    throw new IOException();
+                }
 
-            cliente.setNif(NIF);
+                cliente.setNif(NIF);
 
-            boolean verificaLocalizacao = cliente.escolherLocalizao(localizacao);
-            if(verificaLocalizacao) {
-                cliente.setLocalizacao(localizacao);
-            } else {
-                throw new IOException();
+                boolean verificaLocalizacao = cliente.escolherLocalizao(localizacao);
+                if(verificaLocalizacao) {
+                    cliente.setLocalizacao(localizacao);
+                } else {
+                    throw new IOException();
+                }
+                arrayClientes.add(cliente);
             }
-            arrayClientes.add(cliente);
+        } catch (IOException exception) {
+            System.out.println("Erro ao ler cliente");
         }
     }
 
@@ -82,7 +86,6 @@ public class TrataInformacoesFicheiros {
      * @throws IOException devolve um erro
      */
     private boolean trataInformacoesProduto(String[] linha, Produto produto, ArrayList<Produto> arrayProdutos) throws IOException{
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         String codigo = linha[0];
         String nome = linha[1];
         String descricao = linha[2];
@@ -196,26 +199,30 @@ public class TrataInformacoesFicheiros {
      * @throws IOException devolve um erro
      */
     protected void trataInformacoesTaxaReduzida(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
-        ProdutoAlimentarTaxaReduzida produtoAlimentarTaxaReduzida = new ProdutoAlimentarTaxaReduzida(null, null, null, null, null, null, null, 0, null);
-        String[] informacoesLinha = linha.split("/");
-        if(informacoesLinha.length != 7){
-            throw new IOException();
-        } else {
-            boolean existeProduto = trataInformacoesProdutoAlimentar(informacoesLinha, produtoAlimentarTaxaReduzida, arrayProdutos, taxa);
-            if(!existeProduto) {
-                String[] certificacoesSeparadas = informacoesLinha[6].split(",");
-                ArrayList<String> arrayCertificacoesInseridas = new ArrayList<String>();
-                for(String certificacoes: certificacoesSeparadas) {
-                    arrayCertificacoesInseridas.add(certificacoes);
+        try {
+            ProdutoAlimentarTaxaReduzida produtoAlimentarTaxaReduzida = new ProdutoAlimentarTaxaReduzida(null, null, null, null, null, null, null, 0, null);
+            String[] informacoesLinha = linha.split("/");
+            if(informacoesLinha.length != 7){
+                throw new IOException();
+            } else {
+                boolean existeProduto = trataInformacoesProdutoAlimentar(informacoesLinha, produtoAlimentarTaxaReduzida, arrayProdutos, taxa);
+                if(!existeProduto) {
+                    String[] certificacoesSeparadas = informacoesLinha[6].split(",");
+                    ArrayList<String> arrayCertificacoesInseridas = new ArrayList<String>();
+                    for(String certificacoes: certificacoesSeparadas) {
+                        arrayCertificacoesInseridas.add(certificacoes);
+                    }
+                    boolean verificaCertificacoes = produtoAlimentarTaxaReduzida.verificaCertificacoes(arrayCertificacoesInseridas);
+                    if(verificaCertificacoes) {
+                        produtoAlimentarTaxaReduzida.setCertificacoes(arrayCertificacoesInseridas);
+                    } else {
+                        throw new IOException();
+                    }
+                    arrayProdutos.add(produtoAlimentarTaxaReduzida);
                 }
-                boolean verificaCertificacoes = produtoAlimentarTaxaReduzida.verificaCertificacoes(arrayCertificacoesInseridas);
-                if(verificaCertificacoes) {
-                    produtoAlimentarTaxaReduzida.setCertificacoes(arrayCertificacoesInseridas);
-                } else {
-                    throw new IOException();
-                }
-                arrayProdutos.add(produtoAlimentarTaxaReduzida);
             }
+        } catch (IOException exception) {
+            System.out.println("Erro ao ler produto");
         }
     }
 
@@ -228,23 +235,26 @@ public class TrataInformacoesFicheiros {
      * @throws IOException devolve um erro
      */
     protected void trataInformacoesTaxaIntermedia(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
-        ProdutoAlimentarTaxaIntermedia produtoAlimentarTaxaIntermedia = new ProdutoAlimentarTaxaIntermedia(null, null, null, null, null, null, null, null);
-        String[] informacoesLinha = linha.split("/");
-        if(informacoesLinha.length != 7){
-            throw new IOException();
-        } else {
-            boolean existeProduto = trataInformacoesProdutoAlimentar(informacoesLinha, produtoAlimentarTaxaIntermedia, arrayProdutos, taxa);
-            if(!existeProduto) {
-                String categoria = informacoesLinha[6];
-                boolean verificaCategoria = funcoesUteis.verificaCategoria(categoria);
-                if(verificaCategoria) {
-                    produtoAlimentarTaxaIntermedia.setCategoria(categoria);
-                } else {
-                    throw new IOException();
+        try {
+            ProdutoAlimentarTaxaIntermedia produtoAlimentarTaxaIntermedia = new ProdutoAlimentarTaxaIntermedia(null, null, null, null, null, null, null, null);
+            String[] informacoesLinha = linha.split("/");
+            if (informacoesLinha.length != 7) {
+                throw new IOException();
+            } else {
+                boolean existeProduto = trataInformacoesProdutoAlimentar(informacoesLinha, produtoAlimentarTaxaIntermedia, arrayProdutos, taxa);
+                if (!existeProduto) {
+                    String categoria = informacoesLinha[6];
+                    boolean verificaCategoria = funcoesUteis.verificaCategoria(categoria);
+                    if (verificaCategoria) {
+                        produtoAlimentarTaxaIntermedia.setCategoria(categoria);
+                    } else {
+                        throw new IOException();
+                    }
+                    arrayProdutos.add(produtoAlimentarTaxaIntermedia);
                 }
-                arrayProdutos.add(produtoAlimentarTaxaIntermedia);
             }
+        } catch (IOException exception) {
+            System.out.println("Erro ao ler produto");
         }
     }
 
@@ -257,15 +267,19 @@ public class TrataInformacoesFicheiros {
      * @throws IOException devolve um erro
      */
     protected void trataInformacoesTaxaNormal(ArrayList<Produto> arrayProdutos, String linha, String taxa) throws IOException{
-        ProdutoAlimentarTaxaNormal produtoAlimentarTaxaNormal = new ProdutoAlimentarTaxaNormal(null, null, null, null, null, null, null);
-        String[] informacoesLinha = linha.split("/");
-        if(informacoesLinha.length != 6){
-            throw new IOException();
-        } else {
-            boolean existeProduto = trataInformacoesProdutoAlimentar(informacoesLinha, produtoAlimentarTaxaNormal, arrayProdutos, taxa);
-            if(!existeProduto) {
-                arrayProdutos.add(produtoAlimentarTaxaNormal);
+        try {
+            ProdutoAlimentarTaxaNormal produtoAlimentarTaxaNormal = new ProdutoAlimentarTaxaNormal(null, null, null, null, null, null, null);
+            String[] informacoesLinha = linha.split("/");
+            if(informacoesLinha.length != 6){
+                throw new IOException();
+            } else {
+                boolean existeProduto = trataInformacoesProdutoAlimentar(informacoesLinha, produtoAlimentarTaxaNormal, arrayProdutos, taxa);
+                if(!existeProduto) {
+                    arrayProdutos.add(produtoAlimentarTaxaNormal);
+                }
             }
+        } catch (IOException exception) {
+            System.out.println("Erro ao ler produto");
         }
     }
 
@@ -277,23 +291,26 @@ public class TrataInformacoesFicheiros {
      * @throws IOException devolve um erro
      */
     protected void trataInformacoesComPrescricao(ArrayList<Produto> arrayProdutos, String linha) throws IOException{
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
-        ProdutoFarmaciaComPrescricao produtoFarmaciaComPrescricao = new ProdutoFarmaciaComPrescricao(null, null, null, null, null, null, null);
-        String[] informacoesLinha = linha.split("/");
-        if(informacoesLinha.length != 7){
-            throw new IOException();
-        } else {
-            boolean existeProduto = trataInformacoesProdutoFarmacia(informacoesLinha, produtoFarmaciaComPrescricao, arrayProdutos);
-            if(!existeProduto) {
-                String medico = informacoesLinha[6];
-                boolean verificaMedico = funcoesUteis.verificaNome(medico);
-                if(verificaMedico) {
-                    produtoFarmaciaComPrescricao.setMedico(medico);
-                } else {
-                    throw new IOException();
+        try {
+            ProdutoFarmaciaComPrescricao produtoFarmaciaComPrescricao = new ProdutoFarmaciaComPrescricao(null, null, null, null, null, null, null);
+            String[] informacoesLinha = linha.split("/");
+            if(informacoesLinha.length != 7){
+                throw new IOException();
+            } else {
+                boolean existeProduto = trataInformacoesProdutoFarmacia(informacoesLinha, produtoFarmaciaComPrescricao, arrayProdutos);
+                if(!existeProduto) {
+                    String medico = informacoesLinha[6];
+                    boolean verificaMedico = funcoesUteis.verificaNome(medico);
+                    if(verificaMedico) {
+                        produtoFarmaciaComPrescricao.setMedico(medico);
+                    } else {
+                        throw new IOException();
+                    }
+                    arrayProdutos.add(produtoFarmaciaComPrescricao);
                 }
-                arrayProdutos.add(produtoFarmaciaComPrescricao);
             }
+        } catch (IOException exception) {
+            System.out.println("Erro ao ler produto");
         }
     }
 
@@ -305,23 +322,26 @@ public class TrataInformacoesFicheiros {
      * @throws IOException devolve um erro
      */
     protected void trataInformacoesSemPrescricao(ArrayList<Produto> arrayProdutos, String linha) throws IOException{
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
-        ProdutoFarmaciaSemPrescricao produtoFarmaciaSemPrescricao = new ProdutoFarmaciaSemPrescricao(null, null, null, null, null, null, null);
-        String[] informacoesLinha = linha.split("/");
-        if(informacoesLinha.length != 7){
-            throw new IOException();
-        } else {
-            boolean existeProduto = trataInformacoesProdutoFarmacia(informacoesLinha, produtoFarmaciaSemPrescricao, arrayProdutos);
-            if(!existeProduto) {
-                String categoria = informacoesLinha[6];
-                boolean verificaCategoria = funcoesUteis.verificaCategoria(categoria);
-                if(verificaCategoria) {
-                    produtoFarmaciaSemPrescricao.setCategoria(categoria);
-                } else {
-                    throw new IOException();
+        try {
+            ProdutoFarmaciaSemPrescricao produtoFarmaciaSemPrescricao = new ProdutoFarmaciaSemPrescricao(null, null, null, null, null, null, null);
+            String[] informacoesLinha = linha.split("/");
+            if(informacoesLinha.length != 7){
+                throw new IOException();
+            } else {
+                boolean existeProduto = trataInformacoesProdutoFarmacia(informacoesLinha, produtoFarmaciaSemPrescricao, arrayProdutos);
+                if(!existeProduto) {
+                    String categoria = informacoesLinha[6];
+                    boolean verificaCategoria = funcoesUteis.verificaCategoria(categoria);
+                    if(verificaCategoria) {
+                        produtoFarmaciaSemPrescricao.setCategoria(categoria);
+                    } else {
+                        throw new IOException();
+                    }
+                    arrayProdutos.add(produtoFarmaciaSemPrescricao);
                 }
-                arrayProdutos.add(produtoFarmaciaSemPrescricao);
             }
+        } catch (IOException exception) {
+            System.out.println("Erro ao ler produto");
         }
     }
 
@@ -335,7 +355,6 @@ public class TrataInformacoesFicheiros {
      */
     protected void trataInformacoesFaturas(ArrayList<Fatura> arrayFaturas, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, String linha){
         Fatura fatura = new Fatura(null, null, null, null, 0, 0);
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         try {
             String[] informacoesLinha = linha.split(";");
             if(informacoesLinha.length != 4) {
@@ -453,7 +472,6 @@ public class TrataInformacoesFicheiros {
     private String criaInformacaoProdutoAlimentar(ProdutoAlimentar produtoAlimentar) {
         String informacaoProduto = criaInformacaoProduto(produtoAlimentar);
         String biologico = produtoAlimentar.getBiologico();
-        String taxa = produtoAlimentar.getTipoTaxa();
         String resultado = (informacaoProduto + "/" + biologico);
         return resultado;
     }
@@ -575,7 +593,6 @@ public class TrataInformacoesFicheiros {
      * @return the cliente
      */
     private Cliente verificaNIFFicheiros(String nif, ArrayList<Cliente> arrayClientes){
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         Cliente clienteFinal = new Cliente(null, null, null);
         if (nif.length() != 9 || funcoesUteis.verificaCaracteres(nif,'0', '9')){
             System.out.println("\nO nif introduzido não é válido");
@@ -666,21 +683,25 @@ public class TrataInformacoesFicheiros {
      */
     protected void escreveParaFicheiroObjeto(String nomeFicheiroObjetos, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, ArrayList<Fatura> arrayFaturas){
         File ficheiroObjetos = new File(nomeFicheiroObjetos);
-        try {
-            FileOutputStream fos = new FileOutputStream(ficheiroObjetos);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
+        if(ficheiroObjetos.exists() && ficheiroObjetos.isFile()) {
+            try {
+                FileOutputStream fos = new FileOutputStream(ficheiroObjetos);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-            oos.reset();
+                oos.reset();
 
-            oos.writeObject(arrayClientes);
-            oos.writeObject(arrayProdutos);
-            oos.writeObject(arrayFaturas);
+                oos.writeObject(arrayClientes);
+                oos.writeObject(arrayProdutos);
+                oos.writeObject(arrayFaturas);
 
-            oos.close();
-        } catch (FileNotFoundException exception) {
-            System.out.println("Erro ao criar ficheiro objeto");
-        } catch (IOException exception) {
-            System.out.println("Erro ao escrever para o ficheiro objeto");
+                oos.close();
+            } catch (FileNotFoundException exception) {
+                System.out.println("Erro ao criar ficheiro objeto");
+            } catch (IOException exception) {
+                System.out.println("Erro ao escrever para o ficheiro objeto");
+            }
+        } else {
+            System.out.println("Ficheiro de objetos não existe");
         }
     }
 
@@ -694,35 +715,39 @@ public class TrataInformacoesFicheiros {
      */
     protected void leFicheiroObjeto(String nomeFicheiroObjetos, ArrayList<Cliente> arrayClientes, ArrayList<Produto> arrayProdutos, ArrayList<Fatura> arrayFaturas){
         File ficheiroObjetos = new File(nomeFicheiroObjetos);
-        try {
-            FileInputStream fis = new FileInputStream(ficheiroObjetos);
-            ObjectInputStream ois = new ObjectInputStream(fis);
+        if(ficheiroObjetos.exists() && ficheiroObjetos.isFile()) {
+            try {
+                FileInputStream fis = new FileInputStream(ficheiroObjetos);
+                ObjectInputStream ois = new ObjectInputStream(fis);
 
-            Object objeto = ois.readObject();
-            ArrayList<Cliente> arrayClientesObtido = (ArrayList<Cliente>) objeto;
-            for (Cliente clienteObtido: arrayClientesObtido) {
-                arrayClientes.add(clienteObtido);
+                Object objeto = ois.readObject();
+                ArrayList<Cliente> arrayClientesObtido = (ArrayList<Cliente>) objeto;
+                for (Cliente clienteObtido: arrayClientesObtido) {
+                    arrayClientes.add(clienteObtido);
+                }
+
+                objeto = ois.readObject();
+                ArrayList<Produto> arrayProdutosObtido = (ArrayList<Produto>) objeto;
+                for(Produto produto: arrayProdutosObtido) {
+                    arrayProdutos.add(produto);
+                }
+
+                objeto = ois.readObject();
+                ArrayList<Fatura> arrayFaturasObtido = (ArrayList<Fatura>) objeto;
+                for(Fatura fatura: arrayFaturasObtido) {
+                    arrayFaturas.add(fatura);
+                }
+
+                ois.close();
+            } catch (FileNotFoundException exception) {
+                System.out.println("Erro ao abrir ficheiro objeto");
+            } catch (IOException exception) {
+                System.out.println("Erro ao ler ficheiro objeto");
+            } catch (ClassNotFoundException exception) {
+                System.out.println("Erro ao converter objeto");
             }
-
-            objeto = ois.readObject();
-            ArrayList<Produto> arrayProdutosObtido = (ArrayList<Produto>) objeto;
-            for(Produto produto: arrayProdutosObtido) {
-                arrayProdutos.add(produto);
-            }
-
-            objeto = ois.readObject();
-            ArrayList<Fatura> arrayFaturasObtido = (ArrayList<Fatura>) objeto;
-            for(Fatura fatura: arrayFaturasObtido) {
-                arrayFaturas.add(fatura);
-            }
-
-            ois.close();
-        } catch (FileNotFoundException exception) {
-            System.out.println("Erro ao abrir ficheiro objeto");
-        } catch (IOException exception) {
-            System.out.println("Erro ao ler ficheiro objeto");
-        } catch (ClassNotFoundException exception) {
-            System.out.println("Erro ao converter objeto");
+        } else {
+            System.out.println("Ficheiro de objetos não existe");
         }
     }
 }

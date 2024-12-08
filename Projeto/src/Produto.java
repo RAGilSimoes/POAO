@@ -6,6 +6,7 @@ import java.util.Scanner;
  * The type Produto.
  */
 abstract class Produto implements Serializable {
+    FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
      * The Codigo.
      */
@@ -158,7 +159,6 @@ abstract class Produto implements Serializable {
      * @return the boolean
      */
     protected boolean verificaCodigo(String stringRecebida, ArrayList<Produto> arrayProdutos){
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificacao = true;
         if(stringRecebida.isEmpty()){
             System.out.println("\nO código introduzido não é válido.");
@@ -218,7 +218,6 @@ abstract class Produto implements Serializable {
      * @return the string [ ]
      */
     protected String[] obterInformacoesProduto(ArrayList<Produto> arrayProdutos) {
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         Scanner scannerObterResposta = new Scanner(System.in);
 
         String codigoProduto = null;
@@ -307,4 +306,3 @@ abstract class Produto implements Serializable {
         return taxaAplicada;
     }
 }
-

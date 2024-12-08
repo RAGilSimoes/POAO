@@ -6,6 +6,7 @@ import java.util.Scanner;
  * The type Produto farmacia com prescricao.
  */
 public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Serializable {
+    FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
      * The Medico.
      */
@@ -65,7 +66,6 @@ public class ProdutoFarmaciaComPrescricao extends ProdutoFarmacia implements Ser
      * @return the produto farmacia com prescricao
      */
     protected ProdutoFarmaciaComPrescricao criaProdutoComPrescricao(ArrayList<Produto> arrayProdutos){
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         String prescricao = "Sim";
         boolean verificacaoNome;
         String medicoPrescritor;

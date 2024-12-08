@@ -6,6 +6,9 @@ import java.util.Scanner;
  * The type Poofs.
  */
 public class POOFS {
+    FuncoesUteis funcoesUteis = new FuncoesUteis();
+    ListarFaturas listarFaturas = new ListarFaturas();
+    ListarClientes listarClientes = new ListarClientes();
     /**
      * The Array clientes.
      */
@@ -72,8 +75,6 @@ public class POOFS {
     protected void menu() {
         String escolha;
         boolean sair = false;
-        ListarFaturas listarFaturas = new ListarFaturas();
-        ListarClientes listarClientes = new ListarClientes();
         TrataInformacoesFicheiros trataInformacoesFicheiros = new TrataInformacoesFicheiros();
         final String nomeFicheiroTextoInformacoes = "informacoes.txt";
         final String nomeFicheiroFaturas = "faturas.txt";
@@ -137,8 +138,6 @@ public class POOFS {
 
 
     private void criarEditarEliminarCliente() {
-        ListarClientes listarClientes = new ListarClientes();
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean sair = false;
         do {
             String escolha;
@@ -227,9 +226,7 @@ public class POOFS {
 
 
     private void criarEditarEliminarFaturas() {
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean sair = false;
-        ListarFaturas listarFaturas = new ListarFaturas();
         Scanner scannerEscolha = new Scanner(System.in);
         do {
             String escolha;
@@ -303,8 +300,6 @@ public class POOFS {
     }
 
     private void mostraFatura(ArrayList<Fatura> arrayFaturas) {
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
-        ListarFaturas listarFaturas = new ListarFaturas();
         listarFaturas.listarFaturas(arrayFaturas);
         if (!arrayFaturas.isEmpty()) {
             System.out.print("\nEscolha uma fatura: ");
@@ -408,67 +403,71 @@ public class POOFS {
     private void exportaFatura(ArrayList<Fatura> arrayFaturas, String nomeFicheiro) {
         TrataInformacoesFicheiros trataInformacoesFicheiros = new TrataInformacoesFicheiros();
         File ficheiroTexto = new File(nomeFicheiro);
-        try {
-            FileWriter fileWriter = new FileWriter(ficheiroTexto);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for(Fatura fatura: arrayFaturas) {
-                Cliente cliente = fatura.getCliente();
-                String stringCliente = trataInformacoesFicheiros.criaInformacaoCliente(cliente);
-                bufferedWriter.write(stringCliente);
-                bufferedWriter.newLine();
+        if(ficheiroTexto.exists() && ficheiroTexto.isFile()) {
+            try {
+                FileWriter fileWriter = new FileWriter(ficheiroTexto);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                for(Fatura fatura: arrayFaturas) {
+                    Cliente cliente = fatura.getCliente();
+                    String stringCliente = trataInformacoesFicheiros.criaInformacaoCliente(cliente);
+                    bufferedWriter.write(stringCliente);
+                    bufferedWriter.newLine();
 
-                ArrayList<Produto> arrayProdutosFatura = fatura.getListaProdutos();
-                for(Produto produto: arrayProdutosFatura) {
-                    String tipoProduto = produto.getTipo();
-                    switch (tipoProduto) {
-                        case "Produto Alimentar Taxa Reduzida":
-                            String stringTaxaReduzida = trataInformacoesFicheiros.criaInformacaoProdutoAlimentarTaxaReduzida((ProdutoAlimentarTaxaReduzida) produto);
-                            bufferedWriter.write(stringTaxaReduzida);
-                            bufferedWriter.newLine();
-                            break;
+                    ArrayList<Produto> arrayProdutosFatura = fatura.getListaProdutos();
+                    for(Produto produto: arrayProdutosFatura) {
+                        String tipoProduto = produto.getTipo();
+                        switch (tipoProduto) {
+                            case "Produto Alimentar Taxa Reduzida":
+                                String stringTaxaReduzida = trataInformacoesFicheiros.criaInformacaoProdutoAlimentarTaxaReduzida((ProdutoAlimentarTaxaReduzida) produto);
+                                bufferedWriter.write(stringTaxaReduzida);
+                                bufferedWriter.newLine();
+                                break;
 
-                        case "Produto Alimentar Taxa Intermedia":
-                            String stringTaxaIntermedia = trataInformacoesFicheiros.criaInformacaoProdutoAlimentarTaxaIntermedia((ProdutoAlimentarTaxaIntermedia) produto);
-                            bufferedWriter.write(stringTaxaIntermedia);
-                            bufferedWriter.newLine();
-                            break;
+                            case "Produto Alimentar Taxa Intermedia":
+                                String stringTaxaIntermedia = trataInformacoesFicheiros.criaInformacaoProdutoAlimentarTaxaIntermedia((ProdutoAlimentarTaxaIntermedia) produto);
+                                bufferedWriter.write(stringTaxaIntermedia);
+                                bufferedWriter.newLine();
+                                break;
 
-                        case "Produto Alimentar Taxa Normal":
-                            String stringTaxaNormal = trataInformacoesFicheiros.criaInformacaoProdutoAlimentarTaxaNormal((ProdutoAlimentarTaxaNormal) produto);
-                            bufferedWriter.write(stringTaxaNormal);
-                            bufferedWriter.newLine();
-                            break;
+                            case "Produto Alimentar Taxa Normal":
+                                String stringTaxaNormal = trataInformacoesFicheiros.criaInformacaoProdutoAlimentarTaxaNormal((ProdutoAlimentarTaxaNormal) produto);
+                                bufferedWriter.write(stringTaxaNormal);
+                                bufferedWriter.newLine();
+                                break;
 
-                        case "Produto Farmacia Com Prescricao":
-                            String stringComPrescricao = trataInformacoesFicheiros.criaInformacaoProdutoFarmaciaComPrescricao((ProdutoFarmaciaComPrescricao) produto);
-                            bufferedWriter.write(stringComPrescricao);
-                            bufferedWriter.newLine();
-                            break;
+                            case "Produto Farmacia Com Prescricao":
+                                String stringComPrescricao = trataInformacoesFicheiros.criaInformacaoProdutoFarmaciaComPrescricao((ProdutoFarmaciaComPrescricao) produto);
+                                bufferedWriter.write(stringComPrescricao);
+                                bufferedWriter.newLine();
+                                break;
 
-                        case "Produto Farmacia Sem Prescricao":
-                            String stringSemPrescricao = trataInformacoesFicheiros.criaInformacaoProdutoFarmaciaSemPrescricao((ProdutoFarmaciaSemPrescricao) produto);
-                            bufferedWriter.write(stringSemPrescricao);
-                            bufferedWriter.newLine();
-                            break;
+                            case "Produto Farmacia Sem Prescricao":
+                                String stringSemPrescricao = trataInformacoesFicheiros.criaInformacaoProdutoFarmaciaSemPrescricao((ProdutoFarmaciaSemPrescricao) produto);
+                                bufferedWriter.write(stringSemPrescricao);
+                                bufferedWriter.newLine();
+                                break;
 
-                        default:
-                            break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    String stringFatura = trataInformacoesFicheiros.criaInformacaoFatura(fatura);
+                    if(arrayFaturas.indexOf(fatura) == (arrayFaturas.size() - 1)){
+                        bufferedWriter.write(stringFatura);
+                    } else {
+                        bufferedWriter.write(stringFatura);
+                        bufferedWriter.newLine();
                     }
                 }
-
-                String stringFatura = trataInformacoesFicheiros.criaInformacaoFatura(fatura);
-                if(arrayFaturas.indexOf(fatura) == (arrayFaturas.size() - 1)){
-                    bufferedWriter.write(stringFatura);
-                } else {
-                    bufferedWriter.write(stringFatura);
-                    bufferedWriter.newLine();
-                }
+                bufferedWriter.close();
+            } catch (IOException exception) {
+                System.out.println("Erro ao escrever no ficheiro texto");
+            } catch (NullPointerException exception) {
+                System.out.println("Erro ao abrir o ficheiro");
             }
-            bufferedWriter.close();
-        } catch (IOException exception) {
-            System.out.println("Erro ao escrever no ficheiro texto");
-        } catch (NullPointerException exception) {
-            System.out.println("Erro ao abrir o ficheiro");
+        } else {
+            System.out.println("Ficheiro texto não existe");
         }
     }
 }

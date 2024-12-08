@@ -6,6 +6,7 @@ import java.util.Scanner;
  * The type Produto alimentar taxa intermedia.
  */
 public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements Serializable {
+    FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
      * The Categoria.
      */
@@ -73,7 +74,6 @@ public class ProdutoAlimentarTaxaIntermedia extends ProdutoAlimentar implements 
      * @return the produto alimentar taxa intermedia
      */
     protected ProdutoAlimentarTaxaIntermedia criaProdutoTaxaIntermedia(ArrayList<Produto> arrayProdutos){
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         String tipoTaxa = "Intermedia";
         String categoriaProduto = null;
 

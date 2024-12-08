@@ -6,6 +6,7 @@ import java.util.Scanner;
  * The type Cliente.
  */
 public class Cliente implements Serializable {
+    FuncoesUteis funcoesUteis = new FuncoesUteis();
     /**
      * The Nome.
      */
@@ -118,7 +119,6 @@ public class Cliente implements Serializable {
      * @return the boolean
      */
     protected boolean verificaNif(String nif, ArrayList<Cliente> arrayClientes){
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         boolean verificacao;
         if (nif.length() != 9 || funcoesUteis.verificaCaracteres(nif,'0', '9')){
             System.out.println("\nO nif introduzido não é válido");
@@ -165,7 +165,6 @@ public class Cliente implements Serializable {
      * @return the cliente
      */
     protected Cliente criaCliente(ArrayList<Cliente> arrayClientes) {
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         Scanner scannerCliente = new Scanner(System.in);
 
         String nome = null;
@@ -199,7 +198,6 @@ public class Cliente implements Serializable {
     }
 
     private void alteraInformacaoCliente(String tipo, Cliente clienteRecebido, ArrayList<Cliente> arrayClientes){
-        FuncoesUteis funcoesUteis = new FuncoesUteis();
         Scanner editarCliente = new Scanner(System.in);
 
         switch (tipo){

@@ -82,4 +82,3 @@ abstract class ProdutoFarmacia extends Produto implements Serializable {
         return precoFinalComIVA;
     }
 }
-
